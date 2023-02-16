@@ -42,7 +42,7 @@ data class Luminosity(val value: Double, val unit: LightUnit = LightUnit.LUX) {
 }
 
 /**
- * This enum describe the possibile [Luminosity] unit of measurement.
+ * This enum describe the possible [Luminosity] unit of measurement.
  */
 enum class LightUnit {
     /**
