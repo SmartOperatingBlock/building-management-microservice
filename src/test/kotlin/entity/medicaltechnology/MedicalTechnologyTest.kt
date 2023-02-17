@@ -18,34 +18,43 @@ class MedicalTechnologyTest : StringSpec({
         MedicalTechnologyID("1"),
         "mt1",
         "The base medical technology",
-        MedicalTechnologyType.ENDOSCOPE)
-    val medicalTechnologyUpdate = MedicalTechnology(MedicalTechnologyID("1"),
+        MedicalTechnologyType.ENDOSCOPE,
+    )
+    val medicalTechnologyUpdate = MedicalTechnology(
+        MedicalTechnologyID("1"),
         "mt1",
         "The base medical technology with a changed description",
-        MedicalTechnologyType.XRAY)
-    val differentIdMedicalTechnology = MedicalTechnology(MedicalTechnologyID("2"),
+        MedicalTechnologyType.XRAY,
+    )
+    val differentIdMedicalTechnology = MedicalTechnology(
+        MedicalTechnologyID("2"),
         "mt1",
         "The base medical technology",
-        MedicalTechnologyType.ENDOSCOPE)
+        MedicalTechnologyType.ENDOSCOPE,
+    )
 
     "a medical technology id should not be empty" {
         shouldThrow<IllegalArgumentException> { MedicalTechnologyID("") }
     }
 
     "medical technology name should not be empty" {
-        shouldThrow<IllegalArgumentException> { MedicalTechnology(
-            MedicalTechnologyID("1"),
-            "", "description",
-            MedicalTechnologyType.XRAY
-        ) }
+        shouldThrow<IllegalArgumentException> {
+            MedicalTechnology(
+                MedicalTechnologyID("1"),
+                "", "description",
+                MedicalTechnologyType.XRAY
+            )
+        }
     }
 
     "medical technology description should not be empty" {
-        shouldThrow<IllegalArgumentException> { MedicalTechnology(
-            MedicalTechnologyID("1"),
-            "name", "",
-            MedicalTechnologyType.XRAY
-        ) }
+        shouldThrow<IllegalArgumentException> {
+            MedicalTechnology(
+                MedicalTechnologyID("1"),
+                "name", "",
+                MedicalTechnologyType.XRAY
+            )
+        }
     }
 
     listOf(
