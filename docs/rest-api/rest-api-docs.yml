@@ -13,7 +13,76 @@ info:
     url: 'https://opensource.org/license/mit/'
 
 paths:
+  /rooms:
+    post:
+      summary: insert a new room
+      operationId: insertRoom
+      description: Add new room to the operating block
+      responses:
+        '201':
+          description: room created
+        '400':
+          description: invalid input, object invalid
+        '409':
+          description: a room with the same id already exists
+        '500':
+          description: server error occurred
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+        description: Room to add
 
+  /rooms/{room-id}:
+    get:
+      summary: get the room information
+      operationId: getRoom
+      description: Get room information
+      parameters:
+        - in: path
+          name: room-id
+          description: the room's ID
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: dateTime
+          required: false
+          description: Specify a past date in order to obtain historical data
+          schema:
+            type: string
+            format: date-time
+            example: '2017-07-21T17:32:28Z'
+      responses:
+        '200':
+          description: search result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+        '404':
+          description: room not found
+        '500':
+          description: server error occurred
+    delete:
+      summary: delete the room
+      operationId: deleteRoom
+      description: Delete a room
+      parameters:
+        - in: path
+          name: room-id
+          description: the room's ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: room deleted
+        '404':
+          description: room not found
+        '500':
+          description: server error occurred
 
 components:
   schemas:
@@ -77,6 +146,8 @@ components:
           example: Endoscope
         description:
           type: string
+        in-use:
+          type: boolean
         room-id:
           type: string
           example: Room-#1
