@@ -15,12 +15,14 @@ import entity.zone.RoomID
  * This is an entity that is identified by an [id].
  * In addition, it has a [name], a [description] and a [type].
  * A medical technology can be associated to a [entity.zone.Room] through its [roomId].
+ * Inside the room the technology can be used and its usage is tracked by [isInUse].
  */
 data class MedicalTechnology(
     val id: MedicalTechnologyID,
     val name: String,
     val description: String,
     val type: MedicalTechnologyType,
+    var isInUse: Boolean = false,
     val roomId: RoomID? = null,
 ) {
     init {
