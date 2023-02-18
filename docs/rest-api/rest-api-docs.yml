@@ -206,7 +206,7 @@ paths:
         '400':
           description: malformed merge patch file
         '404':
-          description: medical technology not found
+          description: medical technology or room not found
         '500':
           description: server error occurred
 
