@@ -84,6 +84,108 @@ paths:
         '500':
           description: server error occurred
 
+  /medicalTechnologies:
+    post:
+      summary: insert a new medical technology
+      operationId: insertMedicalTechnology
+      description: Add new medical technology to the operating block
+      responses:
+        '201':
+          description: medical technology created
+        '400':
+          description: invalid input, object invalid
+        '409':
+          description: a medical technology with the same id already exists
+        '500':
+          description: server error occurred
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalTechnology'
+        description: Medical Technology to add
+
+  /medicalTechnologies/{technology-id}:
+    get:
+      summary: get the medical technology information
+      operationId: getMedicalTechnology
+      description: Get medical technology information
+      parameters:
+        - in: path
+          name: technology-id
+          description: the medical technology's ID
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: dateTime
+          required: false
+          description: Specify a past date in order to obtain historical data
+          schema:
+            type: string
+            format: date-time
+            example: '2017-07-21T17:32:28Z'
+      responses:
+        '200':
+          description: search result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalTechnology'
+        '404':
+          description: medical technology not found
+        '500':
+          description: server error occurred
+    delete:
+      summary: delete the medical technology
+      operationId: deleteMedicalTechnology
+      description: Delete a medical technology
+      parameters:
+        - in: path
+          name: technology-id
+          description: the medical technology's ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: medical technology deleted
+        '404':
+          description: medical technology not found
+        '500':
+          description: server error occurred
+    patch:
+      summary: update medical technology mapping
+      operationId: updateMedicalTechnology
+      description: Map the medical technology to a room inside the Operating Block
+      parameters:
+        - in: path
+          name: technology-id
+          description: the medical technology's ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              type: object
+              properties:
+                room-id:
+                  type: string
+                  example: Room-#2
+                  description: room to specify a new mapping, null if you want to delete mapping
+        description: the new mapping
+      responses:
+        '204':
+          description: medical technology updated
+        '400':
+          description: malformed merge patch file
+        '404':
+          description: medical technology not found
+        '500':
+          description: server error occurred
+
 components:
   schemas:
     Room:
