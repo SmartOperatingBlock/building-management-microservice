@@ -13,7 +13,10 @@ import io.ktor.server.application.call
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.response.respondText
+import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
+import io.ktor.server.routing.patch
+import io.ktor.server.routing.post
 import io.ktor.server.routing.routing
 
 /**
@@ -45,8 +48,14 @@ class APIController {
     private fun roomAPI(app: Application) {
         with(app) {
             routing {
-                get("/room") {
-                    call.respondText("[${Thread.currentThread().name}] Room!")
+                post("$apiPath/rooms") {
+                    call.respondText("[${Thread.currentThread().name}] Room POST!")
+                }
+                get("$apiPath/rooms/{room-id}") {
+                    call.respondText("[${Thread.currentThread().name}] Room GET!")
+                }
+                delete("$apiPath/rooms/{room-id}") {
+                    call.respondText("[${Thread.currentThread().name}] Room DELETE!")
                 }
             }
         }
@@ -59,10 +68,23 @@ class APIController {
     private fun medicalTechnologyPI(app: Application) {
         with(app) {
             routing {
-                get("/medicaltechnology") {
-                    call.respondText("[${Thread.currentThread().name}] Medical Technology!")
+                post("$apiPath/medicalTechnologies") {
+                    call.respondText("[${Thread.currentThread().name}] Medical Technology POST!")
+                }
+                get("$apiPath/medicalTechnologies/{technology-id}") {
+                    call.respondText("[${Thread.currentThread().name}] Medical Technology GET!")
+                }
+                delete("$apiPath/medicalTechnologies/{technology-id}") {
+                    call.respondText("[${Thread.currentThread().name}] Medical Technology DELETE!")
+                }
+                patch("$apiPath/medicalTechnologies/{technology-id}") {
+                    call.respondText("[${Thread.currentThread().name}] Medical Technology PATCH!")
                 }
             }
         }
+    }
+
+    companion object {
+        private const val apiPath = "/api"
     }
 }
