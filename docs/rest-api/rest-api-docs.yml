@@ -12,9 +12,17 @@ info:
     name: MIT License
     url: 'https://opensource.org/license/mit/'
 
+tags:
+  - name: Room API
+    description: This is the available API to manage and obtain information about rooms within the Operating Block.
+  - name: Medical Technology API
+    description: This is the available API to manage and obtain information about rooms within the Operating Block.
+
 paths:
   /rooms:
     post:
+      tags:
+        - Room API
       summary: insert a new room
       operationId: insertRoom
       description: Add new room to the operating block
@@ -36,6 +44,8 @@ paths:
 
   /rooms/{room-id}:
     get:
+      tags:
+        - Room API
       summary: get the room information
       operationId: getRoom
       description: Get room information
@@ -66,6 +76,8 @@ paths:
         '500':
           description: server error occurred
     delete:
+      tags:
+        - Room API
       summary: delete the room
       operationId: deleteRoom
       description: Delete a room
@@ -86,6 +98,8 @@ paths:
 
   /medicalTechnologies:
     post:
+      tags:
+        - Medical Technology API
       summary: insert a new medical technology
       operationId: insertMedicalTechnology
       description: Add new medical technology to the operating block
@@ -107,6 +121,8 @@ paths:
 
   /medicalTechnologies/{technology-id}:
     get:
+      tags:
+        - Medical Technology API
       summary: get the medical technology information
       operationId: getMedicalTechnology
       description: Get medical technology information
@@ -137,6 +153,8 @@ paths:
         '500':
           description: server error occurred
     delete:
+      tags:
+        - Medical Technology API
       summary: delete the medical technology
       operationId: deleteMedicalTechnology
       description: Delete a medical technology
@@ -155,6 +173,8 @@ paths:
         '500':
           description: server error occurred
     patch:
+      tags:
+        - Medical Technology API
       summary: update medical technology mapping
       operationId: updateMedicalTechnology
       description: Map the medical technology to a room inside the Operating Block
