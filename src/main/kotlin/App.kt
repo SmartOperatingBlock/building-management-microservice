@@ -6,9 +6,11 @@
  * https://opensource.org/licenses/MIT.
  */
 
+import infrastructure.api.APIController
+
 /**
  * Template for kotlin projects.
  */
 fun main() {
-    println("Hello World from Kotlin Template")
+    APIController().start()
 }
