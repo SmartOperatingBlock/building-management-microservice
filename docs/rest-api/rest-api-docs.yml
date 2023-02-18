@@ -1,0 +1,86 @@
+openapi: 3.0.0
+servers:
+  - description: Building Management microservice
+    url: http://localhost:<port>/api
+info:
+  description: This is the API of the Building Management microservice within the Smart Operating Block project
+  version: "0.1.0"
+  title: Building Management API
+  contact:
+    email: info@smartoperatingblock.com
+  license:
+    name: MIT License
+    url: 'https://opensource.org/license/mit/'
+
+paths:
+
+
+components:
+  schemas:
+    Room:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Room-#1
+        name:
+          type: string
+          example: Mario Rossi's Operating Room - Bufalini Hospital
+        zone-id:
+          type: string
+          example: Zone-#1
+        type:
+          type: string
+          enum: [operating-room, pre-operating-room]
+          example: operating-room
+        environmental-data:
+          $ref: '#/components/schemas/RoomEnvironmentalData'
+
+    RoomEnvironmentalData:
+      type: object
+      properties:
+        temperature:
+          type: object
+          properties:
+            value:
+              type: number
+              example: 25.3
+            unit:
+              type: string
+              enum: [celsius, fahrenheit]
+              example: celsius
+        humidity:
+          type: number
+          example: 55.5
+        luminosity:
+          type: object
+          properties:
+            value:
+              type: number
+              example: 150.5
+            unit:
+              type: string
+              enum: [lux]
+              example: lux
+        presence:
+          type: boolean
+          example: true
+
+    MedicalTechnology:
+      type: object
+      properties:
+        id:
+          type: string
+          example: mt-#1
+        name:
+          type: string
+          example: Endoscope
+        description:
+          type: string
+        room-id:
+          type: string
+          example: Room-#1
+        type:
+          type: string
+          enum: [endoscope, xray]
+          example: endoscope
