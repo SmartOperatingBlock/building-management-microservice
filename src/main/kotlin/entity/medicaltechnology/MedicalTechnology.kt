@@ -22,7 +22,7 @@ data class MedicalTechnology(
     val name: String,
     val description: String,
     val type: MedicalTechnologyType,
-    var isInUse: Boolean = false,
+    val isInUse: Boolean = false,
     val roomId: RoomID? = null,
 ) {
     init {
