@@ -21,6 +21,9 @@ repositories {
 
 dependencies {
     implementation(libs.kotlin.stdlib)
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.engine.netty)
+    implementation(libs.logback)
     testImplementation(libs.bundles.kotlin.testing)
 }
 
