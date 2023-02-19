@@ -37,7 +37,7 @@ class APIController {
     fun dispatcher(app: Application) {
         with(app) {
             roomAPI(this)
-            medicalTechnologyPI(this)
+            medicalTechnologyAPI(this)
         }
     }
 
@@ -49,6 +49,14 @@ class APIController {
         with(app) {
             routing {
                 post("$apiPath/rooms") {
+                    // nel body ha la room in json
+                    // deserializzo in Room
+                    /* logica:
+                        0. caso d'uso esiste la room
+                            - controlla se non esiste un'altra room uguale
+                        1. Salvo la room nel db
+                        2. creo il digital twin su Azure Digital Twins
+                     */
                     call.respondText("[${Thread.currentThread().name}] Room POST!")
                 }
                 get("$apiPath/rooms/{room-id}") {
@@ -65,7 +73,7 @@ class APIController {
      * The Medical Technology API available to handle medical technology requests.
      * @param[app] it represents the running ktor web application
      */
-    private fun medicalTechnologyPI(app: Application) {
+    private fun medicalTechnologyAPI(app: Application) {
         with(app) {
             routing {
                 post("$apiPath/medicalTechnologies") {
