@@ -4,7 +4,7 @@ servers:
     url: http://localhost:<port>/api
 info:
   description: This is the API of the Building Management microservice within the Smart Operating Block project
-  version: "0.1.0"
+  version: 0.1.1
   title: Building Management API
   contact:
     email: info@smartoperatingblock.com
@@ -39,7 +39,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Room'
+              $ref: '#/components/schemas/NewRoom'
         description: Room to add
 
   /rooms/{room-id}:
@@ -212,6 +212,26 @@ paths:
 
 components:
   schemas:
+    RoomType:
+      type: string
+      enum: [OPERATING_ROOM, PRE_OPERATING_ROOM]
+      example: OPERATING_ROOM
+
+    NewRoom:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Room-#1
+        name:
+          type: string
+          example: Mario Rossi's Operating Room - Bufalini Hospital
+        zone-id:
+          type: string
+          example: Zone-#1
+        type:
+          $ref: '#/components/schemas/RoomType'
+
     Room:
       type: object
       properties:
@@ -225,9 +245,7 @@ components:
           type: string
           example: Zone-#1
         type:
-          type: string
-          enum: [operating-room, pre-operating-room]
-          example: operating-room
+          $ref: '#/components/schemas/RoomType'
         environmental-data:
           $ref: '#/components/schemas/RoomEnvironmentalData'
 
