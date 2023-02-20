@@ -8,6 +8,8 @@
 
 package infrastructure.api
 
+import application.presenter.api.deserializer.ApiDeserializer.toRoom
+import application.presenter.api.model.RoomApiDto
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.call
@@ -15,6 +17,7 @@ import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.request.receive
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
@@ -65,7 +68,8 @@ class APIController {
                         1. Salvo la room nel db
                         2. creo il digital twin su Azure Digital Twins
                      */
-                    call.respondText("[${Thread.currentThread().name}] Room POST!")
+                    val room = call.receive<RoomApiDto>().toRoom()
+                    call.respondText("[${Thread.currentThread().name}] Room POST! \n$room")
                 }
                 get("$apiPath/rooms/{room-id}") {
                     call.respondText("[${Thread.currentThread().name}] Room GET!")
