@@ -27,6 +27,7 @@ dependencies {
     implementation(libs.logback)
     implementation(libs.kotlin.serialization.json)
     implementation(libs.ktor.server.content.negotiation)
+    implementation(libs.ktor.server.content.negotiation.json)
     testImplementation(libs.bundles.kotlin.testing)
 }
 
