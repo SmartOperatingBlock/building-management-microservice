@@ -8,8 +8,11 @@
 
 package infrastructure.api
 
+import application.controller.RoomController
 import application.presenter.api.deserializer.ApiDeserializer.toRoom
 import application.presenter.api.model.RoomApiDto
+import application.service.Service
+import infrastructure.provider.ManagerProvider
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.call
@@ -27,8 +30,9 @@ import io.ktor.server.routing.routing
 
 /**
  * It manages the REST-API of the microservice.
+ * @param[provider] the provider of managers.
  */
-class APIController {
+class APIController(private val provider: ManagerProvider) {
     /**
      * Starts the http server to serve the client requests.
      */
@@ -69,6 +73,7 @@ class APIController {
                         2. creo il digital twin su Azure Digital Twins
                      */
                     val room = call.receive<RoomApiDto>().toRoom()
+                    Service.CreateRoom(room, RoomController(provider.roomDigitalTwinManager))
                     call.respondText("[${Thread.currentThread().name}] Room POST! \n$room")
                 }
                 get("$apiPath/rooms/{roomId}") {
