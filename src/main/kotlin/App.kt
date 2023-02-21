@@ -7,10 +7,12 @@
  */
 
 import infrastructure.api.APIController
+import infrastructure.provider.ManagerProviderImpl
 
 /**
  * Template for kotlin projects.
  */
 fun main() {
-    APIController().start()
+    val provider = ManagerProviderImpl()
+    APIController(provider).start()
 }
