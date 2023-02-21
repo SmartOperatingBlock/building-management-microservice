@@ -105,6 +105,7 @@ class APIController {
     }
 
     companion object {
-        private const val apiPath = "/api"
+        private const val apiVersion = "v1"
+        private const val apiPath = "/api/$apiVersion"
     }
 }
