@@ -10,6 +10,7 @@ package usecase.repository
 
 import entity.zone.Room
 import entity.zone.RoomID
+import java.util.Date
 
 /**
  * Interface that models the repository to manage Rooms.
@@ -28,8 +29,14 @@ interface RoomRepository {
     fun deleteRoom(roomId: RoomID): Boolean
 
     /**
-     * Find a room by its [roomId].
+     * Find a room by its [roomId] and get its data in a specific [dateTime].
      * @return the room if present, null otherwise.
      */
-    fun findBy(roomId: RoomID): Room?
+    fun findBy(roomId: RoomID, dateTime: Date): Room?
+
+    /**
+     * Get all the rooms.
+     * @return the set of rooms.
+     */
+    fun getRooms(): Set<Room>
 }
