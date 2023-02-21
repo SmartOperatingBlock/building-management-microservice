@@ -71,10 +71,10 @@ class APIController {
                     val room = call.receive<RoomApiDto>().toRoom()
                     call.respondText("[${Thread.currentThread().name}] Room POST! \n$room")
                 }
-                get("$apiPath/rooms/{room-id}") {
+                get("$apiPath/rooms/{roomId}") {
                     call.respondText("[${Thread.currentThread().name}] Room GET!")
                 }
-                delete("$apiPath/rooms/{room-id}") {
+                delete("$apiPath/rooms/{roomId}") {
                     call.respondText("[${Thread.currentThread().name}] Room DELETE!")
                 }
             }
@@ -88,16 +88,16 @@ class APIController {
     private fun medicalTechnologyAPI(app: Application) {
         with(app) {
             routing {
-                post("$apiPath/medicalTechnologies") {
+                post("$apiPath/medical-technologies") {
                     call.respondText("[${Thread.currentThread().name}] Medical Technology POST!")
                 }
-                get("$apiPath/medicalTechnologies/{technology-id}") {
+                get("$apiPath/medical-technologies/{technologyId}") {
                     call.respondText("[${Thread.currentThread().name}] Medical Technology GET!")
                 }
-                delete("$apiPath/medicalTechnologies/{technology-id}") {
+                delete("$apiPath/medical-technologies/{technologyId}") {
                     call.respondText("[${Thread.currentThread().name}] Medical Technology DELETE!")
                 }
-                patch("$apiPath/medicalTechnologies/{technology-id}") {
+                patch("$apiPath/medical-technologies/{technologyId}") {
                     call.respondText("[${Thread.currentThread().name}] Medical Technology PATCH!")
                 }
             }
