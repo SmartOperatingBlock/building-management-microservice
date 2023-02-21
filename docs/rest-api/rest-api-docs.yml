@@ -42,7 +42,7 @@ paths:
               $ref: '#/components/schemas/NewRoom'
         description: Room to add
 
-  /rooms/{room-id}:
+  /rooms/{roomId}:
     get:
       tags:
         - Room API
@@ -51,7 +51,7 @@ paths:
       description: Get room information
       parameters:
         - in: path
-          name: room-id
+          name: roomId
           description: the room's ID
           required: true
           schema:
@@ -85,7 +85,7 @@ paths:
       description: Delete a room
       parameters:
         - in: path
-          name: room-id
+          name: roomId
           description: the room's ID
           required: true
           schema:
@@ -98,7 +98,7 @@ paths:
         '500':
           description: server error occurred
 
-  /medicalTechnologies:
+  /medical-technologies:
     post:
       tags:
         - Medical Technology API
@@ -121,7 +121,7 @@ paths:
               $ref: '#/components/schemas/MedicalTechnology'
         description: Medical Technology to add
 
-  /medicalTechnologies/{technology-id}:
+  /medical-technologies/{technologyId}:
     get:
       tags:
         - Medical Technology API
@@ -130,7 +130,7 @@ paths:
       description: Get medical technology information
       parameters:
         - in: path
-          name: technology-id
+          name: technologyId
           description: the medical technology's ID
           required: true
           schema:
@@ -164,7 +164,7 @@ paths:
       description: Delete a medical technology
       parameters:
         - in: path
-          name: technology-id
+          name: technologyId
           description: the medical technology's ID
           required: true
           schema:
@@ -184,7 +184,7 @@ paths:
       description: Map the medical technology to a room inside the Operating Block
       parameters:
         - in: path
-          name: technology-id
+          name: technologyId
           description: the medical technology's ID
           required: true
           schema:
