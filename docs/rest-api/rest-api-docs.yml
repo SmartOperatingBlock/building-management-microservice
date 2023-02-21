@@ -226,7 +226,7 @@ components:
         name:
           type: string
           example: Mario Rossi's Operating Room - Bufalini Hospital
-        zone-id:
+        zoneId:
           type: string
           example: Zone-#1
         type:
@@ -241,12 +241,12 @@ components:
         name:
           type: string
           example: Mario Rossi's Operating Room - Bufalini Hospital
-        zone-id:
+        zoneId:
           type: string
           example: Zone-#1
         type:
           $ref: '#/components/schemas/RoomType'
-        environmental-data:
+        environmentalData:
           $ref: '#/components/schemas/RoomEnvironmentalData'
 
     RoomEnvironmentalData:
@@ -260,7 +260,7 @@ components:
               example: 25.3
             unit:
               type: string
-              enum: [celsius, fahrenheit]
+              enum: [CELSIUS, FAHRENHEIT]
               example: celsius
         humidity:
           type: number
@@ -273,7 +273,7 @@ components:
               example: 150.5
             unit:
               type: string
-              enum: [lux]
+              enum: [LUX]
               example: lux
         presence:
           type: boolean
@@ -290,12 +290,12 @@ components:
           example: Endoscope
         description:
           type: string
-        in-use:
+        inUse:
           type: boolean
-        room-id:
+        roomId:
           type: string
           example: Room-#1
         type:
           type: string
-          enum: [endoscope, xray]
+          enum: [ENDOSCOPE, XRAY]
           example: endoscope
