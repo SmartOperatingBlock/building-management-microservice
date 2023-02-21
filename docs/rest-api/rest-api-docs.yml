@@ -20,6 +20,23 @@ tags:
 
 paths:
   /rooms:
+    get:
+      tags:
+        - Room API
+      summary: get all rooms
+      operationId: getRooms
+      description: Get rooms
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfRoomEntry'
+        '204':
+          description: no rooms present
+        '500':
+          description: server error occurred
     post:
       tags:
         - Room API
@@ -39,7 +56,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewRoom'
+              $ref: '#/components/schemas/RoomEntry'
         description: Room to add
 
   /rooms/{roomId}:
@@ -217,7 +234,7 @@ components:
       enum: [OPERATING_ROOM, PRE_OPERATING_ROOM]
       example: OPERATING_ROOM
 
-    NewRoom:
+    RoomEntry:
       type: object
       properties:
         id:
@@ -231,6 +248,26 @@ components:
           example: Zone-#1
         type:
           $ref: '#/components/schemas/RoomType'
+
+    ArrayOfRoomEntry:
+      type: object
+      properties:
+        entries:
+          type: array
+          description: rooms entries
+          items:
+            type: object
+            properties:
+              entry:
+                $ref: '#/components/schemas/RoomEntry'
+              url:
+                type: string
+                format: uri
+                example: 'http://localhost:3000/api/v1/rooms/Room-#1'
+        total:
+          type: integer
+          description: the total number of room entries
+          example: 34
 
     Room:
       type: object
