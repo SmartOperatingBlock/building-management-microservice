@@ -8,19 +8,19 @@
 
 package application.presenter.api.model
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
  * Presenter class to be able to deserialize data that comes from API.
- * It deserializes [id], [name], [zoneId] and the [type] of the room.
+ * It deserializes [id], [name], [zoneId], the [type] of the room and [environmentalData].
  */
 @Serializable
 data class RoomApiDto(
     val id: String,
     val name: String,
-    @SerialName("zone-id") val zoneId: String,
-    val type: RoomApiDtoType
+    val zoneId: String,
+    val type: RoomApiDtoType,
+    val environmentalData: EnvironmentalDataApiDto = EnvironmentalDataApiDto()
 )
 
 /**
@@ -33,3 +33,27 @@ enum class RoomApiDtoType {
     /** Pre-operating room type. */
     PRE_OPERATING_ROOM
 }
+
+/**
+ * Describes a [value] with a [unit] of measurement.
+ */
+@Serializable
+data class ValueWithUnit<T>(val value: T, val unit: String)
+
+/**
+ * Wraps all the environmental data associated to a Room.
+ * It corresponds to the model used with the API.
+ * So it describe:
+ * - the [temperature] inside the room
+ * - the [humidity] inside the room
+ * - the [luminosity] inside the room
+ * - the [presence] of someone in the room
+ * All the data may be not present.
+ */
+@Serializable
+data class EnvironmentalDataApiDto(
+    val temperature: ValueWithUnit<Double>? = null,
+    val humidity: Double? = null,
+    val luminosity: ValueWithUnit<Double>? = null,
+    val presence: Boolean? = null
+)
