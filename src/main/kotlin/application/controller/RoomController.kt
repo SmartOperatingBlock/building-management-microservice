@@ -24,12 +24,15 @@ class RoomController(private val roomDtManager: RoomDigitalTwinManager) : RoomRe
         if (this.roomDtManager.createRoomDigitalTwin(room)) room else null
 
     override fun deleteRoom(roomId: RoomID): Boolean {
-        TODO("Not yet implemented")
+        return this.roomDtManager.deleteRoomDigitalTwin(roomId)
     }
 
-    override fun findBy(roomId: RoomID, dateTime: Date): Room? {
-        TODO("Not yet implemented")
-    }
+    override fun findBy(roomId: RoomID, dateTime: Date?): Room? =
+        if (dateTime == null) {
+            this.roomDtManager.findBy(roomId)
+        } else {
+            null
+        }
 
     override fun getRooms(): Set<Room> {
         TODO("Not yet implemented")
