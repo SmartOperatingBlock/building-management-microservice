@@ -34,7 +34,10 @@ object Service {
      * Application Service that has the objective of creating a [room] using the provided [roomRepository].
      */
     class CreateRoom(private val room: Room, private val roomRepository: RoomRepository) : ApplicationService<Room?> {
-        override fun execute(): Room? = this.roomRepository.createRoom(room)
+        override fun execute(): Room? =
+            if (this.roomRepository.findBy(room.id, null) == null) {
+                this.roomRepository.createRoom(room)
+            } else null
     }
 
     /**
