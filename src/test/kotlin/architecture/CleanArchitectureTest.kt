@@ -24,6 +24,10 @@ class CleanArchitectureTest : StringSpec({
             .whereLayer("usecase").mayOnlyBeAccessedByLayers("application", "infrastructure")
             .whereLayer("application").mayOnlyBeAccessedByLayers("infrastructure")
             .whereLayer("infrastructure").mayNotBeAccessedByAnyLayer()
-            .check(ClassFileImporter().importPackages("entity", "usecase", "application", "infrastructure"))
+            .check(
+                ClassFileImporter()
+                    .withImportOption { !it.contains("/test/") } // ignore tests classes
+                    .importPackages("entity", "usecase", "application", "infrastructure")
+            )
     }
 })
