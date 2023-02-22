@@ -29,10 +29,10 @@ interface RoomRepository {
     fun deleteRoom(roomId: RoomID): Boolean
 
     /**
-     * Find a room by its [roomId] and get its data in a specific [dateTime].
+     * Find a room by its [roomId] and get its data in a specific [dateTime] if specified.
      * @return the room if present, null otherwise.
      */
-    fun findBy(roomId: RoomID, dateTime: Date): Room?
+    fun findBy(roomId: RoomID, dateTime: Date?): Room?
 
     /**
      * Get all the rooms.
