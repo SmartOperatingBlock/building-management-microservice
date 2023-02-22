@@ -48,12 +48,37 @@ class DigitalTwinManager : RoomDigitalTwinManager {
     }
 
     override fun deleteRoomDigitalTwin(roomId: RoomID): Boolean {
-        TODO("Not yet implemented")
+        fun deleteIncomingRelationships() {
+            this.dtClient.listIncomingRelationships(roomId.value).forEach {
+                this.dtClient.deleteRelationship(it.sourceId, it.relationshipId)
+            }
+        }
+
+        fun deleteOutgoingRelationships() {
+            this.dtClient.listRelationships(roomId.value, BasicRelationship::class.java).forEach {
+                this.dtClient.deleteRelationship(it.sourceId, it.id)
+            }
+        }
+
+        return try {
+            deleteIncomingRelationships()
+            deleteOutgoingRelationships()
+            println(roomId.value)
+            dtClient.deleteDigitalTwin(roomId.value)
+            true
+        } catch (e: ErrorResponseException) {
+            println(e) // log the exception.
+            false
+        }
     }
 
-    override fun findBy(roomId: RoomID): Room? {
-        TODO("Not yet implemented")
-    }
+    override fun findBy(roomId: RoomID): Room? =
+        try {
+            this.dtClient.getDigitalTwin(roomId.value, BasicDigitalTwin::class.java).toRoom()
+        } catch (e: ErrorResponseException) {
+            println(e) // log the exception.
+            null
+        }
 
     companion object {
         private const val dtAppIdVariable = "AZURE_CLIENT_ID"
