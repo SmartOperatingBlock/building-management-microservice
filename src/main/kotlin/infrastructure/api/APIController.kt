@@ -11,8 +11,12 @@ package infrastructure.api
 import application.controller.RoomController
 import application.presenter.api.deserializer.ApiDeserializer.toRoom
 import application.presenter.api.model.RoomApiDto
+import application.presenter.api.serializer.ApiSerializer.toRoomApiDto
 import application.service.Service
+import entity.zone.RoomID
 import infrastructure.provider.ManagerProvider
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.call
@@ -21,6 +25,8 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.request.receive
+import io.ktor.server.response.header
+import io.ktor.server.response.respond
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
@@ -37,7 +43,7 @@ class APIController(private val provider: ManagerProvider) {
      * Starts the http server to serve the client requests.
      */
     fun start() {
-        embeddedServer(Netty, port = 3000) {
+        embeddedServer(Netty, port = port) {
             dispatcher(this)
             install(ContentNegotiation) {
                 json()
@@ -73,14 +79,42 @@ class APIController(private val provider: ManagerProvider) {
                         2. creo il digital twin su Azure Digital Twins
                      */
                     val room = call.receive<RoomApiDto>().toRoom()
-                    Service.CreateRoom(room, RoomController(provider.roomDigitalTwinManager))
-                    call.respondText("[${Thread.currentThread().name}] Room POST! \n$room")
+                    Service.CreateRoom(room, RoomController(provider.roomDigitalTwinManager)).execute().apply {
+                        when (this) {
+                            null -> call.respond(HttpStatusCode.Conflict)
+                            else -> {
+                                call.response.header(
+                                    HttpHeaders.Location,
+                                    "http://localhost:$port$apiPath/rooms/${room.id.value}"
+                                )
+                                call.respond(HttpStatusCode.Created)
+                            }
+                        }
+                    }
+                }
+                get("$apiPath/rooms") {
+                    call.respondText("Get Rooms CALLED")
                 }
                 get("$apiPath/rooms/{roomId}") {
-                    call.respondText("[${Thread.currentThread().name}] Room GET!")
+                    Service.GetRoom(
+                        RoomID(call.parameters["roomId"].orEmpty()),
+                        RoomController(provider.roomDigitalTwinManager)
+                    ).execute().apply {
+                        when (this) {
+                            null -> call.respond(HttpStatusCode.NotFound)
+                            else -> call.respond(this.toRoomApiDto())
+                        }
+                    }
                 }
                 delete("$apiPath/rooms/{roomId}") {
-                    call.respondText("[${Thread.currentThread().name}] Room DELETE!")
+                    call.respond(
+                        Service.DeleteRoom(
+                            RoomID(call.parameters["roomId"].orEmpty()),
+                            RoomController(provider.roomDigitalTwinManager)
+                        ).execute().let { result ->
+                            if (result) HttpStatusCode.NoContent else HttpStatusCode.NotFound
+                        }
+                    )
                 }
             }
         }
@@ -110,6 +144,7 @@ class APIController(private val provider: ManagerProvider) {
     }
 
     companion object {
+        private const val port = 3000
         private const val apiVersion = "v1"
         private const val apiPath = "/api/$apiVersion"
     }
