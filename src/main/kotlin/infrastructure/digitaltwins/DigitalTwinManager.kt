@@ -9,6 +9,11 @@
 package infrastructure.digitaltwins
 
 import application.controller.manager.RoomDigitalTwinManager
+import com.azure.digitaltwins.core.BasicDigitalTwin
+import com.azure.digitaltwins.core.BasicRelationship
+import com.azure.digitaltwins.core.DigitalTwinsClientBuilder
+import com.azure.digitaltwins.core.implementation.models.ErrorResponseException
+import com.azure.identity.DefaultAzureCredentialBuilder
 import entity.zone.Room
 import entity.zone.RoomID
 
@@ -17,16 +22,16 @@ import entity.zone.RoomID
  */
 class DigitalTwinManager : RoomDigitalTwinManager {
     init {
-        checkNotNull(System.getenv(DigitalTwinManager.dtAppIdVariable)) { "azure client app id required" }
-        checkNotNull(System.getenv(DigitalTwinManager.dtTenantVariable)) { "azure tenant id required" }
-        checkNotNull(System.getenv(DigitalTwinManager.dtAppSecretVariable)) { "azure client secret id required" }
-        checkNotNull(System.getenv(DigitalTwinManager.dtEndpointVariable)) { "azure dt endpoint required" }
+        checkNotNull(System.getenv(dtAppIdVariable)) { "azure client app id required" }
+        checkNotNull(System.getenv(dtTenantVariable)) { "azure tenant id required" }
+        checkNotNull(System.getenv(dtAppSecretVariable)) { "azure client secret id required" }
+        checkNotNull(System.getenv(dtEndpointVariable)) { "azure dt endpoint required" }
     }
 
-//    private val dtClient = DigitalTwinsClientBuilder()
-//        .credential(DefaultAzureCredentialBuilder().build())
-//        .endpoint(System.getenv(DigitalTwinManager.dtEndpointVariable))
-//        .buildClient()
+    private val dtClient = DigitalTwinsClientBuilder()
+        .credential(DefaultAzureCredentialBuilder().build())
+        .endpoint(System.getenv(dtEndpointVariable))
+        .buildClient()
 
     override fun createRoomDigitalTwin(room: Room): Boolean {
         return true
