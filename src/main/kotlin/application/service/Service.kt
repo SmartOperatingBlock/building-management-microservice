@@ -9,7 +9,9 @@
 package application.service
 
 import entity.zone.Room
+import entity.zone.RoomID
 import usecase.repository.RoomRepository
+import java.util.Date
 
 /**
  * Module that wraps all the services that orchestrate the application logic (not domain one).
@@ -29,9 +31,31 @@ object Service {
     }
 
     /**
-     * Application Service that has the objective of creating a [room] using the [roomRepository] passed.
+     * Application Service that has the objective of creating a [room] using the provided [roomRepository].
      */
     class CreateRoom(private val room: Room, private val roomRepository: RoomRepository) : ApplicationService<Room?> {
         override fun execute(): Room? = this.roomRepository.createRoom(room)
+    }
+
+    /**
+     * Application Service that has the objective of deleting a room using the provided [roomRepository].
+     */
+    class DeleteRoom(
+        private val roomID: RoomID,
+        private val roomRepository: RoomRepository
+    ) : ApplicationService<Boolean> {
+        override fun execute(): Boolean = this.roomRepository.deleteRoom(roomID)
+    }
+
+    /**
+     * Application Service that has the objective of getting the information about a specific room identified
+     * by a [roomID] that - if specified - are respect a specific [dateTime] using the provided [roomRepository].
+     */
+    class GetRoom(
+        private val roomID: RoomID,
+        private val roomRepository: RoomRepository,
+        private val dateTime: Date? = null
+    ) : ApplicationService<Room?> {
+        override fun execute(): Room? = this.roomRepository.findBy(roomID, dateTime)
     }
 }
