@@ -63,7 +63,6 @@ class DigitalTwinManager : RoomDigitalTwinManager {
         return try {
             deleteIncomingRelationships()
             deleteOutgoingRelationships()
-            println(roomId.value)
             dtClient.deleteDigitalTwin(roomId.value)
             true
         } catch (e: ErrorResponseException) {
