@@ -13,9 +13,9 @@ import entity.zone.Room
 import entity.zone.RoomID
 
 /**
- * Simple Stub for [RoomDigitalTwinManager] in order to perform tests.
+ * Simple Test Double (fake) for [RoomDigitalTwinManager] in order to perform tests.
  */
-class DigitalTwinManagerStub : RoomDigitalTwinManager {
+class DigitalTwinManagerTestDouble : RoomDigitalTwinManager {
     private val roomList: MutableSet<Room> = mutableSetOf()
 
     override fun createRoomDigitalTwin(room: Room): Boolean {

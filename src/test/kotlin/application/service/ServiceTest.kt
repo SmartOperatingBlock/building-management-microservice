@@ -13,18 +13,18 @@ import entity.zone.Room
 import entity.zone.RoomID
 import entity.zone.RoomType
 import entity.zone.ZoneID
-import infrastructure.digitaltwins.DigitalTwinManagerStub
+import infrastructure.digitaltwins.DigitalTwinManagerTestDouble
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 
 class ServiceTest : StringSpec({
-    var roomController = RoomController(DigitalTwinManagerStub())
+    var roomController = RoomController(DigitalTwinManagerTestDouble())
     val exampleRoom = Room(RoomID("r1"), RoomType.OPERATING_ROOM, ZoneID("z1"))
 
     beforeEach {
         // Re-initalize the digital twin manager stub.
-        roomController = RoomController(DigitalTwinManagerStub())
+        roomController = RoomController(DigitalTwinManagerTestDouble())
     }
 
     "I should be able to create a room" {
