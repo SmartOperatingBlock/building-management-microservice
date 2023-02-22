@@ -16,6 +16,8 @@ import com.azure.digitaltwins.core.implementation.models.ErrorResponseException
 import com.azure.identity.DefaultAzureCredentialBuilder
 import entity.zone.Room
 import entity.zone.RoomID
+import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation.toDigitalTwin
+import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation.toRoom
 
 /**
  * Implementation of the Digital Twin manager.
@@ -34,7 +36,15 @@ class DigitalTwinManager : RoomDigitalTwinManager {
         .buildClient()
 
     override fun createRoomDigitalTwin(room: Room): Boolean {
-        return true
+        with(room.toDigitalTwin()) {
+            try {
+                dtClient.createOrReplaceDigitalTwin(this.id, this, BasicDigitalTwin::class.java)
+                return true
+            } catch (e: ErrorResponseException) {
+                println(e) // log the exception.
+                return false
+            }
+        }
     }
 
     override fun deleteRoomDigitalTwin(roomId: RoomID): Boolean {
