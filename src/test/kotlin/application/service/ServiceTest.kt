@@ -32,4 +32,27 @@ class ServiceTest : StringSpec({
         result shouldNotBe null
         Service.GetRoom(exampleRoom.id, roomController).execute() shouldBe exampleRoom
     }
+
+    "I should be able to delete an existing room" {
+        Service.CreateRoom(exampleRoom, roomController).execute()
+        val result = Service.DeleteRoom(exampleRoom.id, roomController).execute()
+        result shouldBe true
+        Service.GetRoom(exampleRoom.id, roomController).execute() shouldBe null
+    }
+
+    "If a room does not exist, then call delete on it result in a failed request" {
+        val result = Service.DeleteRoom(exampleRoom.id, roomController).execute()
+        result shouldBe false
+    }
+
+    "I should be able to get the state of an existing room" {
+        Service.CreateRoom(exampleRoom, roomController).execute()
+        val result = Service.GetRoom(exampleRoom.id, roomController).execute()
+        result shouldBe exampleRoom
+    }
+
+    "If a room does not exist, a request on its state, must return null" {
+        val result = Service.GetRoom(exampleRoom.id, roomController).execute()
+        result shouldBe null
+    }
 })
