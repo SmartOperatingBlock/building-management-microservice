@@ -8,6 +8,7 @@
 
 package infrastructure.provider
 
+import application.controller.manager.RoomDatabaseManager
 import application.controller.manager.RoomDigitalTwinManager
 
 /**
@@ -16,4 +17,7 @@ import application.controller.manager.RoomDigitalTwinManager
 interface ManagerProvider {
     /** The manager of the Digital Twin of the room. */
     val roomDigitalTwinManager: RoomDigitalTwinManager
+
+    /** The manager of the Database for room. */
+    val roomDatabaseManager: RoomDatabaseManager
 }
