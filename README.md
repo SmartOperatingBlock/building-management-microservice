@@ -10,3 +10,4 @@ You need to specify the following environment variable:
 - `AZURE_TENANT_ID`: ID of the application's Azure AD tenant
 - `AZURE_CLIENT_SECRET`: the application's client secrets
 - `AZURE_DT_ENDPOINT`: the Azure Digital Twins instance endpoint
+- `MONGODB_CONNECTION_STRING`: the mongodb's connection string
