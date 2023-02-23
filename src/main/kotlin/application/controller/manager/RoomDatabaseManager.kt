@@ -36,4 +36,10 @@ interface RoomDatabaseManager {
      * @return null if data is not available, the room instead.
      */
     fun findBy(roomId: RoomID, dateTime: Date): Room?
+
+    /**
+     * Get all the rooms available.
+     * @return a set of rooms.
+     */
+    fun getAllRooms(): Set<Room>
 }
