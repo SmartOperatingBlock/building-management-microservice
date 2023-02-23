@@ -79,7 +79,10 @@ class APIController(private val provider: ManagerProvider) {
                         2. creo il digital twin su Azure Digital Twins
                      */
                     val room = call.receive<RoomApiDto>().toRoom()
-                    Service.CreateRoom(room, RoomController(provider.roomDigitalTwinManager)).execute().apply {
+                    Service.CreateRoom(
+                        room,
+                        RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
+                    ).execute().apply {
                         when (this) {
                             null -> call.respond(HttpStatusCode.Conflict)
                             else -> {
@@ -98,7 +101,7 @@ class APIController(private val provider: ManagerProvider) {
                 get("$apiPath/rooms/{roomId}") {
                     Service.GetRoom(
                         RoomID(call.parameters["roomId"].orEmpty()),
-                        RoomController(provider.roomDigitalTwinManager)
+                        RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
                     ).execute().apply {
                         when (this) {
                             null -> call.respond(HttpStatusCode.NotFound)
@@ -110,7 +113,7 @@ class APIController(private val provider: ManagerProvider) {
                     call.respond(
                         Service.DeleteRoom(
                             RoomID(call.parameters["roomId"].orEmpty()),
-                            RoomController(provider.roomDigitalTwinManager)
+                            RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
                         ).execute().let { result ->
                             if (result) HttpStatusCode.NoContent else HttpStatusCode.NotFound
                         }
