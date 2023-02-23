@@ -25,7 +25,7 @@ interface RoomDigitalTwinManager {
 
     /**
      * Delete the Digital Twin of the room identified by [roomId].
-     * * @return true if successfully deleted, false otherwise.
+     * @return true if successfully deleted, false otherwise.
      */
     fun deleteRoomDigitalTwin(roomId: RoomID): Boolean
 
