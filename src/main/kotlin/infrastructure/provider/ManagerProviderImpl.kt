@@ -8,6 +8,7 @@
 
 package infrastructure.provider
 
+import infrastructure.database.DatabaseManager
 import infrastructure.digitaltwins.DigitalTwinManager
 
 /**
@@ -15,4 +16,5 @@ import infrastructure.digitaltwins.DigitalTwinManager
  */
 class ManagerProviderImpl : ManagerProvider {
     override val roomDigitalTwinManager = DigitalTwinManager()
+    override val roomDatabaseManager = DatabaseManager()
 }
