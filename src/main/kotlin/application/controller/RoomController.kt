@@ -8,6 +8,7 @@
 
 package application.controller
 
+import application.controller.manager.RoomDatabaseManager
 import application.controller.manager.RoomDigitalTwinManager
 import entity.zone.Room
 import entity.zone.RoomID
@@ -19,22 +20,32 @@ import java.util.Date
  * using both db and digital twin.
  * @param[roomDtManager] the digital twin manager of rooms.
  */
-class RoomController(private val roomDtManager: RoomDigitalTwinManager) : RoomRepository {
-    override fun createRoom(room: Room): Room? =
-        if (this.roomDtManager.createRoomDigitalTwin(room)) room else null
+class RoomController(
+    private val roomDtManager: RoomDigitalTwinManager,
+    private val roomDatabaseManager: RoomDatabaseManager
+) : RoomRepository {
+    override fun createRoom(room: Room): Room? = (
+        this.roomDtManager.createRoomDigitalTwin(room) &&
+            this.roomDatabaseManager.saveRoom(room).rollback {
+                this.roomDtManager.deleteRoomDigitalTwin(room.id)
+            }
+        ).let { if (it) room else null }
 
-    override fun deleteRoom(roomId: RoomID): Boolean {
-        return this.roomDtManager.deleteRoomDigitalTwin(roomId)
-    }
+    override fun deleteRoom(roomId: RoomID): Boolean =
+        this.roomDtManager.deleteRoomDigitalTwin(roomId) && this.roomDatabaseManager.deleteRoom(roomId)
 
     override fun findBy(roomId: RoomID, dateTime: Date?): Room? =
-        if (dateTime == null) {
+        if (dateTime == null) { // if the date-time is null, then obtain present information
             this.roomDtManager.findBy(roomId)
-        } else {
-            null
+        } else { // get historical data
+            this.roomDatabaseManager.findBy(roomId, dateTime)
         }
 
-    override fun getRooms(): Set<Room> {
-        TODO("Not yet implemented")
-    }
+    override fun getRooms(): Set<Room> = this.roomDatabaseManager.getAllRooms()
+
+    private fun Boolean.rollback(rollbackActions: () -> Unit): Boolean =
+        if (!this) {
+            rollbackActions()
+            false
+        } else true
 }
