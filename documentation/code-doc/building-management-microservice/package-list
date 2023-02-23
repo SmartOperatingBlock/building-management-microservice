@@ -1,0 +1,187 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:////PointingToDeclaration/building-management-microservice/[root]/index.html
+$dokka.location://main/#/PointingToDeclaration/building-management-microservice/[root]/main.html
+$dokka.location:application.controller.manager////PointingToDeclaration/building-management-microservice/application.controller.manager/index.html
+$dokka.location:application.controller.manager/RoomDigitalTwinManager///PointingToDeclaration/building-management-microservice/application.controller.manager/-room-digital-twin-manager/index.html
+$dokka.location:application.controller.manager/RoomDigitalTwinManager/createRoomDigitalTwin/#entity.zone.Room/PointingToDeclaration/building-management-microservice/application.controller.manager/-room-digital-twin-manager/create-room-digital-twin.html
+$dokka.location:application.controller.manager/RoomDigitalTwinManager/deleteRoomDigitalTwin/#entity.zone.RoomID/PointingToDeclaration/building-management-microservice/application.controller.manager/-room-digital-twin-manager/delete-room-digital-twin.html
+$dokka.location:application.controller.manager/RoomDigitalTwinManager/findBy/#entity.zone.RoomID/PointingToDeclaration/building-management-microservice/application.controller.manager/-room-digital-twin-manager/find-by.html
+$dokka.location:application.controller////PointingToDeclaration/building-management-microservice/application.controller/index.html
+$dokka.location:application.controller/RoomController///PointingToDeclaration/building-management-microservice/application.controller/-room-controller/index.html
+$dokka.location:application.controller/RoomController/RoomController/#application.controller.manager.RoomDigitalTwinManager/PointingToDeclaration/building-management-microservice/application.controller/-room-controller/-room-controller.html
+$dokka.location:application.controller/RoomController/createRoom/#entity.zone.Room/PointingToDeclaration/building-management-microservice/application.controller/-room-controller/create-room.html
+$dokka.location:application.controller/RoomController/deleteRoom/#entity.zone.RoomID/PointingToDeclaration/building-management-microservice/application.controller/-room-controller/delete-room.html
+$dokka.location:application.controller/RoomController/findBy/#entity.zone.RoomID#java.util.Date?/PointingToDeclaration/building-management-microservice/application.controller/-room-controller/find-by.html
+$dokka.location:application.controller/RoomController/getRooms/#/PointingToDeclaration/building-management-microservice/application.controller/-room-controller/get-rooms.html
+$dokka.location:application.presenter.api.deserializer////PointingToDeclaration/building-management-microservice/application.presenter.api.deserializer/index.html
+$dokka.location:application.presenter.api.deserializer/ApiDeserializer///PointingToDeclaration/building-management-microservice/application.presenter.api.deserializer/-api-deserializer/index.html
+$dokka.location:application.presenter.api.deserializer/ApiDeserializer/toRoom/application.presenter.api.model.RoomApiDto#/PointingToDeclaration/building-management-microservice/application.presenter.api.deserializer/-api-deserializer/to-room.html
+$dokka.location:application.presenter.api.model////PointingToDeclaration/building-management-microservice/application.presenter.api.model/index.html
+$dokka.location:application.presenter.api.model/EnvironmentalDataApiDto///PointingToDeclaration/building-management-microservice/application.presenter.api.model/-environmental-data-api-dto/index.html
+$dokka.location:application.presenter.api.model/EnvironmentalDataApiDto/EnvironmentalDataApiDto/#application.presenter.api.model.ValueWithUnit[kotlin.Double]?#kotlin.Double?#application.presenter.api.model.ValueWithUnit[kotlin.Double]?#kotlin.Boolean?/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-environmental-data-api-dto/-environmental-data-api-dto.html
+$dokka.location:application.presenter.api.model/EnvironmentalDataApiDto/humidity/#/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-environmental-data-api-dto/humidity.html
+$dokka.location:application.presenter.api.model/EnvironmentalDataApiDto/luminosity/#/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-environmental-data-api-dto/luminosity.html
+$dokka.location:application.presenter.api.model/EnvironmentalDataApiDto/presence/#/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-environmental-data-api-dto/presence.html
+$dokka.location:application.presenter.api.model/EnvironmentalDataApiDto/temperature/#/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-environmental-data-api-dto/temperature.html
+$dokka.location:application.presenter.api.model/RoomApiDto///PointingToDeclaration/building-management-microservice/application.presenter.api.model/-room-api-dto/index.html
+$dokka.location:application.presenter.api.model/RoomApiDto/RoomApiDto/#kotlin.String#kotlin.String#kotlin.String#application.presenter.api.model.RoomApiDtoType#application.presenter.api.model.EnvironmentalDataApiDto/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-room-api-dto/-room-api-dto.html
+$dokka.location:application.presenter.api.model/RoomApiDto/environmentalData/#/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-room-api-dto/environmental-data.html
+$dokka.location:application.presenter.api.model/RoomApiDto/id/#/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-room-api-dto/id.html
+$dokka.location:application.presenter.api.model/RoomApiDto/name/#/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-room-api-dto/name.html
+$dokka.location:application.presenter.api.model/RoomApiDto/type/#/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-room-api-dto/type.html
+$dokka.location:application.presenter.api.model/RoomApiDto/zoneId/#/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-room-api-dto/zone-id.html
+$dokka.location:application.presenter.api.model/RoomApiDtoType.OPERATING_ROOM///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}building-management-microservice/application.presenter.api.model/-room-api-dto-type/-o-p-e-r-a-t-i-n-g_-r-o-o-m/index.html
+$dokka.location:application.presenter.api.model/RoomApiDtoType.PRE_OPERATING_ROOM///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}building-management-microservice/application.presenter.api.model/-room-api-dto-type/-p-r-e_-o-p-e-r-a-t-i-n-g_-r-o-o-m/index.html
+$dokka.location:application.presenter.api.model/RoomApiDtoType///PointingToDeclaration/building-management-microservice/application.presenter.api.model/-room-api-dto-type/index.html
+$dokka.location:application.presenter.api.model/RoomApiDtoType/valueOf/#kotlin.String/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-room-api-dto-type/value-of.html
+$dokka.location:application.presenter.api.model/RoomApiDtoType/values/#/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-room-api-dto-type/values.html
+$dokka.location:application.presenter.api.model/ValueWithUnit///PointingToDeclaration/building-management-microservice/application.presenter.api.model/-value-with-unit/index.html
+$dokka.location:application.presenter.api.model/ValueWithUnit/ValueWithUnit/#TypeParam(bounds=[kotlin.Any?])#kotlin.String/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-value-with-unit/-value-with-unit.html
+$dokka.location:application.presenter.api.model/ValueWithUnit/unit/#/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-value-with-unit/unit.html
+$dokka.location:application.presenter.api.model/ValueWithUnit/value/#/PointingToDeclaration/building-management-microservice/application.presenter.api.model/-value-with-unit/value.html
+$dokka.location:application.presenter.api.serializer////PointingToDeclaration/building-management-microservice/application.presenter.api.serializer/index.html
+$dokka.location:application.presenter.api.serializer/ApiSerializer///PointingToDeclaration/building-management-microservice/application.presenter.api.serializer/-api-serializer/index.html
+$dokka.location:application.presenter.api.serializer/ApiSerializer/toRoomApiDto/entity.zone.Room#/PointingToDeclaration/building-management-microservice/application.presenter.api.serializer/-api-serializer/to-room-api-dto.html
+$dokka.location:application.service////PointingToDeclaration/building-management-microservice/application.service/index.html
+$dokka.location:application.service/Service.ApplicationService///PointingToDeclaration/building-management-microservice/application.service/-service/-application-service/index.html
+$dokka.location:application.service/Service.ApplicationService/execute/#/PointingToDeclaration/building-management-microservice/application.service/-service/-application-service/execute.html
+$dokka.location:application.service/Service.CreateRoom///PointingToDeclaration/building-management-microservice/application.service/-service/-create-room/index.html
+$dokka.location:application.service/Service.CreateRoom/CreateRoom/#entity.zone.Room#usecase.repository.RoomRepository/PointingToDeclaration/building-management-microservice/application.service/-service/-create-room/-create-room.html
+$dokka.location:application.service/Service.CreateRoom/execute/#/PointingToDeclaration/building-management-microservice/application.service/-service/-create-room/execute.html
+$dokka.location:application.service/Service.DeleteRoom///PointingToDeclaration/building-management-microservice/application.service/-service/-delete-room/index.html
+$dokka.location:application.service/Service.DeleteRoom/DeleteRoom/#entity.zone.RoomID#usecase.repository.RoomRepository/PointingToDeclaration/building-management-microservice/application.service/-service/-delete-room/-delete-room.html
+$dokka.location:application.service/Service.DeleteRoom/execute/#/PointingToDeclaration/building-management-microservice/application.service/-service/-delete-room/execute.html
+$dokka.location:application.service/Service.GetRoom///PointingToDeclaration/building-management-microservice/application.service/-service/-get-room/index.html
+$dokka.location:application.service/Service.GetRoom/GetRoom/#entity.zone.RoomID#usecase.repository.RoomRepository#java.util.Date?/PointingToDeclaration/building-management-microservice/application.service/-service/-get-room/-get-room.html
+$dokka.location:application.service/Service.GetRoom/execute/#/PointingToDeclaration/building-management-microservice/application.service/-service/-get-room/execute.html
+$dokka.location:application.service/Service///PointingToDeclaration/building-management-microservice/application.service/-service/index.html
+$dokka.location:entity.environment////PointingToDeclaration/building-management-microservice/entity.environment/index.html
+$dokka.location:entity.environment/Humidity///PointingToDeclaration/building-management-microservice/entity.environment/-humidity/index.html
+$dokka.location:entity.environment/Humidity/Humidity/#kotlin.Double/PointingToDeclaration/building-management-microservice/entity.environment/-humidity/-humidity.html
+$dokka.location:entity.environment/Humidity/percentage/#/PointingToDeclaration/building-management-microservice/entity.environment/-humidity/percentage.html
+$dokka.location:entity.environment/LightUnit.LUX///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}building-management-microservice/entity.environment/-light-unit/-l-u-x/index.html
+$dokka.location:entity.environment/LightUnit///PointingToDeclaration/building-management-microservice/entity.environment/-light-unit/index.html
+$dokka.location:entity.environment/LightUnit/valueOf/#kotlin.String/PointingToDeclaration/building-management-microservice/entity.environment/-light-unit/value-of.html
+$dokka.location:entity.environment/LightUnit/values/#/PointingToDeclaration/building-management-microservice/entity.environment/-light-unit/values.html
+$dokka.location:entity.environment/Luminosity///PointingToDeclaration/building-management-microservice/entity.environment/-luminosity/index.html
+$dokka.location:entity.environment/Luminosity/Luminosity/#kotlin.Double#entity.environment.LightUnit/PointingToDeclaration/building-management-microservice/entity.environment/-luminosity/-luminosity.html
+$dokka.location:entity.environment/Luminosity/unit/#/PointingToDeclaration/building-management-microservice/entity.environment/-luminosity/unit.html
+$dokka.location:entity.environment/Luminosity/value/#/PointingToDeclaration/building-management-microservice/entity.environment/-luminosity/value.html
+$dokka.location:entity.environment/Presence///PointingToDeclaration/building-management-microservice/entity.environment/-presence/index.html
+$dokka.location:entity.environment/Presence/Presence/#kotlin.Boolean/PointingToDeclaration/building-management-microservice/entity.environment/-presence/-presence.html
+$dokka.location:entity.environment/Presence/presenceDetected/#/PointingToDeclaration/building-management-microservice/entity.environment/-presence/presence-detected.html
+$dokka.location:entity.environment/Temperature///PointingToDeclaration/building-management-microservice/entity.environment/-temperature/index.html
+$dokka.location:entity.environment/Temperature/Temperature/#kotlin.Double#entity.environment.TemperatureUnit/PointingToDeclaration/building-management-microservice/entity.environment/-temperature/-temperature.html
+$dokka.location:entity.environment/Temperature/unit/#/PointingToDeclaration/building-management-microservice/entity.environment/-temperature/unit.html
+$dokka.location:entity.environment/Temperature/value/#/PointingToDeclaration/building-management-microservice/entity.environment/-temperature/value.html
+$dokka.location:entity.environment/TemperatureUnit.CELSIUS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}building-management-microservice/entity.environment/-temperature-unit/-c-e-l-s-i-u-s/index.html
+$dokka.location:entity.environment/TemperatureUnit///PointingToDeclaration/building-management-microservice/entity.environment/-temperature-unit/index.html
+$dokka.location:entity.environment/TemperatureUnit/valueOf/#kotlin.String/PointingToDeclaration/building-management-microservice/entity.environment/-temperature-unit/value-of.html
+$dokka.location:entity.environment/TemperatureUnit/values/#/PointingToDeclaration/building-management-microservice/entity.environment/-temperature-unit/values.html
+$dokka.location:entity.medicaltechnology////PointingToDeclaration/building-management-microservice/entity.medicaltechnology/index.html
+$dokka.location:entity.medicaltechnology/MedicalTechnology///PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology/index.html
+$dokka.location:entity.medicaltechnology/MedicalTechnology/MedicalTechnology/#entity.medicaltechnology.MedicalTechnologyID#kotlin.String#kotlin.String#entity.medicaltechnology.MedicalTechnologyType#kotlin.Boolean#entity.zone.RoomID?/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology/-medical-technology.html
+$dokka.location:entity.medicaltechnology/MedicalTechnology/description/#/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology/description.html
+$dokka.location:entity.medicaltechnology/MedicalTechnology/equals/#kotlin.Any?/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology/equals.html
+$dokka.location:entity.medicaltechnology/MedicalTechnology/hashCode/#/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology/hash-code.html
+$dokka.location:entity.medicaltechnology/MedicalTechnology/id/#/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology/id.html
+$dokka.location:entity.medicaltechnology/MedicalTechnology/isInUse/#/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology/is-in-use.html
+$dokka.location:entity.medicaltechnology/MedicalTechnology/name/#/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology/name.html
+$dokka.location:entity.medicaltechnology/MedicalTechnology/roomId/#/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology/room-id.html
+$dokka.location:entity.medicaltechnology/MedicalTechnology/type/#/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology/type.html
+$dokka.location:entity.medicaltechnology/MedicalTechnologyID///PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology-i-d/index.html
+$dokka.location:entity.medicaltechnology/MedicalTechnologyID/MedicalTechnologyID/#kotlin.String/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology-i-d/-medical-technology-i-d.html
+$dokka.location:entity.medicaltechnology/MedicalTechnologyID/value/#/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology-i-d/value.html
+$dokka.location:entity.medicaltechnology/MedicalTechnologyType.ENDOSCOPE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}building-management-microservice/entity.medicaltechnology/-medical-technology-type/-e-n-d-o-s-c-o-p-e/index.html
+$dokka.location:entity.medicaltechnology/MedicalTechnologyType.XRAY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}building-management-microservice/entity.medicaltechnology/-medical-technology-type/-x-r-a-y/index.html
+$dokka.location:entity.medicaltechnology/MedicalTechnologyType///PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology-type/index.html
+$dokka.location:entity.medicaltechnology/MedicalTechnologyType/valueOf/#kotlin.String/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology-type/value-of.html
+$dokka.location:entity.medicaltechnology/MedicalTechnologyType/values/#/PointingToDeclaration/building-management-microservice/entity.medicaltechnology/-medical-technology-type/values.html
+$dokka.location:entity.zone////PointingToDeclaration/building-management-microservice/entity.zone/index.html
+$dokka.location:entity.zone/Room///PointingToDeclaration/building-management-microservice/entity.zone/-room/index.html
+$dokka.location:entity.zone/Room/Room/#entity.zone.RoomID#entity.zone.RoomType#entity.zone.ZoneID#kotlin.String?#entity.zone.RoomEnvironmentalData/PointingToDeclaration/building-management-microservice/entity.zone/-room/-room.html
+$dokka.location:entity.zone/Room/environmentalData/#/PointingToDeclaration/building-management-microservice/entity.zone/-room/environmental-data.html
+$dokka.location:entity.zone/Room/equals/#kotlin.Any?/PointingToDeclaration/building-management-microservice/entity.zone/-room/equals.html
+$dokka.location:entity.zone/Room/hashCode/#/PointingToDeclaration/building-management-microservice/entity.zone/-room/hash-code.html
+$dokka.location:entity.zone/Room/id/#/PointingToDeclaration/building-management-microservice/entity.zone/-room/id.html
+$dokka.location:entity.zone/Room/name/#/PointingToDeclaration/building-management-microservice/entity.zone/-room/name.html
+$dokka.location:entity.zone/Room/type/#/PointingToDeclaration/building-management-microservice/entity.zone/-room/type.html
+$dokka.location:entity.zone/Room/zoneId/#/PointingToDeclaration/building-management-microservice/entity.zone/-room/zone-id.html
+$dokka.location:entity.zone/RoomEnvironmentalData///PointingToDeclaration/building-management-microservice/entity.zone/-room-environmental-data/index.html
+$dokka.location:entity.zone/RoomEnvironmentalData/RoomEnvironmentalData/#entity.environment.Temperature?#entity.environment.Humidity?#entity.environment.Luminosity?#entity.environment.Presence?/PointingToDeclaration/building-management-microservice/entity.zone/-room-environmental-data/-room-environmental-data.html
+$dokka.location:entity.zone/RoomEnvironmentalData/humidity/#/PointingToDeclaration/building-management-microservice/entity.zone/-room-environmental-data/humidity.html
+$dokka.location:entity.zone/RoomEnvironmentalData/luminosity/#/PointingToDeclaration/building-management-microservice/entity.zone/-room-environmental-data/luminosity.html
+$dokka.location:entity.zone/RoomEnvironmentalData/presence/#/PointingToDeclaration/building-management-microservice/entity.zone/-room-environmental-data/presence.html
+$dokka.location:entity.zone/RoomEnvironmentalData/temperature/#/PointingToDeclaration/building-management-microservice/entity.zone/-room-environmental-data/temperature.html
+$dokka.location:entity.zone/RoomID///PointingToDeclaration/building-management-microservice/entity.zone/-room-i-d/index.html
+$dokka.location:entity.zone/RoomID/RoomID/#kotlin.String/PointingToDeclaration/building-management-microservice/entity.zone/-room-i-d/-room-i-d.html
+$dokka.location:entity.zone/RoomID/value/#/PointingToDeclaration/building-management-microservice/entity.zone/-room-i-d/value.html
+$dokka.location:entity.zone/RoomType.OPERATING_ROOM///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}building-management-microservice/entity.zone/-room-type/-o-p-e-r-a-t-i-n-g_-r-o-o-m/index.html
+$dokka.location:entity.zone/RoomType.PRE_OPERATING_ROOM///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}building-management-microservice/entity.zone/-room-type/-p-r-e_-o-p-e-r-a-t-i-n-g_-r-o-o-m/index.html
+$dokka.location:entity.zone/RoomType///PointingToDeclaration/building-management-microservice/entity.zone/-room-type/index.html
+$dokka.location:entity.zone/RoomType/valueOf/#kotlin.String/PointingToDeclaration/building-management-microservice/entity.zone/-room-type/value-of.html
+$dokka.location:entity.zone/RoomType/values/#/PointingToDeclaration/building-management-microservice/entity.zone/-room-type/values.html
+$dokka.location:entity.zone/Zone///PointingToDeclaration/building-management-microservice/entity.zone/-zone/index.html
+$dokka.location:entity.zone/Zone/Zone/#entity.zone.ZoneID#kotlin.String#kotlin.String/PointingToDeclaration/building-management-microservice/entity.zone/-zone/-zone.html
+$dokka.location:entity.zone/Zone/description/#/PointingToDeclaration/building-management-microservice/entity.zone/-zone/description.html
+$dokka.location:entity.zone/Zone/equals/#kotlin.Any?/PointingToDeclaration/building-management-microservice/entity.zone/-zone/equals.html
+$dokka.location:entity.zone/Zone/hashCode/#/PointingToDeclaration/building-management-microservice/entity.zone/-zone/hash-code.html
+$dokka.location:entity.zone/Zone/id/#/PointingToDeclaration/building-management-microservice/entity.zone/-zone/id.html
+$dokka.location:entity.zone/Zone/name/#/PointingToDeclaration/building-management-microservice/entity.zone/-zone/name.html
+$dokka.location:entity.zone/ZoneID///PointingToDeclaration/building-management-microservice/entity.zone/-zone-i-d/index.html
+$dokka.location:entity.zone/ZoneID/ZoneID/#kotlin.String/PointingToDeclaration/building-management-microservice/entity.zone/-zone-i-d/-zone-i-d.html
+$dokka.location:entity.zone/ZoneID/value/#/PointingToDeclaration/building-management-microservice/entity.zone/-zone-i-d/value.html
+$dokka.location:infrastructure.api////PointingToDeclaration/building-management-microservice/infrastructure.api/index.html
+$dokka.location:infrastructure.api/APIController.Companion///PointingToDeclaration/building-management-microservice/infrastructure.api/-a-p-i-controller/-companion/index.html
+$dokka.location:infrastructure.api/APIController///PointingToDeclaration/building-management-microservice/infrastructure.api/-a-p-i-controller/index.html
+$dokka.location:infrastructure.api/APIController/APIController/#infrastructure.provider.ManagerProvider/PointingToDeclaration/building-management-microservice/infrastructure.api/-a-p-i-controller/-a-p-i-controller.html
+$dokka.location:infrastructure.api/APIController/dispatcher/#io.ktor.server.application.Application/PointingToDeclaration/building-management-microservice/infrastructure.api/-a-p-i-controller/dispatcher.html
+$dokka.location:infrastructure.api/APIController/start/#/PointingToDeclaration/building-management-microservice/infrastructure.api/-a-p-i-controller/start.html
+$dokka.location:infrastructure.digitaltwins.adtpresentation////PointingToDeclaration/building-management-microservice/infrastructure.digitaltwins.adtpresentation/index.html
+$dokka.location:infrastructure.digitaltwins.adtpresentation/RoomAdtPresentation///PointingToDeclaration/building-management-microservice/infrastructure.digitaltwins.adtpresentation/-room-adt-presentation/index.html
+$dokka.location:infrastructure.digitaltwins.adtpresentation/RoomAdtPresentation/toDigitalTwin/entity.zone.Room#/PointingToDeclaration/building-management-microservice/infrastructure.digitaltwins.adtpresentation/-room-adt-presentation/to-digital-twin.html
+$dokka.location:infrastructure.digitaltwins.adtpresentation/RoomAdtPresentation/toRoom/com.azure.digitaltwins.core.BasicDigitalTwin#/PointingToDeclaration/building-management-microservice/infrastructure.digitaltwins.adtpresentation/-room-adt-presentation/to-room.html
+$dokka.location:infrastructure.digitaltwins////PointingToDeclaration/building-management-microservice/infrastructure.digitaltwins/index.html
+$dokka.location:infrastructure.digitaltwins/DigitalTwinManager.Companion///PointingToDeclaration/building-management-microservice/infrastructure.digitaltwins/-digital-twin-manager/-companion/index.html
+$dokka.location:infrastructure.digitaltwins/DigitalTwinManager///PointingToDeclaration/building-management-microservice/infrastructure.digitaltwins/-digital-twin-manager/index.html
+$dokka.location:infrastructure.digitaltwins/DigitalTwinManager/DigitalTwinManager/#/PointingToDeclaration/building-management-microservice/infrastructure.digitaltwins/-digital-twin-manager/-digital-twin-manager.html
+$dokka.location:infrastructure.digitaltwins/DigitalTwinManager/createRoomDigitalTwin/#entity.zone.Room/PointingToDeclaration/building-management-microservice/infrastructure.digitaltwins/-digital-twin-manager/create-room-digital-twin.html
+$dokka.location:infrastructure.digitaltwins/DigitalTwinManager/deleteRoomDigitalTwin/#entity.zone.RoomID/PointingToDeclaration/building-management-microservice/infrastructure.digitaltwins/-digital-twin-manager/delete-room-digital-twin.html
+$dokka.location:infrastructure.digitaltwins/DigitalTwinManager/findBy/#entity.zone.RoomID/PointingToDeclaration/building-management-microservice/infrastructure.digitaltwins/-digital-twin-manager/find-by.html
+$dokka.location:infrastructure.provider////PointingToDeclaration/building-management-microservice/infrastructure.provider/index.html
+$dokka.location:infrastructure.provider/ManagerProvider///PointingToDeclaration/building-management-microservice/infrastructure.provider/-manager-provider/index.html
+$dokka.location:infrastructure.provider/ManagerProvider/roomDigitalTwinManager/#/PointingToDeclaration/building-management-microservice/infrastructure.provider/-manager-provider/room-digital-twin-manager.html
+$dokka.location:infrastructure.provider/ManagerProviderImpl///PointingToDeclaration/building-management-microservice/infrastructure.provider/-manager-provider-impl/index.html
+$dokka.location:infrastructure.provider/ManagerProviderImpl/ManagerProviderImpl/#/PointingToDeclaration/building-management-microservice/infrastructure.provider/-manager-provider-impl/-manager-provider-impl.html
+$dokka.location:infrastructure.provider/ManagerProviderImpl/roomDigitalTwinManager/#/PointingToDeclaration/building-management-microservice/infrastructure.provider/-manager-provider-impl/room-digital-twin-manager.html
+$dokka.location:usecase.repository////PointingToDeclaration/building-management-microservice/usecase.repository/index.html
+$dokka.location:usecase.repository/MedicalTechnologyRepository///PointingToDeclaration/building-management-microservice/usecase.repository/-medical-technology-repository/index.html
+$dokka.location:usecase.repository/MedicalTechnologyRepository/createMedicalTechnology/#entity.medicaltechnology.MedicalTechnology/PointingToDeclaration/building-management-microservice/usecase.repository/-medical-technology-repository/create-medical-technology.html
+$dokka.location:usecase.repository/MedicalTechnologyRepository/deleteMedicalTechnology/#entity.medicaltechnology.MedicalTechnologyID/PointingToDeclaration/building-management-microservice/usecase.repository/-medical-technology-repository/delete-medical-technology.html
+$dokka.location:usecase.repository/MedicalTechnologyRepository/findBy/#entity.medicaltechnology.MedicalTechnologyID/PointingToDeclaration/building-management-microservice/usecase.repository/-medical-technology-repository/find-by.html
+$dokka.location:usecase.repository/MedicalTechnologyRepository/mapTechnologyTo/#entity.medicaltechnology.MedicalTechnologyID#entity.zone.RoomID/PointingToDeclaration/building-management-microservice/usecase.repository/-medical-technology-repository/map-technology-to.html
+$dokka.location:usecase.repository/RoomRepository///PointingToDeclaration/building-management-microservice/usecase.repository/-room-repository/index.html
+$dokka.location:usecase.repository/RoomRepository/createRoom/#entity.zone.Room/PointingToDeclaration/building-management-microservice/usecase.repository/-room-repository/create-room.html
+$dokka.location:usecase.repository/RoomRepository/deleteRoom/#entity.zone.RoomID/PointingToDeclaration/building-management-microservice/usecase.repository/-room-repository/delete-room.html
+$dokka.location:usecase.repository/RoomRepository/findBy/#entity.zone.RoomID#java.util.Date?/PointingToDeclaration/building-management-microservice/usecase.repository/-room-repository/find-by.html
+$dokka.location:usecase.repository/RoomRepository/getRooms/#/PointingToDeclaration/building-management-microservice/usecase.repository/-room-repository/get-rooms.html
+$dokka.location:usecase////PointingToDeclaration/building-management-microservice/usecase/index.html
+$dokka.location:usecase/UseCase///PointingToDeclaration/building-management-microservice/usecase/-use-case/index.html
+$dokka.location:usecase/UseCase/execute/#/PointingToDeclaration/building-management-microservice/usecase/-use-case/execute.html
+application.controller
+application.controller.manager
+application.presenter.api.deserializer
+application.presenter.api.model
+application.presenter.api.serializer
+application.service
+entity.environment
+entity.medicaltechnology
+entity.zone
+infrastructure.api
+infrastructure.digitaltwins
+infrastructure.digitaltwins.adtpresentation
+infrastructure.provider
+usecase
+usecase.repository
+
