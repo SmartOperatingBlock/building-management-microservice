@@ -1,0 +1,336 @@
+openapi: 3.0.0
+servers:
+  - description: Building Management microservice
+    url: http://localhost:<port>/api
+info:
+  description: This is the API of the Building Management microservice within the Smart Operating Block project
+  version: 1.0.0
+  title: Building Management API
+  contact:
+    email: info@smartoperatingblock.com
+  license:
+    name: MIT License
+    url: 'https://opensource.org/license/mit/'
+
+tags:
+  - name: Room API
+    description: This is the available API to manage and obtain information about rooms within the Operating Block.
+  - name: Medical Technology API
+    description: This is the available API to manage and obtain information about rooms within the Operating Block.
+
+paths:
+  /rooms:
+    get:
+      tags:
+        - Room API
+      summary: get all rooms
+      operationId: getRooms
+      description: Get rooms
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfRoomEntry'
+        '204':
+          description: no rooms present
+        '500':
+          description: server error occurred
+    post:
+      tags:
+        - Room API
+      summary: insert a new room
+      operationId: insertRoom
+      description: Add new room to the operating block
+      responses:
+        '201':
+          description: room created
+        '400':
+          description: invalid input, object invalid
+        '409':
+          description: a room with the same id already exists
+        '500':
+          description: server error occurred
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomEntry'
+        description: Room to add
+
+  /rooms/{roomId}:
+    get:
+      tags:
+        - Room API
+      summary: get the room information
+      operationId: getRoom
+      description: Get room information
+      parameters:
+        - in: path
+          name: roomId
+          description: the room's ID
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: dateTime
+          required: false
+          description: Specify a past date in order to obtain historical data
+          schema:
+            type: string
+            format: date-time
+            example: '2017-07-21T17:32:28Z'
+      responses:
+        '200':
+          description: search result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+        '404':
+          description: room not found
+        '500':
+          description: server error occurred
+    delete:
+      tags:
+        - Room API
+      summary: delete the room
+      operationId: deleteRoom
+      description: Delete a room
+      parameters:
+        - in: path
+          name: roomId
+          description: the room's ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: room deleted
+        '404':
+          description: room not found
+        '500':
+          description: server error occurred
+
+  /medical-technologies:
+    post:
+      tags:
+        - Medical Technology API
+      summary: insert a new medical technology
+      operationId: insertMedicalTechnology
+      description: Add new medical technology to the operating block
+      responses:
+        '201':
+          description: medical technology created
+        '400':
+          description: invalid input, object invalid
+        '409':
+          description: a medical technology with the same id already exists
+        '500':
+          description: server error occurred
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalTechnology'
+        description: Medical Technology to add
+
+  /medical-technologies/{technologyId}:
+    get:
+      tags:
+        - Medical Technology API
+      summary: get the medical technology information
+      operationId: getMedicalTechnology
+      description: Get medical technology information
+      parameters:
+        - in: path
+          name: technologyId
+          description: the medical technology's ID
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: dateTime
+          required: false
+          description: Specify a past date in order to obtain historical data
+          schema:
+            type: string
+            format: date-time
+            example: '2017-07-21T17:32:28Z'
+      responses:
+        '200':
+          description: search result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalTechnology'
+        '204':
+          description: no content about the medical technology was found
+        '404':
+          description: medical technology not found
+        '500':
+          description: server error occurred
+    delete:
+      tags:
+        - Medical Technology API
+      summary: delete the medical technology
+      operationId: deleteMedicalTechnology
+      description: Delete a medical technology
+      parameters:
+        - in: path
+          name: technologyId
+          description: the medical technology's ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: medical technology deleted
+        '404':
+          description: medical technology not found
+        '500':
+          description: server error occurred
+    patch:
+      tags:
+        - Medical Technology API
+      summary: update medical technology mapping
+      operationId: updateMedicalTechnology
+      description: Map the medical technology to a room inside the Operating Block
+      parameters:
+        - in: path
+          name: technologyId
+          description: the medical technology's ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              type: object
+              properties:
+                room-id:
+                  type: string
+                  example: Room-#2
+                  description: room to specify a new mapping, null if you want to delete mapping
+        description: the new mapping
+      responses:
+        '204':
+          description: medical technology updated
+        '400':
+          description: malformed merge patch file
+        '404':
+          description: medical technology or room not found
+        '500':
+          description: server error occurred
+
+components:
+  schemas:
+    RoomType:
+      type: string
+      enum: [OPERATING_ROOM, PRE_OPERATING_ROOM]
+      example: OPERATING_ROOM
+
+    RoomEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Room-#1
+        name:
+          type: string
+          example: Mario Rossi's Operating Room - Bufalini Hospital
+        zoneId:
+          type: string
+          example: Zone-#1
+        type:
+          $ref: '#/components/schemas/RoomType'
+
+    ArrayOfRoomEntry:
+      type: object
+      properties:
+        entries:
+          type: array
+          description: rooms entries
+          items:
+            type: object
+            properties:
+              entry:
+                $ref: '#/components/schemas/RoomEntry'
+              url:
+                type: string
+                format: uri
+                example: 'http://localhost:3000/api/v1/rooms/Room-#1'
+        total:
+          type: integer
+          description: the total number of room entries
+          example: 34
+
+    Room:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Room-#1
+        name:
+          type: string
+          example: Mario Rossi's Operating Room - Bufalini Hospital
+        zoneId:
+          type: string
+          example: Zone-#1
+        type:
+          $ref: '#/components/schemas/RoomType'
+        environmentalData:
+          $ref: '#/components/schemas/RoomEnvironmentalData'
+
+    RoomEnvironmentalData:
+      type: object
+      properties:
+        temperature:
+          type: object
+          properties:
+            value:
+              type: number
+              example: 25.3
+            unit:
+              type: string
+              enum: [CELSIUS, FAHRENHEIT]
+              example: CELSIUS
+        humidity:
+          type: number
+          example: 55.5
+        luminosity:
+          type: object
+          properties:
+            value:
+              type: number
+              example: 150.5
+            unit:
+              type: string
+              enum: [LUX]
+              example: LUX
+        presence:
+          type: boolean
+          example: true
+
+    MedicalTechnology:
+      type: object
+      properties:
+        id:
+          type: string
+          example: mt-#1
+        name:
+          type: string
+          example: Endoscope
+        description:
+          type: string
+        inUse:
+          type: boolean
+        roomId:
+          type: string
+          example: Room-#1
+        type:
+          type: string
+          enum: [ENDOSCOPE, XRAY]
+          example: ENDOSCOPE
