@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.0.0...1.0.1) (2023-02-25)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-serialization-json to v1.5.0 ([19894da](https://github.com/SmartOperatingBlock/building-management-microservice/commit/19894daa2cd5a9e85f127317eee1a831636525c8))
+
 ## 1.0.0 (2023-02-23)
 
 
