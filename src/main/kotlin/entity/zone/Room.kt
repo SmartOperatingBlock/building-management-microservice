@@ -12,6 +12,7 @@ import entity.environment.Humidity
 import entity.environment.Luminosity
 import entity.environment.Presence
 import entity.environment.Temperature
+import kotlinx.serialization.Serializable
 
 /**
  * It describes a room inside the Operating Block.
@@ -20,6 +21,7 @@ import entity.environment.Temperature
  * The Building Management system has the objective to collect [environmentalData]
  * of the rooms withing the Operating Block.
  */
+@Serializable
 data class Room(
     val id: RoomID,
     val type: RoomType,
@@ -40,6 +42,7 @@ data class Room(
  * Identification of a [Room].
  * @param[value] the id.
  */
+@Serializable
 data class RoomID(val value: String) {
     init {
         // Constructor validation: The id must not be empty
@@ -56,6 +59,7 @@ data class RoomID(val value: String) {
  * - the [presence] of someone in the room
  * All the data may be not present.
  */
+@Serializable
 data class RoomEnvironmentalData(
     val temperature: Temperature? = null,
     val humidity: Humidity? = null,
@@ -66,6 +70,7 @@ data class RoomEnvironmentalData(
 /**
  * Describes the type of [Room].
  */
+@Serializable
 enum class RoomType {
     /** It is the Pre/Post Operating Room. */
     PRE_OPERATING_ROOM,

@@ -8,6 +8,8 @@
 
 package entity.zone
 
+import kotlinx.serialization.Serializable
+
 /**
  * It describes a zone inside the Operating block.
  * Each zone is identified by an [id] and described
@@ -35,6 +37,7 @@ data class Zone(
 /**
  * It represents the Operating Block zone ID [value].
  */
+@Serializable
 data class ZoneID(val value: String) {
     init {
         // Constructor validation: the id must not be empty
