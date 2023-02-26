@@ -9,6 +9,7 @@
 package application.controller.manager
 
 import entity.zone.Room
+import entity.zone.RoomEnvironmentalData
 import entity.zone.RoomID
 import java.util.Date
 
@@ -42,4 +43,14 @@ interface RoomDatabaseManager {
      * @return a set of rooms.
      */
     fun getAllRooms(): Set<Room>
+
+    /**
+     * Update the [environmentalData] about a room identified by its [roomId].
+     * The data is associated to a [dateTime].
+     */
+    fun updateRoomEnvironmentalData(
+        roomId: RoomID,
+        environmentalData: RoomEnvironmentalData,
+        dateTime: Instant
+    ): Boolean
 }
