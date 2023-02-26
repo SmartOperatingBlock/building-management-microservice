@@ -11,7 +11,7 @@ package application.controller.manager
 import entity.zone.Room
 import entity.zone.RoomEnvironmentalData
 import entity.zone.RoomID
-import java.util.Date
+import java.time.Instant
 
 /**
  * This interface models the manager of the database for rooms.
@@ -36,7 +36,7 @@ interface RoomDatabaseManager {
      * Specify a past [dateTime] in order to get historical data.
      * @return null if data is not available, the room instead.
      */
-    fun findBy(roomId: RoomID, dateTime: Date): Room?
+    fun findBy(roomId: RoomID, dateTime: Instant): Room?
 
     /**
      * Get all the rooms available.
