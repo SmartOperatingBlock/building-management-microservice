@@ -10,7 +10,7 @@ package usecase.repository
 
 import entity.zone.Room
 import entity.zone.RoomID
-import java.util.Date
+import java.time.Instant
 
 /**
  * Interface that models the repository to manage Rooms.
@@ -32,7 +32,7 @@ interface RoomRepository {
      * Find a room by its [roomId] and get its data in a specific [dateTime] if specified.
      * @return the room if present, null otherwise.
      */
-    fun findBy(roomId: RoomID, dateTime: Date?): Room?
+    fun findBy(roomId: RoomID, dateTime: Instant?): Room?
 
     /**
      * Get all the rooms.

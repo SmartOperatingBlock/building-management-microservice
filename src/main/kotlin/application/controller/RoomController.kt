@@ -13,7 +13,7 @@ import application.controller.manager.RoomDigitalTwinManager
 import entity.zone.Room
 import entity.zone.RoomID
 import usecase.repository.RoomRepository
-import java.util.Date
+import java.time.Instant
 
 /**
  * Implementation of room repository that handle the application logic
@@ -34,7 +34,7 @@ class RoomController(
     override fun deleteRoom(roomId: RoomID): Boolean =
         this.roomDtManager.deleteRoomDigitalTwin(roomId) && this.roomDatabaseManager.deleteRoom(roomId)
 
-    override fun findBy(roomId: RoomID, dateTime: Date?): Room? =
+    override fun findBy(roomId: RoomID, dateTime: Instant?): Room? =
         if (dateTime == null) { // if the date-time is null, then obtain present information
             this.roomDtManager.findBy(roomId)
         } else { // get historical data

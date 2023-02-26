@@ -11,7 +11,7 @@ package application.service
 import entity.zone.Room
 import entity.zone.RoomID
 import usecase.repository.RoomRepository
-import java.util.Date
+import java.time.Instant
 
 /**
  * Module that wraps all the services that orchestrate the application logic (not domain one).
@@ -57,7 +57,7 @@ object Service {
     class GetRoom(
         private val roomID: RoomID,
         private val roomRepository: RoomRepository,
-        private val dateTime: Date? = null
+        private val dateTime: Instant? = null
     ) : ApplicationService<Room?> {
         override fun execute(): Room? = this.roomRepository.findBy(roomID, dateTime)
     }
