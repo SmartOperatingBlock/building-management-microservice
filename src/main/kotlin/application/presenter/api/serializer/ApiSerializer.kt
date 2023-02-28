@@ -11,6 +11,7 @@ package application.presenter.api.serializer
 import application.presenter.api.model.EnvironmentalDataApiDto
 import application.presenter.api.model.RoomApiDto
 import application.presenter.api.model.RoomApiDtoType
+import application.presenter.api.model.RoomEntry
 import application.presenter.api.model.ValueWithUnit
 import entity.zone.Room
 import entity.zone.RoomEnvironmentalData
@@ -20,6 +21,17 @@ import entity.zone.RoomType
  * Serializer for data to return in API.
  */
 object ApiSerializer {
+    /**
+     * Extension method to obtain the room entry information.
+     * @return the room entry.
+     */
+    fun Room.toRoomEntry(): RoomEntry = RoomEntry(
+        id = this.id.value,
+        name = this.name.orEmpty(),
+        zoneId = this.zoneId.value,
+        type = this.type.toString()
+    )
+
     /**
      * Extension method to convert [Room] API DTO to [application.presenter.api.model.RoomApiDto] class.
      */
