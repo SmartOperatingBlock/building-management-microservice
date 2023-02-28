@@ -6,7 +6,7 @@
  * https://opensource.org/licenses/MIT.
  */
 
-package infrastructure.database.datamodel
+package application.presenter.database.model
 
 import entity.zone.RoomID
 import kotlinx.serialization.Contextual
