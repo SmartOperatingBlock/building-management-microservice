@@ -24,6 +24,7 @@ import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.request.receive
 import io.ktor.server.response.header
 import io.ktor.server.response.respond
@@ -101,13 +102,11 @@ class APIController(private val provider: ManagerProvider) {
                 get("$apiPath/rooms/{roomId}") {
                     Service.GetRoom(
                         RoomID(call.parameters["roomId"].orEmpty()),
-                        RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
-                    ).execute().apply {
-                        when (this) {
-                            null -> call.respond(HttpStatusCode.NotFound)
-                            else -> call.respond(this.toRoomApiDto())
-                        }
-                    }
+                        RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
+                        call.request.queryParameters["dateTime"]?.let { Instant.parse(it) }
+                    ).execute()
+                        .let { it?.toRoomApiDto() ?: HttpStatusCode.NotFound }
+                        .apply { call.respond(this) }
                 }
                 delete("$apiPath/rooms/{roomId}") {
                     call.respond(
