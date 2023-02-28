@@ -9,10 +9,14 @@
 package application.presenter.api.serializer
 
 import application.presenter.api.model.EnvironmentalDataApiDto
+import application.presenter.api.model.MedicalTechnologyApiDto
+import application.presenter.api.model.MedicalTechnologyApiDtoType
 import application.presenter.api.model.RoomApiDto
 import application.presenter.api.model.RoomApiDtoType
 import application.presenter.api.model.RoomEntry
 import application.presenter.api.model.ValueWithUnit
+import entity.medicaltechnology.MedicalTechnology
+import entity.medicaltechnology.MedicalTechnologyType
 import entity.zone.Room
 import entity.zone.RoomEnvironmentalData
 import entity.zone.RoomType
@@ -53,5 +57,23 @@ object ApiSerializer {
     private fun RoomType.toRoomApiDtoType() = when (this) {
         RoomType.OPERATING_ROOM -> RoomApiDtoType.OPERATING_ROOM
         RoomType.PRE_OPERATING_ROOM -> RoomApiDtoType.PRE_OPERATING_ROOM
+    }
+
+    /**
+     * Extension method to convert [MedicalTechnology] API DTO
+     * to [application.presenter.api.model.MedicalTechnologyApiDto] class.
+     */
+    fun MedicalTechnology.toMedicalTechnologyApiDto() = MedicalTechnologyApiDto(
+        id = this.id.value,
+        name = this.name,
+        description = this.description,
+        type = this.type.toMedicalTechnologyApiDtoType(),
+        inUse = this.isInUse,
+        roomId = this.roomId?.value
+    )
+
+    private fun MedicalTechnologyType.toMedicalTechnologyApiDtoType() = when (this) {
+        MedicalTechnologyType.ENDOSCOPE -> MedicalTechnologyApiDtoType.ENDOSCOPE
+        MedicalTechnologyType.XRAY -> MedicalTechnologyApiDtoType.XRAY
     }
 }

@@ -9,6 +9,8 @@
 package application.presenter.api.deserializer
 
 import application.presenter.api.model.EnvironmentalDataApiDto
+import application.presenter.api.model.MedicalTechnologyApiDto
+import application.presenter.api.model.MedicalTechnologyApiDtoType
 import application.presenter.api.model.RoomApiDto
 import application.presenter.api.model.RoomApiDtoType
 import entity.environment.Humidity
@@ -17,6 +19,9 @@ import entity.environment.Luminosity
 import entity.environment.Presence
 import entity.environment.Temperature
 import entity.environment.TemperatureUnit
+import entity.medicaltechnology.MedicalTechnology
+import entity.medicaltechnology.MedicalTechnologyID
+import entity.medicaltechnology.MedicalTechnologyType
 import entity.zone.Room
 import entity.zone.RoomEnvironmentalData
 import entity.zone.RoomID
@@ -48,5 +53,22 @@ object ApiDeserializer {
     private fun RoomApiDtoType.toRoomType() = when (this) {
         RoomApiDtoType.OPERATING_ROOM -> RoomType.OPERATING_ROOM
         RoomApiDtoType.PRE_OPERATING_ROOM -> RoomType.PRE_OPERATING_ROOM
+    }
+
+    /**
+     * Extension method to convert Medical Technology API DTO to [entity.medicaltechnology.MedicalTechnology] class.
+     */
+    fun MedicalTechnologyApiDto.toMedicalTechnology() = MedicalTechnology(
+        id = MedicalTechnologyID(this.id),
+        name = this.name,
+        description = this.description,
+        type = this.type.toMedicalTechnologyType(),
+        isInUse = this.inUse,
+        roomId = this.roomId?.let { RoomID(it) }
+    )
+
+    private fun MedicalTechnologyApiDtoType.toMedicalTechnologyType() = when (this) {
+        MedicalTechnologyApiDtoType.ENDOSCOPE -> MedicalTechnologyType.ENDOSCOPE
+        MedicalTechnologyApiDtoType.XRAY -> MedicalTechnologyType.XRAY
     }
 }
