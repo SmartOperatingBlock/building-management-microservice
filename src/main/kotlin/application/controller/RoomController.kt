@@ -10,6 +10,7 @@ package application.controller
 
 import application.controller.manager.RoomDatabaseManager
 import application.controller.manager.RoomDigitalTwinManager
+import application.controller.util.rollback
 import entity.zone.Room
 import entity.zone.RoomID
 import usecase.repository.RoomRepository
@@ -43,10 +44,4 @@ class RoomController(
         }
 
     override fun getRooms(): Set<Room> = this.roomDatabaseManager.getAllRooms()
-
-    private fun Boolean.rollback(rollbackActions: () -> Unit): Boolean =
-        if (!this) {
-            rollbackActions()
-            false
-        } else true
 }
