@@ -8,11 +8,17 @@
 
 package infrastructure.api
 
+import application.controller.MedicalTechnologyController
 import application.controller.RoomController
+import application.presenter.api.deserializer.ApiDeserializer.toMedicalTechnology
 import application.presenter.api.deserializer.ApiDeserializer.toRoom
+import application.presenter.api.model.MedicalTechnologyApiDto
 import application.presenter.api.model.RoomApiDto
+import application.presenter.api.serializer.ApiSerializer.toMedicalTechnologyApiDto
 import application.presenter.api.serializer.ApiSerializer.toRoomApiDto
+import application.service.MedicalTechnologyService
 import application.service.RoomService
+import entity.medicaltechnology.MedicalTechnologyID
 import entity.zone.RoomID
 import infrastructure.api.util.ApiResponses
 import infrastructure.provider.ManagerProvider
@@ -139,10 +145,39 @@ class APIController(private val provider: ManagerProvider) {
         with(app) {
             routing {
                 post("$apiPath/medical-technologies") {
-                    call.respondText("[${Thread.currentThread().name}] Medical Technology POST!")
+                    val medicalTechnology = call.receive<MedicalTechnologyApiDto>().toMedicalTechnology()
+                    MedicalTechnologyService.CreateMedicalTechnology(
+                        medicalTechnology,
+                        MedicalTechnologyController(
+                            provider.medicalTechnologyDigitalTwinManager,
+                            provider.medicalTechnologyDatabaseManager
+                        )
+                    ).execute().apply {
+                        when (this) {
+                            null -> call.respond(HttpStatusCode.Conflict)
+                            else -> {
+                                call.response.header(
+                                    HttpHeaders.Location,
+                                    "http://localhost:$port$apiPath/medical-technologies/${medicalTechnology.id.value}"
+                                )
+                                call.respond(HttpStatusCode.Created)
+                            }
+                        }
+                    }
                 }
                 get("$apiPath/medical-technologies/{technologyId}") {
-                    call.respondText("[${Thread.currentThread().name}] Medical Technology GET!")
+                    call.respond(
+                        MedicalTechnologyService.GetMedicalTechnology(
+                            MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
+                            MedicalTechnologyController(
+                                provider.medicalTechnologyDigitalTwinManager,
+                                provider.medicalTechnologyDatabaseManager
+                            ),
+                            call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
+                        ).execute().let { medicalTechnology ->
+                            medicalTechnology?.toMedicalTechnologyApiDto() ?: HttpStatusCode.NotFound
+                        }
+                    )
                 }
                 delete("$apiPath/medical-technologies/{technologyId}") {
                     call.respondText("[${Thread.currentThread().name}] Medical Technology DELETE!")
