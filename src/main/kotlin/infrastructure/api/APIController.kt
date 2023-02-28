@@ -12,7 +12,7 @@ import application.controller.RoomController
 import application.presenter.api.deserializer.ApiDeserializer.toRoom
 import application.presenter.api.model.RoomApiDto
 import application.presenter.api.serializer.ApiSerializer.toRoomApiDto
-import application.service.Service
+import application.service.RoomService
 import entity.zone.RoomID
 import infrastructure.api.util.ApiResponses
 import infrastructure.provider.ManagerProvider
@@ -83,7 +83,7 @@ class APIController(private val provider: ManagerProvider) {
             routing {
                 post("$apiPath/rooms") {
                     val room = call.receive<RoomApiDto>().toRoom()
-                    Service.CreateRoom(
+                    RoomService.CreateRoom(
                         room,
                         RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
                     ).execute().apply {
@@ -100,7 +100,7 @@ class APIController(private val provider: ManagerProvider) {
                     }
                 }
                 get("$apiPath/rooms") {
-                    val entries = Service.GetAllRoomEntry(
+                    val entries = RoomService.GetAllRoomEntry(
                         RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
                     ).execute().map { entry ->
                         ApiResponses.ResponseEntry(entry, "http://localhost:$port$apiPath/rooms/${entry.id}")
@@ -110,7 +110,7 @@ class APIController(private val provider: ManagerProvider) {
                 }
                 get("$apiPath/rooms/{roomId}") {
                     call.respond(
-                        Service.GetRoom(
+                        RoomService.GetRoom(
                             RoomID(call.parameters["roomId"].orEmpty()),
                             RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
                             call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
@@ -119,7 +119,7 @@ class APIController(private val provider: ManagerProvider) {
                 }
                 delete("$apiPath/rooms/{roomId}") {
                     call.respond(
-                        Service.DeleteRoom(
+                        RoomService.DeleteRoom(
                             RoomID(call.parameters["roomId"].orEmpty()),
                             RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
                         ).execute().let { result ->
