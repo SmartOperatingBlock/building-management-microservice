@@ -105,6 +105,7 @@ class APIController(private val provider: ManagerProvider) {
                     ).execute().map { entry ->
                         ApiResponses.ResponseEntry(entry, "http://localhost:$port$apiPath/rooms/${entry.id}")
                     }
+                    call.response.status(if (entries.isNotEmpty()) HttpStatusCode.OK else HttpStatusCode.NoContent)
                     call.respond(ApiResponses.ResponseEntryList(entries))
                 }
                 get("$apiPath/rooms/{roomId}") {
