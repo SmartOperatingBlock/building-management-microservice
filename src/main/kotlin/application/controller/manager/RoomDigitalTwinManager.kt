@@ -31,7 +31,7 @@ interface RoomDigitalTwinManager {
 
     /**
      * Get the Room Digital Twin data of the room identified by [roomId].
-     * @return null if the room is not present, the room instead.
+     * @return null if the room is not present, the room otherwise.
      */
     fun findBy(roomId: RoomID): Room?
 }
