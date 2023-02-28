@@ -9,6 +9,7 @@
 package entity.medicaltechnology
 
 import entity.zone.RoomID
+import kotlinx.serialization.Serializable
 
 /**
  * Describe a medical technology used inside the operating block.
@@ -17,6 +18,7 @@ import entity.zone.RoomID
  * A medical technology can be associated to a [entity.zone.Room] through its [roomId].
  * Inside the room the technology can be used and its usage is tracked by [isInUse].
  */
+@Serializable
 data class MedicalTechnology(
     val id: MedicalTechnologyID,
     val name: String,
@@ -43,6 +45,7 @@ data class MedicalTechnology(
  * Identification of a [MedicalTechnology].
  * @param[value] the id.
  */
+@Serializable
 data class MedicalTechnologyID(val value: String) {
     init {
         // Constructor validation: The id must not be empty
@@ -53,6 +56,7 @@ data class MedicalTechnologyID(val value: String) {
 /**
  * The type of [MedicalTechnology].
  */
+@Serializable
 enum class MedicalTechnologyType {
     /** Endoscope technology. */
     ENDOSCOPE,
