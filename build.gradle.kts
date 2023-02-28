@@ -31,6 +31,7 @@ dependencies {
     implementation(libs.ktor.server.content.negotiation)
     implementation(libs.ktor.server.content.negotiation.json)
     implementation(libs.ktor.server.engine.netty)
+    implementation(libs.ktor.server.status.pages)
     testImplementation(libs.bundles.kotlin.testing)
 }
 
