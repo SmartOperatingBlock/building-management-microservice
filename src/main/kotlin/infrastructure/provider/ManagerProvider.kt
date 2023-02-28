@@ -8,6 +8,8 @@
 
 package infrastructure.provider
 
+import application.controller.manager.MedicalTechnologyDatabaseManager
+import application.controller.manager.MedicalTechnologyDigitalTwinManager
 import application.controller.manager.RoomDatabaseManager
 import application.controller.manager.RoomDigitalTwinManager
 
@@ -15,9 +17,15 @@ import application.controller.manager.RoomDigitalTwinManager
  * Provider of managers.
  */
 interface ManagerProvider {
-    /** The manager of the Digital Twin of the room. */
+    /** The manager of the Digital Twin for rooms. */
     val roomDigitalTwinManager: RoomDigitalTwinManager
 
     /** The manager of the Database for room. */
     val roomDatabaseManager: RoomDatabaseManager
+
+    /** The manager of the Digital Twins for medical technologies. */
+    val medicalTechnologyDigitalTwinManager: MedicalTechnologyDigitalTwinManager
+
+    /** The manager of the Database for medical technologies. */
+    val medicalTechnologyDatabaseManager: MedicalTechnologyDatabaseManager
 }

@@ -15,6 +15,11 @@ import infrastructure.digitaltwins.DigitalTwinManager
  * Provider that creates the different managers.
  */
 class ManagerProviderImpl : ManagerProvider {
-    override val roomDigitalTwinManager = DigitalTwinManager()
-    override val roomDatabaseManager = DatabaseManager()
+    private val digitalTwinManager = DigitalTwinManager()
+    private val databaseManager = DatabaseManager()
+
+    override val roomDigitalTwinManager = digitalTwinManager
+    override val roomDatabaseManager = databaseManager
+    override val medicalTechnologyDigitalTwinManager = digitalTwinManager
+    override val medicalTechnologyDatabaseManager = databaseManager
 }
