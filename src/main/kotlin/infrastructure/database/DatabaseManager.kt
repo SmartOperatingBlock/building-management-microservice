@@ -9,20 +9,15 @@
 package infrastructure.database
 
 import application.controller.manager.RoomDatabaseManager
+import application.presenter.database.model.TimeSeriesDataType
+import application.presenter.database.model.TimeSeriesRoomEnvironmentalData
+import application.presenter.database.model.TimeSeriesRoomMetadata
+import application.presenter.database.serialization.toRoomEnvironmentalData
 import com.mongodb.MongoException
 import com.mongodb.client.MongoCollection
-import entity.environment.Humidity
-import entity.environment.LightUnit
-import entity.environment.Luminosity
-import entity.environment.Presence
-import entity.environment.Temperature
-import entity.environment.TemperatureUnit
 import entity.zone.Room
 import entity.zone.RoomEnvironmentalData
 import entity.zone.RoomID
-import infrastructure.database.datamodel.TimeSeriesDataType
-import infrastructure.database.datamodel.TimeSeriesRoomEnvironmentalData
-import infrastructure.database.datamodel.TimeSeriesRoomMetadata
 import org.litote.kmongo.KMongo
 import org.litote.kmongo.descendingSort
 import org.litote.kmongo.div
@@ -60,36 +55,16 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
         deleteOne(Room::id eq roomId).deletedCount > 0
     }
 
-    override fun findBy(roomId: RoomID, dateTime: Instant): Room? {
-        val room = this.roomCollection.findOne { Room::id eq roomId }
-
-        val timeSeriesData = TimeSeriesDataType.values().associateWith {
-            this.roomTimeSeriesCollection.find(
-                TimeSeriesRoomEnvironmentalData::metadata / TimeSeriesRoomMetadata::roomId eq roomId,
-                TimeSeriesRoomEnvironmentalData::metadata / TimeSeriesRoomMetadata::type eq it,
-                TimeSeriesRoomEnvironmentalData::dateTime lte dateTime
-            ).descendingSort(TimeSeriesRoomEnvironmentalData::dateTime).limit(1).first()
-        }
-
-        return room?.copy(
-            environmentalData = RoomEnvironmentalData(
-                temperature = timeSeriesData[TimeSeriesDataType.TEMPERATURE]?.let {
-                    Temperature(
-                        it.value,
-                        it.metadata.unit?.let { unit -> TemperatureUnit.valueOf(unit) } ?: TemperatureUnit.CELSIUS
-                    )
-                },
-                humidity = timeSeriesData[TimeSeriesDataType.HUMIDITY]?.let { Humidity(it.value) },
-                luminosity = timeSeriesData[TimeSeriesDataType.LUMINOSITY]?.let {
-                    Luminosity(
-                        it.value,
-                        it.metadata.unit?.let { unit -> LightUnit.valueOf(unit) } ?: LightUnit.LUX
-                    )
-                },
-                presence = timeSeriesData[TimeSeriesDataType.PRESENCE]?.let { Presence(it.value > 0) }
-            )
+    override fun findBy(roomId: RoomID, dateTime: Instant): Room? =
+        this.roomCollection.findOne { Room::id eq roomId }?.copy(
+            environmentalData = TimeSeriesDataType.values().associateWith {
+                this.roomTimeSeriesCollection.find(
+                    TimeSeriesRoomEnvironmentalData::metadata / TimeSeriesRoomMetadata::roomId eq roomId,
+                    TimeSeriesRoomEnvironmentalData::metadata / TimeSeriesRoomMetadata::type eq it,
+                    TimeSeriesRoomEnvironmentalData::dateTime lte dateTime
+                ).descendingSort(TimeSeriesRoomEnvironmentalData::dateTime).first() ?: null
+            }.toRoomEnvironmentalData()
         )
-    }
 
     override fun getAllRooms(): Set<Room> {
         TODO("Not yet implemented")
