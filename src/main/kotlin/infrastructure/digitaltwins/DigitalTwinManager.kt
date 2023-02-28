@@ -8,12 +8,15 @@
 
 package infrastructure.digitaltwins
 
+import application.controller.manager.MedicalTechnologyDigitalTwinManager
 import application.controller.manager.RoomDigitalTwinManager
 import com.azure.digitaltwins.core.BasicDigitalTwin
 import com.azure.digitaltwins.core.BasicRelationship
 import com.azure.digitaltwins.core.DigitalTwinsClientBuilder
 import com.azure.digitaltwins.core.implementation.models.ErrorResponseException
 import com.azure.identity.DefaultAzureCredentialBuilder
+import entity.medicaltechnology.MedicalTechnology
+import entity.medicaltechnology.MedicalTechnologyID
 import entity.zone.Room
 import entity.zone.RoomID
 import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation.toDigitalTwin
@@ -22,7 +25,7 @@ import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation.toRoom
 /**
  * Implementation of the Digital Twin manager.
  */
-class DigitalTwinManager : RoomDigitalTwinManager {
+class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinManager {
     init {
         checkNotNull(System.getenv(dtAppIdVariable)) { "azure client app id required" }
         checkNotNull(System.getenv(dtTenantVariable)) { "azure tenant id required" }
@@ -78,6 +81,22 @@ class DigitalTwinManager : RoomDigitalTwinManager {
             println(e) // log the exception.
             null
         }
+
+    override fun createMedicalTechnologyDigitalTwin(medicalTechnology: MedicalTechnology): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteMedicalTechnologyDigitalTwin(medicalTechnologyId: MedicalTechnologyID) {
+        TODO("Not yet implemented")
+    }
+
+    override fun findBy(medicalTechnologyId: MedicalTechnologyID): MedicalTechnology? {
+        TODO("Not yet implemented")
+    }
+
+    override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID): Boolean {
+        TODO("Not yet implemented")
+    }
 
     companion object {
         private const val dtAppIdVariable = "AZURE_CLIENT_ID"
