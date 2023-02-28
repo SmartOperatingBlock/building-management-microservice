@@ -66,9 +66,7 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
             }.toRoomEnvironmentalData()
         )
 
-    override fun getAllRooms(): Set<Room> {
-        TODO("Not yet implemented")
-    }
+    override fun getAllRooms(): Set<Room> = this.roomCollection.find().toSet()
 
     override fun updateRoomEnvironmentalData(
         roomId: RoomID,

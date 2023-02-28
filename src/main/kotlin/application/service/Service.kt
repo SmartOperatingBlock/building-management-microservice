@@ -8,6 +8,8 @@
 
 package application.service
 
+import application.presenter.api.model.RoomEntry
+import application.presenter.api.serializer.ApiSerializer.toRoomEntry
 import entity.zone.Room
 import entity.zone.RoomID
 import usecase.repository.RoomRepository
@@ -60,5 +62,14 @@ object Service {
         private val dateTime: Instant? = null
     ) : ApplicationService<Room?> {
         override fun execute(): Room? = this.roomRepository.findBy(roomID, dateTime)
+    }
+
+    /**
+     * Application Service that has the objective of getting all the room that are inside the building using
+     * the provided [roomRepository].
+     * This method will not return all the information about a room, but only its [RoomEntry].
+     */
+    class GetAllRoomEntry(private val roomRepository: RoomRepository) : ApplicationService<Set<RoomEntry>> {
+        override fun execute(): Set<RoomEntry> = this.roomRepository.getRooms().map { it.toRoomEntry() }.toSet()
     }
 }

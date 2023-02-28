@@ -14,6 +14,7 @@ import application.presenter.api.model.RoomApiDto
 import application.presenter.api.serializer.ApiSerializer.toRoomApiDto
 import application.service.Service
 import entity.zone.RoomID
+import infrastructure.api.util.ApiResponses
 import infrastructure.provider.ManagerProvider
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
@@ -42,9 +43,7 @@ import java.time.format.DateTimeParseException
  * @param[provider] the provider of managers.
  */
 class APIController(private val provider: ManagerProvider) {
-    /**
-     * Starts the http server to serve the client requests.
-     */
+    /** Starts the http server to serve the client requests. */
     fun start() {
         embeddedServer(Netty, port = port) {
             dispatcher(this)
@@ -101,7 +100,12 @@ class APIController(private val provider: ManagerProvider) {
                     }
                 }
                 get("$apiPath/rooms") {
-                    call.respondText("Get Rooms CALLED")
+                    val entries = Service.GetAllRoomEntry(
+                        RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
+                    ).execute().map { entry ->
+                        ApiResponses.ResponseEntry(entry, "http://localhost:$port$apiPath/rooms/${entry.id}")
+                    }
+                    call.respond(ApiResponses.ResponseEntryList(entries))
                 }
                 get("$apiPath/rooms/{roomId}") {
                     call.respond(
