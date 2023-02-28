@@ -52,11 +52,7 @@ class APIController(private val provider: ManagerProvider) {
         }.start(wait = true)
     }
 
-    /**
-     * Dispatcher of the http routing.
-     * Needs to be public due to reflection used by ktor.
-     */
-    fun dispatcher(app: Application) {
+    private fun dispatcher(app: Application) {
         with(app) {
             roomAPI(this)
             medicalTechnologyAPI(this)
