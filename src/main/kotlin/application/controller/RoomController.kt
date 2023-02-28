@@ -18,7 +18,8 @@ import java.time.Instant
 /**
  * Implementation of room repository that handle the application logic
  * using both db and digital twin.
- * @param[roomDtManager] the digital twin manager of rooms.
+ * @param[roomDtManager] the digital twin manager for rooms.
+ * @param[roomDatabaseManager] the database manager for rooms.
  */
 class RoomController(
     private val roomDtManager: RoomDigitalTwinManager,
