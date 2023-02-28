@@ -31,6 +31,13 @@ interface MedicalTechnologyDigitalTwinManager {
     fun deleteMedicalTechnologyDigitalTwin(medicalTechnologyId: MedicalTechnologyID)
 
     /**
+     * Get the Medical Technology Digital Twin data of the medical technology
+     * identified by [medicalTechnologyId].
+     * @return null if the medical technology is not present, the medical technology otherwise.
+     */
+    fun findBy(medicalTechnologyId: MedicalTechnologyID): MedicalTechnology?
+
+    /**
      * Map a medical technology Digital Twin, identified by its [medicalTechnologyId], to a room
      * Digital Twin identified by its [roomId].
      * @return true if successfully mapped, false otherwise

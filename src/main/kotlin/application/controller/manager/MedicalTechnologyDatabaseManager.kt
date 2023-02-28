@@ -11,6 +11,7 @@ package application.controller.manager
 import entity.medicaltechnology.MedicalTechnology
 import entity.medicaltechnology.MedicalTechnologyID
 import entity.zone.RoomID
+import java.time.Instant
 
 /**
  * This interface models the manager of the database for medical technologies.
@@ -29,6 +30,13 @@ interface MedicalTechnologyDatabaseManager {
      * @return true if successfully deleted, false otherwise.
      */
     fun deleteMedicalTechnology(medicalTechnologyId: MedicalTechnologyID)
+
+    /**
+     * Get a medical technology identified by its [medicalTechnologyId] from the DB.
+     * Specify a past [dateTime] in order to get historical data.
+     * @return null if data is not available, the medical technology otherwise.
+     */
+    fun findBy(medicalTechnologyId: MedicalTechnologyID, dateTime: Instant): MedicalTechnology?
 
     /**
      * Map a medical technology, identified by its [medicalTechnologyId], to a room
