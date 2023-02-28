@@ -34,7 +34,7 @@ interface RoomDatabaseManager {
     /**
      * Get a room identified by its [roomId] from the DB.
      * Specify a past [dateTime] in order to get historical data.
-     * @return null if data is not available, the room instead.
+     * @return null if data is not available, the room otherwise.
      */
     fun findBy(roomId: RoomID, dateTime: Instant): Room?
 
