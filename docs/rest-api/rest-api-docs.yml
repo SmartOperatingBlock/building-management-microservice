@@ -133,7 +133,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MedicalTechnology'
+              $ref: '#/components/schemas/MedicalTechnologyEntry'
         description: Medical Technology to add
 
   /medical-technologies/{technologyId}:
@@ -314,6 +314,25 @@ components:
           type: boolean
           example: true
 
+    MedicalTechnologyType:
+      type: string
+      enum: [ENDOSCOPE, XRAY]
+      example: ENDOSCOPE
+
+    MedicalTechnologyEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          example: mt-1
+        name:
+          type: string
+          example: Endoscope
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/MedicalTechnologyType'
+
     MedicalTechnology:
       type: object
       properties:
@@ -331,6 +350,4 @@ components:
           type: string
           example: Room-#1
         type:
-          type: string
-          enum: [ENDOSCOPE, XRAY]
-          example: ENDOSCOPE
+          $ref: '#/components/schemas/MedicalTechnologyType'
