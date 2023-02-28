@@ -104,13 +104,13 @@ class APIController(private val provider: ManagerProvider) {
                     call.respondText("Get Rooms CALLED")
                 }
                 get("$apiPath/rooms/{roomId}") {
-                    Service.GetRoom(
-                        RoomID(call.parameters["roomId"].orEmpty()),
-                        RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
-                        call.request.queryParameters["dateTime"]?.let { Instant.parse(it) }
-                    ).execute()
-                        .let { it?.toRoomApiDto() ?: HttpStatusCode.NotFound }
-                        .apply { call.respond(this) }
+                    call.respond(
+                        Service.GetRoom(
+                            RoomID(call.parameters["roomId"].orEmpty()),
+                            RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
+                            call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
+                        ).execute().let { room -> room?.toRoomApiDto() ?: HttpStatusCode.NotFound }
+                    )
                 }
                 delete("$apiPath/rooms/{roomId}") {
                     call.respond(
