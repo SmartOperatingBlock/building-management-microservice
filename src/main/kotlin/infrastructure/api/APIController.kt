@@ -83,14 +83,6 @@ class APIController(private val provider: ManagerProvider) {
         with(app) {
             routing {
                 post("$apiPath/rooms") {
-                    // nel body ha la room in json
-                    // deserializzo in Room
-                    /* logica:
-                        0. caso d'uso esiste la room
-                            - controlla se non esiste un'altra room uguale
-                        1. Salvo la room nel db
-                        2. creo il digital twin su Azure Digital Twins
-                     */
                     val room = call.receive<RoomApiDto>().toRoom()
                     Service.CreateRoom(
                         room,
