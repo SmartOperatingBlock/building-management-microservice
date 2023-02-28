@@ -18,20 +18,7 @@ import java.time.Instant
 /**
  * Module that wraps all the services that orchestrate the application logic (not domain one).
  */
-object Service {
-    /**
-     * Interface that models an Application Service.
-     * An Application Service handle application logic without business elements.
-     * @param[T] the type returned by the service.
-     */
-    interface ApplicationService<out T> {
-        /**
-         * Method to execute the application service.
-         * @return the result of type [T]
-         */
-        fun execute(): T
-    }
-
+object RoomService {
     /**
      * Application Service that has the objective of creating a [room] using the provided [roomRepository].
      */
