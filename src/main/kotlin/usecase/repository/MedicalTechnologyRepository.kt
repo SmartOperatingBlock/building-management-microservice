@@ -11,6 +11,7 @@ package usecase.repository
 import entity.medicaltechnology.MedicalTechnology
 import entity.medicaltechnology.MedicalTechnologyID
 import entity.zone.RoomID
+import java.time.Instant
 
 /**
  * Interface that models the repository to manage Medical Technologies.
@@ -29,10 +30,10 @@ interface MedicalTechnologyRepository {
     fun deleteMedicalTechnology(medicalTechnologyId: MedicalTechnologyID): Boolean
 
     /**
-     * Find a medical technology by its [medicalTechnologyId].
+     * Find a medical technology by its [medicalTechnologyId] get its data in a specific [dateTime] if specified.
      * @return the medical technology if present, null otherwise.
      */
-    fun findBy(medicalTechnologyId: MedicalTechnologyID): MedicalTechnology?
+    fun findBy(medicalTechnologyId: MedicalTechnologyID, dateTime: Instant?): MedicalTechnology?
 
     /**
      * Map a medical technology identified by its [medicalTechnologyId] to another [roomId].
