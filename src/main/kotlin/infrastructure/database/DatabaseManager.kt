@@ -8,13 +8,18 @@
 
 package infrastructure.database
 
+import application.controller.manager.MedicalTechnologyDatabaseManager
 import application.controller.manager.RoomDatabaseManager
 import application.presenter.database.model.TimeSeriesDataType
+import application.presenter.database.model.TimeSeriesMedicalTechnologyMetadata
+import application.presenter.database.model.TimeSeriesMedicalTechnologyUsage
 import application.presenter.database.model.TimeSeriesRoomEnvironmentalData
 import application.presenter.database.model.TimeSeriesRoomMetadata
 import application.presenter.database.serialization.toRoomEnvironmentalData
 import com.mongodb.MongoException
 import com.mongodb.client.MongoCollection
+import entity.medicaltechnology.MedicalTechnology
+import entity.medicaltechnology.MedicalTechnologyID
 import entity.zone.Room
 import entity.zone.RoomEnvironmentalData
 import entity.zone.RoomID
@@ -31,7 +36,7 @@ import java.time.Instant
 /**
  * Implementation of the room database manager.
  */
-class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseManager {
+class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseManager, MedicalTechnologyDatabaseManager {
     private val connectionString: String
 
     init {
@@ -46,6 +51,10 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
     private val roomTimeSeriesCollection = this.database.getCollection<TimeSeriesRoomEnvironmentalData>(
         roomEnvironmentalDataCollectionName
     )
+    private val medicalTechnologiesCollection =
+        this.database.getCollection<MedicalTechnology>(medicalTechnologyCollectionName)
+    private val medicalTechnologyDataCollection =
+        this.database.getCollection<TimeSeriesMedicalTechnologyUsage>(medicalTechnologyDataCollectionName)
 
     override fun saveRoom(room: Room): Boolean = this.roomCollection.safeMongoDbWrite(defaultResult = false) {
         insertOne(room).wasAcknowledged()
@@ -80,6 +89,28 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
         TODO("Not yet implemented")
     }
 
+    override fun saveMedicalTechnology(medicalTechnology: MedicalTechnology): Boolean =
+        this.medicalTechnologiesCollection.safeMongoDbWrite(defaultResult = false) {
+            insertOne(medicalTechnology).wasAcknowledged()
+        }
+
+    override fun deleteMedicalTechnology(medicalTechnologyId: MedicalTechnologyID) {
+        TODO("Not yet implemented")
+    }
+
+    override fun findBy(medicalTechnologyId: MedicalTechnologyID, dateTime: Instant): MedicalTechnology? =
+        this.medicalTechnologiesCollection.findOne { MedicalTechnology::id eq medicalTechnologyId }?.copy(
+            isInUse = this.medicalTechnologyDataCollection.find(
+                TimeSeriesMedicalTechnologyUsage::metadata /
+                    TimeSeriesMedicalTechnologyMetadata::medicalTechnologyId eq medicalTechnologyId,
+                TimeSeriesMedicalTechnologyUsage::dateTime lte dateTime
+            ).descendingSort(TimeSeriesMedicalTechnologyUsage::dateTime).first()?.value ?: false
+        )
+
+    override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID): Boolean {
+        TODO("Not yet implemented")
+    }
+
     private fun <T, R> MongoCollection<T>.safeMongoDbWrite(defaultResult: R, operation: MongoCollection<T>.() -> R): R =
         try {
             operation()
@@ -93,5 +124,7 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
         private const val databaseName = "building_management"
         private const val roomCollectionName = "rooms"
         private const val roomEnvironmentalDataCollectionName = "room_data"
+        private const val medicalTechnologyCollectionName = "medical_technologies"
+        private const val medicalTechnologyDataCollectionName = "medical_technologies_data"
     }
 }
