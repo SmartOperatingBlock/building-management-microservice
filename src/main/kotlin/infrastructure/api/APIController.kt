@@ -34,6 +34,8 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.patch
 import io.ktor.server.routing.post
 import io.ktor.server.routing.routing
+import java.time.Instant
+import java.time.format.DateTimeParseException
 
 /**
  * It manages the REST-API of the microservice.
@@ -46,6 +48,7 @@ class APIController(private val provider: ManagerProvider) {
     fun start() {
         embeddedServer(Netty, port = port) {
             dispatcher(this)
+            exceptionHandler(this)
             install(ContentNegotiation) {
                 json()
             }
@@ -56,6 +59,19 @@ class APIController(private val provider: ManagerProvider) {
         with(app) {
             roomAPI(this)
             medicalTechnologyAPI(this)
+        }
+    }
+
+    private fun exceptionHandler(app: Application) {
+        with(app) {
+            install(StatusPages) {
+                exception<DateTimeParseException> { call, _ ->
+                    call.respondText(
+                        text = "Date time information must be in ISO 8601 format",
+                        status = HttpStatusCode.BadRequest
+                    )
+                }
+            }
         }
     }
 
