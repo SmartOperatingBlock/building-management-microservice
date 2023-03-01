@@ -94,7 +94,7 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
             insertOne(medicalTechnology).wasAcknowledged()
         }
 
-    override fun deleteMedicalTechnology(medicalTechnologyId: MedicalTechnologyID) {
+    override fun deleteMedicalTechnology(medicalTechnologyId: MedicalTechnologyID): Boolean {
         TODO("Not yet implemented")
     }
 
@@ -107,7 +107,7 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
             ).descendingSort(TimeSeriesMedicalTechnologyUsage::dateTime).first()?.value ?: false
         )
 
-    override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID): Boolean {
+    override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean {
         TODO("Not yet implemented")
     }
 

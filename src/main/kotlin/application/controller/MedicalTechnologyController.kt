@@ -45,7 +45,7 @@ class MedicalTechnologyController(
             this.databaseManager.findBy(medicalTechnologyId, dateTime)
         }
 
-    override fun mapTechnologyTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID): Boolean {
+    override fun mapTechnologyTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean {
         TODO("Not yet implemented")
     }
 
