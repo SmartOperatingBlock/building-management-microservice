@@ -44,4 +44,15 @@ object MedicalTechnologyService {
         override fun execute(): MedicalTechnology? =
             this.medicalTechnologyRepository.findBy(medicalTechnologyId, dateTime)
     }
+
+    /**
+     * Application Service that has the objective of deleting a medical technology
+     * identified by its [medicalTechnologyId] using the provided [medicalTechnologyId].
+     */
+    class DeleteMedicalTechnology(
+        private val medicalTechnologyId: MedicalTechnologyID,
+        private val medicalTechnologyRepository: MedicalTechnologyRepository
+    ) : ApplicationService<Boolean> {
+        override fun execute(): Boolean = this.medicalTechnologyRepository.deleteMedicalTechnology(medicalTechnologyId)
+    }
 }

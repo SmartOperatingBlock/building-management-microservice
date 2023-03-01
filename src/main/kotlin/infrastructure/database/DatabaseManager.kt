@@ -94,9 +94,10 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
             insertOne(medicalTechnology).wasAcknowledged()
         }
 
-    override fun deleteMedicalTechnology(medicalTechnologyId: MedicalTechnologyID): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun deleteMedicalTechnology(medicalTechnologyId: MedicalTechnologyID): Boolean =
+        this.medicalTechnologiesCollection.safeMongoDbWrite(defaultResult = false) {
+            deleteOne(MedicalTechnology::id eq medicalTechnologyId).deletedCount > 0
+        }
 
     override fun findBy(medicalTechnologyId: MedicalTechnologyID, dateTime: Instant): MedicalTechnology? =
         this.medicalTechnologiesCollection.findOne { MedicalTechnology::id eq medicalTechnologyId }?.copy(
