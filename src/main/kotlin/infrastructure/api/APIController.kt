@@ -13,6 +13,7 @@ import application.controller.RoomController
 import application.presenter.api.deserializer.ApiDeserializer.toMedicalTechnology
 import application.presenter.api.deserializer.ApiDeserializer.toRoom
 import application.presenter.api.model.MedicalTechnologyApiDto
+import application.presenter.api.model.MedicalTechnologyPatch
 import application.presenter.api.model.RoomApiDto
 import application.presenter.api.serializer.ApiSerializer.toMedicalTechnologyApiDto
 import application.presenter.api.serializer.ApiSerializer.toRoomApiDto
@@ -197,7 +198,19 @@ class APIController(private val provider: ManagerProvider) {
                     )
                 }
                 patch("$apiPath/medical-technologies/{technologyId}") {
-                    call.respondText("[${Thread.currentThread().name}] Medical Technology PATCH!")
+                    call.respond(
+                        MedicalTechnologyService.MapMedicalTechnologyToRoom(
+                            MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
+                            call.receive<MedicalTechnologyPatch>().roomId?.let { roomId -> RoomID(roomId) },
+                            RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
+                            MedicalTechnologyController(
+                                provider.medicalTechnologyDigitalTwinManager,
+                                provider.medicalTechnologyDatabaseManager
+                            )
+                        ).execute().let { result ->
+                            if (result) HttpStatusCode.NoContent else HttpStatusCode.NotFound
+                        }
+                    )
                 }
             }
         }
