@@ -31,6 +31,7 @@ import org.litote.kmongo.find
 import org.litote.kmongo.findOne
 import org.litote.kmongo.getCollection
 import org.litote.kmongo.lte
+import org.litote.kmongo.setValue
 import java.time.Instant
 
 /**
@@ -108,9 +109,11 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
             ).descendingSort(TimeSeriesMedicalTechnologyUsage::dateTime).first()?.value ?: false
         )
 
-    override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean =
+        this.medicalTechnologiesCollection.safeMongoDbWrite(defaultResult = false) {
+            updateOne(MedicalTechnology::id eq medicalTechnologyId, setValue(MedicalTechnology::roomId, roomId))
+                .matchedCount > 0
+        }
 
     override fun updateMedicalTechnologyUsage(
         medicalTechnologyId: MedicalTechnologyID,
