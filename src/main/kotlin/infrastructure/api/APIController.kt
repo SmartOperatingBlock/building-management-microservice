@@ -180,7 +180,17 @@ class APIController(private val provider: ManagerProvider) {
                     )
                 }
                 delete("$apiPath/medical-technologies/{technologyId}") {
-                    call.respondText("[${Thread.currentThread().name}] Medical Technology DELETE!")
+                    call.respond(
+                        MedicalTechnologyService.DeleteMedicalTechnology(
+                            MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
+                            MedicalTechnologyController(
+                                provider.medicalTechnologyDigitalTwinManager,
+                                provider.medicalTechnologyDatabaseManager
+                            ),
+                        ).execute().let { result ->
+                            if (result) HttpStatusCode.NoContent else HttpStatusCode.NotFound
+                        }
+                    )
                 }
                 patch("$apiPath/medical-technologies/{technologyId}") {
                     call.respondText("[${Thread.currentThread().name}] Medical Technology PATCH!")
