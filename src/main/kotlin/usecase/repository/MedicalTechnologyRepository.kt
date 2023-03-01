@@ -38,9 +38,10 @@ interface MedicalTechnologyRepository {
     /**
      * Map a medical technology identified by its [medicalTechnologyId] to another [roomId].
      * NB: the roomId existence isn't checked. You need to check its existence on your own.
+     * If [roomId] is false then the medical technology will be detached from the current room.
      * @return false if the medical technology does not exist, true otherwise.
      */
-    fun mapTechnologyTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID): Boolean
+    fun mapTechnologyTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean
 
     /**
      * Update the status of [usage] in a specified [dateTime] of a medical technology

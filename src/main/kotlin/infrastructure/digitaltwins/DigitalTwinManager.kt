@@ -86,7 +86,7 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
         TODO("Not yet implemented")
     }
 
-    override fun deleteMedicalTechnologyDigitalTwin(medicalTechnologyId: MedicalTechnologyID) {
+    override fun deleteMedicalTechnologyDigitalTwin(medicalTechnologyId: MedicalTechnologyID): Boolean {
         TODO("Not yet implemented")
     }
 
@@ -94,7 +94,7 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
         TODO("Not yet implemented")
     }
 
-    override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID): Boolean {
+    override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean {
         TODO("Not yet implemented")
     }
 
