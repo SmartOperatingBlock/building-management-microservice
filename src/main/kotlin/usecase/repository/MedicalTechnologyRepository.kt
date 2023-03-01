@@ -41,4 +41,14 @@ interface MedicalTechnologyRepository {
      * @return false if the medical technology does not exist, true otherwise.
      */
     fun mapTechnologyTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID): Boolean
+
+    /**
+     * Update the status of [usage] in a specified [dateTime] of a medical technology
+     * identified by its [medicalTechnologyId].
+     */
+    fun updateMedicalTechnologyUsage(
+        medicalTechnologyId: MedicalTechnologyID,
+        usage: Boolean,
+        dateTime: Instant
+    ): Boolean
 }
