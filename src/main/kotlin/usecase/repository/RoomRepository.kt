@@ -9,6 +9,7 @@
 package usecase.repository
 
 import entity.zone.Room
+import entity.zone.RoomEnvironmentalData
 import entity.zone.RoomID
 import java.time.Instant
 
@@ -39,4 +40,14 @@ interface RoomRepository {
      * @return the set of rooms.
      */
     fun getRooms(): Set<Room>
+
+    /**
+     * Update the [environmentalData] about a room identified by its [roomId].
+     * The data is associated to a [dateTime].
+     */
+    fun updateRoomEnvironmentalData(
+        roomId: RoomID,
+        environmentalData: RoomEnvironmentalData,
+        dateTime: Instant
+    ): Boolean
 }

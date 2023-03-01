@@ -12,6 +12,7 @@ import application.controller.manager.RoomDatabaseManager
 import application.controller.manager.RoomDigitalTwinManager
 import application.controller.util.rollback
 import entity.zone.Room
+import entity.zone.RoomEnvironmentalData
 import entity.zone.RoomID
 import usecase.repository.RoomRepository
 import java.time.Instant
@@ -44,4 +45,12 @@ class RoomController(
         }
 
     override fun getRooms(): Set<Room> = this.roomDatabaseManager.getAllRooms()
+
+    override fun updateRoomEnvironmentalData(
+        roomId: RoomID,
+        environmentalData: RoomEnvironmentalData,
+        dateTime: Instant,
+    ): Boolean {
+        TODO("Not yet implemented")
+    }
 }
