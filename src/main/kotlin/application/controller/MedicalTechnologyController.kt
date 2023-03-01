@@ -34,9 +34,9 @@ class MedicalTechnologyController(
             }
         ).let { if (it) medicalTechnology else null }
 
-    override fun deleteMedicalTechnology(medicalTechnologyId: MedicalTechnologyID): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun deleteMedicalTechnology(medicalTechnologyId: MedicalTechnologyID): Boolean =
+        this.digitalTwinManager.deleteMedicalTechnologyDigitalTwin(medicalTechnologyId) &&
+            this.databaseManager.deleteMedicalTechnology(medicalTechnologyId)
 
     override fun findBy(medicalTechnologyId: MedicalTechnologyID, dateTime: Instant?): MedicalTechnology? =
         if (dateTime == null) { // if the date-time is null, then obtain present information
@@ -45,15 +45,13 @@ class MedicalTechnologyController(
             this.databaseManager.findBy(medicalTechnologyId, dateTime)
         }
 
-    override fun mapTechnologyTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun mapTechnologyTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean =
+        this.digitalTwinManager.mapTo(medicalTechnologyId, roomId) &&
+            this.databaseManager.mapTo(medicalTechnologyId, roomId)
 
     override fun updateMedicalTechnologyUsage(
         medicalTechnologyId: MedicalTechnologyID,
         usage: Boolean,
         dateTime: Instant,
-    ): Boolean {
-        TODO("Not yet implemented")
-    }
+    ): Boolean = this.databaseManager.updateMedicalTechnologyUsage(medicalTechnologyId, usage, dateTime)
 }
