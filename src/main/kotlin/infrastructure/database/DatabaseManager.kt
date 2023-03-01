@@ -111,6 +111,14 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
         TODO("Not yet implemented")
     }
 
+    override fun updateMedicalTechnologyUsage(
+        medicalTechnologyId: MedicalTechnologyID,
+        usage: Boolean,
+        dateTime: Instant,
+    ): Boolean {
+        TODO("Not yet implemented")
+    }
+
     private fun <T, R> MongoCollection<T>.safeMongoDbWrite(defaultResult: R, operation: MongoCollection<T>.() -> R): R =
         try {
             operation()

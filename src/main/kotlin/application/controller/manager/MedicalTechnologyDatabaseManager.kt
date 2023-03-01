@@ -44,4 +44,14 @@ interface MedicalTechnologyDatabaseManager {
      * @return true if successfully mapped, false otherwise
      */
     fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID): Boolean
+
+    /**
+     * Update the status of [usage] in a specified [dateTime] of a medical technology
+     * identified by its [medicalTechnologyId].
+     */
+    fun updateMedicalTechnologyUsage(
+        medicalTechnologyId: MedicalTechnologyID,
+        usage: Boolean,
+        dateTime: Instant
+    ): Boolean
 }
