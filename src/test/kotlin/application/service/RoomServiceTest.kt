@@ -8,38 +8,32 @@
 
 package application.service
 
-// import application.controller.RoomController
-// import entity.zone.Room
-// import entity.zone.RoomID
-// import entity.zone.RoomType
-// import entity.zone.ZoneID
-// import infrastructure.database.DatabaseManager
-// import infrastructure.digitaltwins.DigitalTwinManagerTestDouble
-// import io.kotest.core.extensions.install
+import application.controller.RoomController
+import entity.zone.Room
+import entity.zone.RoomID
+import entity.zone.RoomType
+import entity.zone.ZoneID
+import infrastructure.database.DatabaseManager
+import infrastructure.database.withMongo
+import infrastructure.digitaltwins.DigitalTwinManagerTestDouble
 import io.kotest.core.spec.style.StringSpec
-// import io.kotest.extensions.testcontainers.TestContainerExtension
-// import io.kotest.matchers.shouldBe
-// import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 
-class ServiceTest : StringSpec({
-//    val exampleRoom = Room(RoomID("r1"), RoomType.OPERATING_ROOM, ZoneID("z1"))
-//    install(TestContainerExtension("mongo:latest")) {
-//        withExposedPorts(27017)
-//    }.start()
-//    lateinit var roomController: RoomController
-//
-//    beforeEach {
-//        roomController = RoomController(
-//            DigitalTwinManagerTestDouble(),
-//            DatabaseManager("mongodb://localhost:27017")
-//        )
-//    }
-//
-//    "I should be able to create a room" {
-//        val result = Service.CreateRoom(exampleRoom, roomController).execute()
-//        result shouldNotBe null
-//        Service.GetRoom(exampleRoom.id, roomController).execute() shouldBe exampleRoom
-//    }
+class RoomServiceTest : StringSpec({
+    val exampleRoom = Room(RoomID("r1"), RoomType.OPERATING_ROOM, ZoneID("z1"))
+
+    "I should be able to create a room" {
+        withMongo {
+            val roomController = RoomController(
+                DigitalTwinManagerTestDouble(),
+                DatabaseManager("mongodb://localhost:27017")
+            )
+            val result = RoomService.CreateRoom(exampleRoom, roomController).execute()
+            result shouldNotBe null
+            RoomService.GetRoom(exampleRoom.id, roomController).execute() shouldBe exampleRoom
+        }
+    }
 //
 //    "I should be able to delete an existing room" {
 //        Service.CreateRoom(exampleRoom, roomController).execute()
