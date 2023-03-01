@@ -29,7 +29,7 @@ interface MedicalTechnologyDatabaseManager {
      * Delete a medical technology identified by [medicalTechnologyId] from the Database.
      * @return true if successfully deleted, false otherwise.
      */
-    fun deleteMedicalTechnology(medicalTechnologyId: MedicalTechnologyID)
+    fun deleteMedicalTechnology(medicalTechnologyId: MedicalTechnologyID): Boolean
 
     /**
      * Get a medical technology identified by its [medicalTechnologyId] from the DB.
