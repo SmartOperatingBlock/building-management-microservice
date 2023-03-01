@@ -10,7 +10,9 @@ package application.service
 
 import entity.medicaltechnology.MedicalTechnology
 import entity.medicaltechnology.MedicalTechnologyID
+import entity.zone.RoomID
 import usecase.repository.MedicalTechnologyRepository
+import usecase.repository.RoomRepository
 import java.time.Instant
 
 /**
@@ -54,5 +56,26 @@ object MedicalTechnologyService {
         private val medicalTechnologyRepository: MedicalTechnologyRepository
     ) : ApplicationService<Boolean> {
         override fun execute(): Boolean = this.medicalTechnologyRepository.deleteMedicalTechnology(medicalTechnologyId)
+    }
+
+    /**
+     * Application Service that has the objective of updating the mapping of a medical technology to the room using
+     * the provided [medicalTechnologyRepository].
+     * The medical technology is identified by its [medicalTechnologyId] and the room by its [roomID].
+     * If the [roomID] is null, then the mapping will be deleted.
+     */
+    class MapMedicalTechnologyToRoom(
+        private val medicalTechnologyId: MedicalTechnologyID,
+        private val roomID: RoomID?,
+        private val roomRepository: RoomRepository,
+        private val medicalTechnologyRepository: MedicalTechnologyRepository
+    ) : ApplicationService<Boolean> {
+        override fun execute(): Boolean =
+            // Check if the medical technology (always) and room exists (if the roomId is not null)
+            if (this.medicalTechnologyRepository.findBy(this.medicalTechnologyId, null) != null &&
+                (this.roomID == null || this.roomRepository.findBy(this.roomID, null) != null)
+            ) {
+                this.medicalTechnologyRepository.mapTechnologyTo(medicalTechnologyId, roomID)
+            } else false
     }
 }
