@@ -115,13 +115,16 @@ class APIController(private val provider: ManagerProvider) {
                     call.respond(ApiResponses.ResponseEntryList(entries))
                 }
                 get("$apiPath/rooms/{roomId}") {
-                    call.respond(
-                        RoomService.GetRoom(
-                            RoomID(call.parameters["roomId"].orEmpty()),
-                            RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
-                            call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
-                        ).execute().let { room -> room?.toRoomApiDto() ?: HttpStatusCode.NotFound }
-                    )
+                    RoomService.GetRoom(
+                        RoomID(call.parameters["roomId"].orEmpty()),
+                        RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
+                        call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
+                    ).execute().apply {
+                        when (this) {
+                            null -> call.respond(HttpStatusCode.NotFound)
+                            else -> call.respond(this.toRoomApiDto())
+                        }
+                    }
                 }
                 delete("$apiPath/rooms/{roomId}") {
                     call.respond(
@@ -166,18 +169,19 @@ class APIController(private val provider: ManagerProvider) {
                     }
                 }
                 get("$apiPath/medical-technologies/{technologyId}") {
-                    call.respond(
-                        MedicalTechnologyService.GetMedicalTechnology(
-                            MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
-                            MedicalTechnologyController(
-                                provider.medicalTechnologyDigitalTwinManager,
-                                provider.medicalTechnologyDatabaseManager
-                            ),
-                            call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
-                        ).execute().let { medicalTechnology ->
-                            medicalTechnology?.toMedicalTechnologyApiDto() ?: HttpStatusCode.NotFound
+                    MedicalTechnologyService.GetMedicalTechnology(
+                        MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
+                        MedicalTechnologyController(
+                            provider.medicalTechnologyDigitalTwinManager,
+                            provider.medicalTechnologyDatabaseManager
+                        ),
+                        call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
+                    ).execute().apply {
+                        when (this) {
+                            null -> call.respond(HttpStatusCode.NotFound)
+                            else -> call.respond(this.toMedicalTechnologyApiDto())
                         }
-                    )
+                    }
                 }
                 delete("$apiPath/medical-technologies/{technologyId}") {
                     call.respond(
