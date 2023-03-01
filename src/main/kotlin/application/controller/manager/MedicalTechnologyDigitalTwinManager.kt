@@ -28,7 +28,7 @@ interface MedicalTechnologyDigitalTwinManager {
      * Delete the Digital Twin of the medical technology identified by [medicalTechnologyId].
      * @return true if successfully deleted, false otherwise.
      */
-    fun deleteMedicalTechnologyDigitalTwin(medicalTechnologyId: MedicalTechnologyID)
+    fun deleteMedicalTechnologyDigitalTwin(medicalTechnologyId: MedicalTechnologyID): Boolean
 
     /**
      * Get the Medical Technology Digital Twin data of the medical technology
