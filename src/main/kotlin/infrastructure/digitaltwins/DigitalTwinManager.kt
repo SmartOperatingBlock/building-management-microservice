@@ -20,6 +20,7 @@ import entity.medicaltechnology.MedicalTechnology
 import entity.medicaltechnology.MedicalTechnologyID
 import entity.zone.Room
 import entity.zone.RoomID
+import infrastructure.digitaltwins.adtpresentation.MedicalTechnologyAdtPresentation.toDigitalTwin
 import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation.toDigitalTwin
 import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation.toRoom
 
@@ -58,15 +59,36 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
         getDigitalTwin(roomId.value, BasicDigitalTwin::class.java).toRoom()
     }
 
-    override fun deleteMedicalTechnologyDigitalTwin(medicalTechnologyId: MedicalTechnologyID): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun createMedicalTechnologyDigitalTwin(medicalTechnology: MedicalTechnology): Boolean =
+        with(medicalTechnology.toDigitalTwin()) {
+            dtClient.applySafeDigitalTwinOperation(false) {
+                createOrReplaceDigitalTwin(this@with.id, this@with, BasicDigitalTwin::class.java)
+                true
+            }
+        }
 
-    override fun findBy(medicalTechnologyId: MedicalTechnologyID): MedicalTechnology? {
-        TODO("Not yet implemented")
-    }
+    override fun deleteMedicalTechnologyDigitalTwin(medicalTechnologyId: MedicalTechnologyID): Boolean =
+        this.dtClient.applySafeDigitalTwinOperation(false) {
+            deleteIncomingRelationships(medicalTechnologyId.value)
+            deleteOutgoingRelationships(medicalTechnologyId.value)
+            deleteDigitalTwin(medicalTechnologyId.value)
+            true
+        }
+
+    override fun findBy(medicalTechnologyId: MedicalTechnologyID): MedicalTechnology? =
+        this.dtClient.applySafeDigitalTwinOperation(null) {
+            // val medicalTechnology =
+            //    getDigitalTwin(medicalTechnologyId.value, BasicDigitalTwin::class.java).toMedicalTechnology()
+            // the relationship is room -> medical technology, so it is needed a query on
+            // Azure in order to get the first room that has a relation with this medical technology if exists
+            // If it doesn't exist (so we need to be able to check the result count) then it's ok to have null
+            // in roomId property of the medical technology, otherwise set to the returned id.
+            TODO("complete this method")
+        }
 
     override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean {
+        // if the roomId is null then the relationship must be deleted
+        // remember: the relationship is room -> medical technology)
         TODO("Not yet implemented")
     }
 
