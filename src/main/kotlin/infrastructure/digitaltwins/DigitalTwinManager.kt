@@ -12,6 +12,7 @@ import application.controller.manager.MedicalTechnologyDigitalTwinManager
 import application.controller.manager.RoomDigitalTwinManager
 import com.azure.digitaltwins.core.BasicDigitalTwin
 import com.azure.digitaltwins.core.BasicRelationship
+import com.azure.digitaltwins.core.DigitalTwinsClient
 import com.azure.digitaltwins.core.DigitalTwinsClientBuilder
 import com.azure.digitaltwins.core.implementation.models.ErrorResponseException
 import com.azure.identity.DefaultAzureCredentialBuilder
@@ -38,52 +39,23 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
         .endpoint(System.getenv(dtEndpointVariable))
         .buildClient()
 
-    override fun createRoomDigitalTwin(room: Room): Boolean {
-        with(room.toDigitalTwin()) {
-            try {
-                dtClient.createOrReplaceDigitalTwin(this.id, this, BasicDigitalTwin::class.java)
-                return true
-            } catch (e: ErrorResponseException) {
-                println(e) // log the exception.
-                return false
-            }
-        }
-    }
-
-    override fun deleteRoomDigitalTwin(roomId: RoomID): Boolean {
-        fun deleteIncomingRelationships() {
-            this.dtClient.listIncomingRelationships(roomId.value).forEach {
-                this.dtClient.deleteRelationship(it.sourceId, it.relationshipId)
-            }
-        }
-
-        fun deleteOutgoingRelationships() {
-            this.dtClient.listRelationships(roomId.value, BasicRelationship::class.java).forEach {
-                this.dtClient.deleteRelationship(it.sourceId, it.id)
-            }
-        }
-
-        return try {
-            deleteIncomingRelationships()
-            deleteOutgoingRelationships()
-            dtClient.deleteDigitalTwin(roomId.value)
+    override fun createRoomDigitalTwin(room: Room): Boolean = with(room.toDigitalTwin()) {
+        dtClient.applySafeDigitalTwinOperation(false) {
+            createOrReplaceDigitalTwin(this@with.id, this@with, BasicDigitalTwin::class.java)
             true
-        } catch (e: ErrorResponseException) {
-            println(e) // log the exception.
-            false
         }
     }
 
-    override fun findBy(roomId: RoomID): Room? =
-        try {
-            this.dtClient.getDigitalTwin(roomId.value, BasicDigitalTwin::class.java).toRoom()
-        } catch (e: ErrorResponseException) {
-            println(e) // log the exception.
-            null
+    override fun deleteRoomDigitalTwin(roomId: RoomID): Boolean =
+        this.dtClient.applySafeDigitalTwinOperation(false) {
+            deleteIncomingRelationships(roomId.value)
+            deleteOutgoingRelationships(roomId.value)
+            deleteDigitalTwin(roomId.value)
+            true
         }
 
-    override fun createMedicalTechnologyDigitalTwin(medicalTechnology: MedicalTechnology): Boolean {
-        TODO("Not yet implemented")
+    override fun findBy(roomId: RoomID): Room? = this.dtClient.applySafeDigitalTwinOperation(null) {
+        getDigitalTwin(roomId.value, BasicDigitalTwin::class.java).toRoom()
     }
 
     override fun deleteMedicalTechnologyDigitalTwin(medicalTechnologyId: MedicalTechnologyID): Boolean {
@@ -97,6 +69,29 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
     override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean {
         TODO("Not yet implemented")
     }
+
+    private fun DigitalTwinsClient.deleteIncomingRelationships(sourceId: String) {
+        this.listIncomingRelationships(sourceId).forEach {
+            this.deleteRelationship(it.sourceId, it.relationshipId)
+        }
+    }
+
+    private fun DigitalTwinsClient.deleteOutgoingRelationships(sourceId: String) {
+        this.listRelationships(sourceId, BasicRelationship::class.java).forEach {
+            this.deleteRelationship(it.sourceId, it.id)
+        }
+    }
+
+    private fun <R> DigitalTwinsClient.applySafeDigitalTwinOperation(
+        defaultResult: R,
+        operation: DigitalTwinsClient.() -> R
+    ): R =
+        try {
+            operation()
+        } catch (exception: ErrorResponseException) {
+            println(exception)
+            defaultResult
+        }
 
     companion object {
         private const val dtAppIdVariable = "AZURE_CLIENT_ID"
