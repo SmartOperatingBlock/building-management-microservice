@@ -26,8 +26,10 @@ import entity.zone.ZoneID
  * Module to wrap all the presentation-related stuff for Azure Digital Twins with [entity.zone.Room].
  */
 object RoomAdtPresentation {
-    private const val OPERATING_ROOM_MODEL = "dtmi:io:github:smartoperatingblock:OperatingRoom;1"
-    private const val PRE_OPERATING_ROOM_MODEL = "dtmi:io:github:smartoperatingblock:PrePostOperatingRoom;1"
+    /** Operating room Azure Digital Twins model. */
+    const val OPERATING_ROOM_MODEL = "dtmi:io:github:smartoperatingblock:OperatingRoom;1"
+    /** Pre-operating room Azure Digital Twins model. */
+    const val PRE_OPERATING_ROOM_MODEL = "dtmi:io:github:smartoperatingblock:PrePostOperatingRoom;1"
     private const val NAME_PROPERTY = "name"
     private const val ZONE_ID_PROPERTY = "zone_id"
     private const val TEMPERATURE_PROPERTY = "temperature"
