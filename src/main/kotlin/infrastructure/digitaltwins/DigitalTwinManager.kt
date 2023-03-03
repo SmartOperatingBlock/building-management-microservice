@@ -21,8 +21,16 @@ import entity.medicaltechnology.MedicalTechnologyID
 import entity.zone.Room
 import entity.zone.RoomID
 import infrastructure.digitaltwins.adtpresentation.MedicalTechnologyAdtPresentation.toDigitalTwin
+import infrastructure.digitaltwins.adtpresentation.MedicalTechnologyAdtPresentation.toMedicalTechnology
+import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation
 import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation.toDigitalTwin
 import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation.toRoom
+import infrastructure.digitaltwins.query.AdtQuery
+import infrastructure.digitaltwins.query.AdtQuery.Companion.AdtQueryUtils.eq
+import infrastructure.digitaltwins.query.AdtQuery.Companion.AdtQueryUtils.isOfModel
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 /**
  * Implementation of the Digital Twin manager.
@@ -77,13 +85,25 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
 
     override fun findBy(medicalTechnologyId: MedicalTechnologyID): MedicalTechnology? =
         this.dtClient.applySafeDigitalTwinOperation(null) {
-            // val medicalTechnology =
-            //    getDigitalTwin(medicalTechnologyId.value, BasicDigitalTwin::class.java).toMedicalTechnology()
-            // the relationship is room -> medical technology, so it is needed a query on
-            // Azure in order to get the first room that has a relation with this medical technology if exists
-            // If it doesn't exist (so we need to be able to check the result count) then it's ok to have null
-            // in roomId property of the medical technology, otherwise set to the returned id.
-            TODO("complete this method")
+            getDigitalTwin(medicalTechnologyId.value, BasicDigitalTwin::class.java).toMedicalTechnology().copy(
+                roomId = query(
+                    AdtQuery
+                        .createQuery()
+                        .selectTop(1, "T.\$dtId")
+                        .fromDigitalTwins("T")
+                        .joinRelationship("CT", "T", "rel_contains_medical_technology")
+                        .where("T" isOfModel RoomAdtPresentation.OPERATING_ROOM_MODEL)
+                        .and("CT.\$dtId" eq medicalTechnologyId.value)
+                        .query,
+                    String::class.java
+                ).let {
+                    if (it.count() == 1) {
+                        Json.parseToJsonElement(it.first()).jsonObject["\$dtId"]?.let { id ->
+                            RoomID(id.jsonPrimitive.content)
+                        }
+                    } else null
+                }
+            )
         }
 
     override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean {
