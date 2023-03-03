@@ -60,8 +60,8 @@ object RoomAdtPresentation {
     fun BasicDigitalTwin.toRoom(): Room =
         Room(
             id = RoomID(this.id),
-            zoneId = ZoneID(this.contents[ZONE_ID_PROPERTY] as String),
-            name = this.contents[NAME_PROPERTY] as String,
+            zoneId = ZoneID(this.contents[ZONE_ID_PROPERTY].propertyAs(defaultValue = "")),
+            name = this.contents[NAME_PROPERTY].propertyAs(defaultValue = ""),
             type = if (this.metadata.modelId == OPERATING_ROOM_MODEL) {
                 RoomType.OPERATING_ROOM
             } else RoomType.PRE_OPERATING_ROOM,
