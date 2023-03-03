@@ -23,8 +23,8 @@ object MedicalTechnologyAdtPresentation {
     private const val NAME_PROPERTY = "name"
     private const val DESCRIPTION_PROPERTY = "description"
     private const val TYPE_PROPERTY = "type"
-    private const val TYPE_ENDOSCOPE = "endoscope"
-    private const val TYPE_XRAY = "xray"
+    private const val TYPE_ENDOSCOPE = "0"
+    private const val TYPE_XRAY = "1"
     private const val IS_IN_USE_PROPERTY = "is_in_use"
 
     /**
@@ -55,7 +55,7 @@ object MedicalTechnologyAdtPresentation {
             id = MedicalTechnologyID(this.id),
             name = this.contents[NAME_PROPERTY].propertyAs(defaultValue = ""),
             description = this.contents[DESCRIPTION_PROPERTY].propertyAs(defaultValue = ""),
-            type = when (this.contents[TYPE_PROPERTY].propertyAs(defaultValue = "")) {
+            type = when (this.contents[TYPE_PROPERTY].propertyAs(defaultValue = "not supported")) {
                 TYPE_ENDOSCOPE -> MedicalTechnologyType.ENDOSCOPE
                 TYPE_XRAY -> MedicalTechnologyType.XRAY
                 else -> throw IllegalArgumentException("medical technology type not supported")
