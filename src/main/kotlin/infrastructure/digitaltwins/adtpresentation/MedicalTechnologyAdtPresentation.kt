@@ -53,13 +53,13 @@ object MedicalTechnologyAdtPresentation {
     fun BasicDigitalTwin.toMedicalTechnology(): MedicalTechnology =
         MedicalTechnology(
             id = MedicalTechnologyID(this.id),
-            name = this.contents[NAME_PROPERTY] as String,
-            description = this.contents[DESCRIPTION_PROPERTY] as String,
-            type = when (this.contents[TYPE_PROPERTY] as String) {
+            name = this.contents[NAME_PROPERTY].propertyAs(defaultValue = ""),
+            description = this.contents[DESCRIPTION_PROPERTY].propertyAs(defaultValue = ""),
+            type = when (this.contents[TYPE_PROPERTY].propertyAs(defaultValue = "")) {
                 TYPE_ENDOSCOPE -> MedicalTechnologyType.ENDOSCOPE
                 TYPE_XRAY -> MedicalTechnologyType.XRAY
                 else -> throw IllegalArgumentException("medical technology type not supported")
             },
-            isInUse = this.contents[IS_IN_USE_PROPERTY] as Boolean
+            isInUse = this.contents[IS_IN_USE_PROPERTY].propertyAs(defaultValue = false)
         )
 }
