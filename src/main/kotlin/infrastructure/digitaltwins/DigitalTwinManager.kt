@@ -22,12 +22,10 @@ import entity.zone.Room
 import entity.zone.RoomID
 import infrastructure.digitaltwins.adtpresentation.MedicalTechnologyAdtPresentation.toDigitalTwin
 import infrastructure.digitaltwins.adtpresentation.MedicalTechnologyAdtPresentation.toMedicalTechnology
-import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation
 import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation.toDigitalTwin
 import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation.toRoom
 import infrastructure.digitaltwins.query.AdtQuery
 import infrastructure.digitaltwins.query.AdtQuery.Companion.AdtQueryUtils.eq
-import infrastructure.digitaltwins.query.AdtQuery.Companion.AdtQueryUtils.isOfModel
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -90,11 +88,10 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
                 roomId = query(
                     AdtQuery
                         .createQuery()
-                        .selectTop(1, "T.\$dtId")
+                        .selectTop(1, "CT.\$dtId")
                         .fromDigitalTwins("T")
-                        .joinRelationship("CT", "T", "rel_contains_medical_technology")
-                        .where("T" isOfModel RoomAdtPresentation.OPERATING_ROOM_MODEL)
-                        .and("CT.\$dtId" eq medicalTechnologyId.value)
+                        .joinRelationship("CT", "T", "rel_is_located")
+                        .where("T.\$dtId" eq medicalTechnologyId.value)
                         .query,
                     String::class.java
                 ).let {
