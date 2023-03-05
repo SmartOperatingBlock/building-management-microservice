@@ -20,6 +20,7 @@ import entity.medicaltechnology.MedicalTechnology
 import entity.medicaltechnology.MedicalTechnologyID
 import entity.zone.Room
 import entity.zone.RoomID
+import infrastructure.digitaltwins.adtpresentation.MedicalTechnologyAdtPresentation
 import infrastructure.digitaltwins.adtpresentation.MedicalTechnologyAdtPresentation.toDigitalTwin
 import infrastructure.digitaltwins.adtpresentation.MedicalTechnologyAdtPresentation.toMedicalTechnology
 import infrastructure.digitaltwins.adtpresentation.RoomAdtPresentation.toDigitalTwin
@@ -90,9 +91,11 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
                         .createQuery()
                         .selectTop(1, "CT.\$dtId")
                         .fromDigitalTwins("T")
-                        .joinRelationship("CT", "T", "rel_is_located")
-                        .where("T.\$dtId" eq medicalTechnologyId.value)
-                        .query,
+                        .joinRelationship(
+                            "CT",
+                            "T",
+                            MedicalTechnologyAdtPresentation.IS_LOCATED_IN_OPERATING_ROOM_RELATIONSHIP
+                        ).where("T.\$dtId" eq medicalTechnologyId.value).query,
                     String::class.java
                 ).let {
                     if (it.count() == 1) {
