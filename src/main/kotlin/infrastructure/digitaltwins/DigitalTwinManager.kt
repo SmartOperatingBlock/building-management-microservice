@@ -107,11 +107,30 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
             )
         }
 
-    override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean {
-        // if the roomId is null then the relationship must be deleted
-        // remember: the relationship is room -> medical technology)
-        TODO("Not yet implemented")
-    }
+    override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean =
+        this.dtClient.applySafeDigitalTwinOperation(false) {
+            // first delete the existing relationship
+            deleteOutgoingRelationships(
+                medicalTechnologyId.value,
+                MedicalTechnologyAdtPresentation.IS_LOCATED_IN_OPERATING_ROOM_RELATIONSHIP
+            )
+            // then if there is a new specified, update the mapping
+            if (roomId != null) {
+                // room id is not null, so update the mapping
+                createOrReplaceRelationship(
+                    medicalTechnologyId.value,
+                    MedicalTechnologyAdtPresentation.isLocatedRelationshipId(medicalTechnologyId),
+                    BasicRelationship(
+                        MedicalTechnologyAdtPresentation.isLocatedRelationshipId(medicalTechnologyId),
+                        medicalTechnologyId.value,
+                        roomId.value,
+                        MedicalTechnologyAdtPresentation.IS_LOCATED_IN_OPERATING_ROOM_RELATIONSHIP
+                    ),
+                    BasicRelationship::class.java
+                )
+            }
+            true
+        }
 
     private fun DigitalTwinsClient.deleteIncomingRelationships(sourceId: String) {
         this.listIncomingRelationships(sourceId).forEach {
