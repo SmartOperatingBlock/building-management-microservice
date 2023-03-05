@@ -40,7 +40,7 @@ interface MedicalTechnologyDigitalTwinManager {
     /**
      * Map a medical technology Digital Twin, identified by its [medicalTechnologyId], to a room
      * Digital Twin identified by its [roomId].
-     * If [roomId] is false then the medical technology will be detached from the current room.
+     * If [roomId] is null then the medical technology will be detached from the current room.
      * @return true if successfully mapped, false otherwise
      */
     fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean
