@@ -201,7 +201,7 @@ class APIController(private val provider: ManagerProvider) {
                     call.respond(
                         MedicalTechnologyService.MapMedicalTechnologyToRoom(
                             MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
-                            call.receive<MedicalTechnologyPatch>().roomId?.let { roomId -> RoomID(roomId) },
+                            call.receive<MedicalTechnologyPatch>().roomId?.let { roomId -> RoomID(roomId.trim()) },
                             RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
                             MedicalTechnologyController(
                                 provider.medicalTechnologyDigitalTwinManager,
