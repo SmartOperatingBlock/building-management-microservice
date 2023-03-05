@@ -91,10 +91,10 @@ class ApiSerializationTest : StringSpec({
 
     "It should be possible to serialize a room in a room entry" {
         room.toRoomEntry() shouldBe RoomEntry(
-            id = room.id.value,
-            name = room.name ?: "",
-            zoneId = room.zoneId.value,
-            type = room.type.toString()
+            id = "r1",
+            name = "name",
+            zoneId = "z1",
+            type = "OPERATING_ROOM"
         )
     }
 
