@@ -119,9 +119,11 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
         }
     }
 
-    private fun DigitalTwinsClient.deleteOutgoingRelationships(sourceId: String) {
+    private fun DigitalTwinsClient.deleteOutgoingRelationships(sourceId: String, relationshipName: String? = null) {
         this.listRelationships(sourceId, BasicRelationship::class.java).forEach {
-            this.deleteRelationship(it.sourceId, it.id)
+            if (relationshipName == null || it.name == relationshipName) {
+                this.deleteRelationship(it.sourceId, it.id)
+            }
         }
     }
 
