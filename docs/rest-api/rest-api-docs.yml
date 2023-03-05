@@ -165,8 +165,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MedicalTechnology'
-        '204':
-          description: no content about the medical technology was found
         '404':
           description: medical technology not found
         '500':
