@@ -85,6 +85,7 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
 
     override fun findBy(medicalTechnologyId: MedicalTechnologyID): MedicalTechnology? =
         this.dtClient.applySafeDigitalTwinOperation(null) {
+            // Get the medical technology digital twin and obtain also the room in which it is located (if present)
             getDigitalTwin(medicalTechnologyId.value, BasicDigitalTwin::class.java).toMedicalTechnology().copy(
                 roomId = query(
                     AdtQuery
