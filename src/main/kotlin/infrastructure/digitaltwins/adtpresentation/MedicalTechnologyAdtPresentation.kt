@@ -27,6 +27,9 @@ object MedicalTechnologyAdtPresentation {
     private const val TYPE_XRAY = "1"
     private const val IS_IN_USE_PROPERTY = "is_in_use"
 
+    /** "Is located in operating room" relationship name in Azure Digital Twins. */
+    const val IS_LOCATED_IN_OPERATING_ROOM_RELATIONSHIP = "rel_is_located"
+
     /**
      * Convert a [MedicalTechnology] to a Digital Twin.
      * Specifically this extension method will convert it into the Azure Digital Twins SDK [BasicDigitalTwin].
@@ -62,4 +65,13 @@ object MedicalTechnologyAdtPresentation {
             },
             isInUse = this.contents[IS_IN_USE_PROPERTY].propertyAs(defaultValue = false)
         )
+
+    /**
+     * Obtain the relationship id of the [IS_LOCATED_IN_OPERATING_ROOM_RELATIONSHIP] between
+     * the Medical Technology Digital Twin - identified by its [medicalTechnologyID]
+     * and the Operating Room Digital Twin.
+     * @return the relationship id.
+     */
+    fun isLocatedRelationshipId(medicalTechnologyID: MedicalTechnologyID): String =
+        "${medicalTechnologyID.value}-located"
 }
