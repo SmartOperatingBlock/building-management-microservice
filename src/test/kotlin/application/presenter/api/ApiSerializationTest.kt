@@ -8,18 +8,27 @@
 
 package application.presenter.api
 
+import application.presenter.api.deserializer.ApiDeserializer.toMedicalTechnology
 import application.presenter.api.deserializer.ApiDeserializer.toRoom
 import application.presenter.api.model.EnvironmentalDataApiDto
+import application.presenter.api.model.MedicalTechnologyApiDto
+import application.presenter.api.model.MedicalTechnologyApiDtoType
 import application.presenter.api.model.RoomApiDto
 import application.presenter.api.model.RoomApiDtoType
+import application.presenter.api.model.RoomEntry
 import application.presenter.api.model.ValueWithUnit
+import application.presenter.api.serializer.ApiSerializer.toMedicalTechnologyApiDto
 import application.presenter.api.serializer.ApiSerializer.toRoomApiDto
+import application.presenter.api.serializer.ApiSerializer.toRoomEntry
 import entity.environment.Humidity
 import entity.environment.LightUnit
 import entity.environment.Luminosity
 import entity.environment.Presence
 import entity.environment.Temperature
 import entity.environment.TemperatureUnit
+import entity.medicaltechnology.MedicalTechnology
+import entity.medicaltechnology.MedicalTechnologyID
+import entity.medicaltechnology.MedicalTechnologyType
 import entity.zone.Room
 import entity.zone.RoomEnvironmentalData
 import entity.zone.RoomID
@@ -54,11 +63,46 @@ class ApiSerializationTest : StringSpec({
         )
     )
 
+    val medicalTechnology = MedicalTechnology(
+        id = MedicalTechnologyID("mt-1"),
+        name = "name",
+        description = "description",
+        type = MedicalTechnologyType.ENDOSCOPE,
+        isInUse = true,
+        roomId = RoomID("r-1")
+    )
+
+    val medicalTechnologyApiDto = MedicalTechnologyApiDto(
+        id = "mt-1",
+        name = "name",
+        description = "description",
+        type = MedicalTechnologyApiDtoType.ENDOSCOPE,
+        inUse = true,
+        roomId = "r-1"
+    )
+
     "It should be possible to obtain the corresponding room from the data get from the API" {
         roomApiDto.toRoom() shouldBe room
     }
 
-    "It should be possibile to serialize a room in order to send it through the API" {
+    "It should be possible to serialize a room in order to send it through the API" {
         room.toRoomApiDto() shouldBe roomApiDto
+    }
+
+    "It should be possible to serialize a room in a room entry" {
+        room.toRoomEntry() shouldBe RoomEntry(
+            id = room.id.value,
+            name = room.name ?: "",
+            zoneId = room.zoneId.value,
+            type = room.type.toString()
+        )
+    }
+
+    "It should be possible to obtain the corresponding medical technology from the data get from the API" {
+        medicalTechnologyApiDto.toMedicalTechnology() shouldBe medicalTechnology
+    }
+
+    "It should be possible to serialize a medical technology in order to send it through the API" {
+        medicalTechnology.toMedicalTechnologyApiDto() shouldBe medicalTechnologyApiDto
     }
 })
