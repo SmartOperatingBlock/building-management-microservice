@@ -101,13 +101,17 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
         }
 
     override fun findBy(medicalTechnologyId: MedicalTechnologyID, dateTime: Instant): MedicalTechnology? =
-        this.medicalTechnologiesCollection.findOne { MedicalTechnology::id eq medicalTechnologyId }?.copy(
-            isInUse = this.medicalTechnologyDataCollection.find(
+        with(
+            this.medicalTechnologyDataCollection.find(
                 TimeSeriesMedicalTechnologyUsage::metadata /
                     TimeSeriesMedicalTechnologyMetadata::medicalTechnologyId eq medicalTechnologyId,
                 TimeSeriesMedicalTechnologyUsage::dateTime lte dateTime
-            ).descendingSort(TimeSeriesMedicalTechnologyUsage::dateTime).first()?.value ?: false
-        )
+            ).descendingSort(TimeSeriesMedicalTechnologyUsage::dateTime).first()
+        ) {
+            this@DatabaseManager.medicalTechnologiesCollection.findOne {
+                MedicalTechnology::id eq medicalTechnologyId
+            }?.copy(isInUse = this?.value ?: false, roomId = this?.metadata?.roomId)
+        }
 
     override fun mapTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean =
         this.medicalTechnologiesCollection.safeMongoDbWrite(defaultResult = false) {
@@ -120,6 +124,8 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
         usage: Boolean,
         dateTime: Instant,
     ): Boolean {
+        // It needs to be in use in some room.
+        // In order to populate the time series data we need to know in which room it is currently.
         TODO("Not yet implemented")
     }
 
