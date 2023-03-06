@@ -18,6 +18,7 @@ import infrastructure.api.util.ApiResponses
 import io.kotest.assertions.ktor.client.shouldHaveStatus
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.header
@@ -57,6 +58,7 @@ class RoomApiTest : StringSpec({
         apiTestApplication {
             val response = insertRoom(roomApiDto)
             response shouldHaveStatus HttpStatusCode.Created
+            response.headers[HttpHeaders.Location] shouldNotBe null
         }
     }
 
