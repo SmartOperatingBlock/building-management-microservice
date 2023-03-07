@@ -48,17 +48,13 @@ fun Application.medicalTechnologyAPI(apiPath: String, port: Int, provider: Manag
                     provider.medicalTechnologyDigitalTwinManager,
                     provider.medicalTechnologyDatabaseManager
                 )
-            ).execute().apply {
-                if (this == null) {
-                    call.respond(HttpStatusCode.Conflict)
-                } else {
-                    call.response.header(
-                        HttpHeaders.Location,
-                        "http://localhost:$port$apiPath/medical-technologies/${medicalTechnology.id.value}"
-                    )
-                    call.respond(HttpStatusCode.Created)
-                }
-            }
+            ).execute()?.apply {
+                call.response.header(
+                    HttpHeaders.Location,
+                    "http://localhost:$port$apiPath/medical-technologies/${medicalTechnology.id.value}"
+                )
+                call.respond(HttpStatusCode.Created)
+            } ?: call.respond(HttpStatusCode.Conflict)
         }
         get("$apiPath/medical-technologies/{technologyId}") {
             MedicalTechnologyService.GetMedicalTechnology(
@@ -68,12 +64,8 @@ fun Application.medicalTechnologyAPI(apiPath: String, port: Int, provider: Manag
                     provider.medicalTechnologyDatabaseManager
                 ),
                 call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
-            ).execute().apply {
-                when (this) {
-                    null -> call.respond(HttpStatusCode.NotFound)
-                    else -> call.respond(this.toMedicalTechnologyApiDto())
-                }
-            }
+            ).execute()?.apply { call.respond(this.toMedicalTechnologyApiDto()) }
+                ?: call.respond(HttpStatusCode.NotFound)
         }
         delete("$apiPath/medical-technologies/{technologyId}") {
             call.respond(
