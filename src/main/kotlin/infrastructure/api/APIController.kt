@@ -33,7 +33,7 @@ class APIController(private val provider: ManagerProvider) {
             install(ContentNegotiation) {
                 json()
             }
-        }.start(wait = true)
+        }.start(wait = false)
     }
 
     private fun dispatcher(app: Application) {
