@@ -18,12 +18,17 @@ group = "io.github.smartoperatingblock"
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://packages.confluent.io/maven")
+    }
 }
 
 dependencies {
     implementation(libs.azure.digital.twins)
     implementation(libs.azure.identity)
     implementation(libs.logback)
+    implementation(libs.kafka.clients)
+    implementation(libs.kafka.json)
     implementation(libs.kmongo)
     implementation(libs.kotlin.serialization.json)
     implementation(libs.kotlin.stdlib)
