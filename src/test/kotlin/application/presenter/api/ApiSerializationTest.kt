@@ -13,6 +13,7 @@ import application.presenter.api.deserializer.ApiDeserializer.toRoom
 import application.presenter.api.model.EnvironmentalDataApiDto
 import application.presenter.api.model.MedicalTechnologyApiDto
 import application.presenter.api.model.MedicalTechnologyApiDtoType
+import application.presenter.api.model.MedicalTechnologyEntry
 import application.presenter.api.model.RoomApiDto
 import application.presenter.api.model.RoomApiDtoType
 import application.presenter.api.model.RoomEntry
@@ -89,6 +90,13 @@ class ApiSerializationTest : StringSpec({
         roomId = "r-1"
     )
 
+    val medicalTechnologyEntry = MedicalTechnologyEntry(
+        id = "mt-1",
+        name = "name",
+        description = "description",
+        type = MedicalTechnologyApiDtoType.ENDOSCOPE
+    )
+
     "It should be possible to obtain the corresponding room from the data get from the API" {
         roomEntry.toRoom() shouldBe room
     }
@@ -102,7 +110,7 @@ class ApiSerializationTest : StringSpec({
     }
 
     "It should be possible to obtain the corresponding medical technology from the data get from the API" {
-        medicalTechnologyApiDto.toMedicalTechnology() shouldBe medicalTechnology
+        medicalTechnologyEntry.toMedicalTechnology() shouldBe medicalTechnology
     }
 
     "It should be possible to serialize a medical technology in order to send it through the API" {
