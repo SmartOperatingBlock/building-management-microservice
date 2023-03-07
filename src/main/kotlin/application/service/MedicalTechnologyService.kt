@@ -78,4 +78,28 @@ object MedicalTechnologyService {
                 this.medicalTechnologyRepository.mapTechnologyTo(medicalTechnologyId, roomID)
             } else false
     }
+
+    /**
+     * Application Service that has the objective of updating the [usage] data about a medical technology identified
+     * by its [medicalTechnologyId]. The [usage] refers to a specific [dateTime] and it is updated via the provided
+     * [medicalTechnologyRepository].
+     */
+    class UpdateMedicalTechnologyUsage(
+        private val medicalTechnologyId: MedicalTechnologyID,
+        private val usage: Boolean,
+        private val dateTime: Instant,
+        private val medicalTechnologyRepository: MedicalTechnologyRepository,
+    ) : ApplicationService<Boolean> {
+        override fun execute(): Boolean =
+            with(this.medicalTechnologyRepository.findBy(medicalTechnologyId, null)) {
+                if (this != null && this.roomId != null) {
+                    medicalTechnologyRepository.updateMedicalTechnologyUsage(
+                        medicalTechnologyId,
+                        usage,
+                        this.roomId,
+                        dateTime
+                    )
+                } else false
+            }
+    }
 }
