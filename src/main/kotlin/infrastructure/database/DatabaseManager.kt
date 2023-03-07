@@ -146,11 +146,23 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
     override fun updateMedicalTechnologyUsage(
         medicalTechnologyId: MedicalTechnologyID,
         usage: Boolean,
+        roomId: RoomID,
         dateTime: Instant,
-    ): Boolean {
-        // It needs to be in use in some room.
-        // In order to populate the time series data we need to know in which room it is currently.
-        TODO("Not yet implemented")
+    ): Boolean = this.medicalTechnologyDataCollection.safeMongoDbWrite(false) {
+        // update time series data
+        insertOne(
+            TimeSeriesMedicalTechnologyUsage(
+                dateTime,
+                TimeSeriesMedicalTechnologyMetadata(medicalTechnologyId, roomId),
+                usage
+            )
+        ).wasAcknowledged()
+    }.let {
+        // update medical technology current data
+        this@DatabaseManager.medicalTechnologiesCollection.safeMongoDbWrite(false) {
+            updateOne(MedicalTechnology::id eq medicalTechnologyId, setValue(MedicalTechnology::isInUse, usage))
+            true
+        }
     }
 
     private fun <T, R> MongoCollection<T>.safeMongoDbWrite(defaultResult: R, operation: MongoCollection<T>.() -> R): R =
