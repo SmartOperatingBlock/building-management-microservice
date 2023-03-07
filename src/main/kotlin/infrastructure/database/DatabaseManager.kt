@@ -16,6 +16,7 @@ import application.presenter.database.model.TimeSeriesMedicalTechnologyUsage
 import application.presenter.database.model.TimeSeriesRoomEnvironmentalData
 import application.presenter.database.model.TimeSeriesRoomMetadata
 import application.presenter.database.serialization.toRoomEnvironmentalData
+import application.presenter.database.serialization.toTimeSeries
 import com.mongodb.MongoException
 import com.mongodb.client.MongoCollection
 import entity.medicaltechnology.MedicalTechnology
@@ -82,12 +83,35 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
         roomId: RoomID,
         environmentalData: RoomEnvironmentalData,
         dateTime: Instant
-    ): Boolean {
-        // insert new data to the room_environmental_data collection
-        // update environmental data to the room document inside the room collection
-        // the environmental data collection has the room ID associated to the environmental data and a timestamp
-        // this data model must be created within this package because it is used only here.
-        TODO("Not yet implemented")
+    ): Boolean = this.roomTimeSeriesCollection.safeMongoDbWrite(mapOf()) {
+        // update time series
+        val updatesMap = environmentalData.toTimeSeries(dateTime, roomId)
+        insertMany(updatesMap.values.map { it })
+        updatesMap
+    }.let {
+        // update room info with the latest values
+        this@DatabaseManager.roomCollection.safeMongoDbWrite(false) {
+            updateOne(
+                Room::id eq roomId,
+                it.toRoomEnvironmentalData().let { roomEnvData ->
+                    listOfNotNull(
+                        roomEnvData.temperature?.let { t ->
+                            setValue(Room::environmentalData / RoomEnvironmentalData::temperature, t)
+                        },
+                        roomEnvData.humidity?.let { t ->
+                            setValue(Room::environmentalData / RoomEnvironmentalData::humidity, t)
+                        },
+                        roomEnvData.luminosity?.let { t ->
+                            setValue(Room::environmentalData / RoomEnvironmentalData::luminosity, t)
+                        },
+                        roomEnvData.presence?.let { t ->
+                            setValue(Room::environmentalData / RoomEnvironmentalData::presence, t)
+                        }
+                    )
+                }
+            )
+            true
+        }
     }
 
     override fun saveMedicalTechnology(medicalTechnology: MedicalTechnology): Boolean =
