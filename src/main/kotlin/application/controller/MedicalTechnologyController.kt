@@ -52,6 +52,7 @@ class MedicalTechnologyController(
     override fun updateMedicalTechnologyUsage(
         medicalTechnologyId: MedicalTechnologyID,
         usage: Boolean,
+        roomId: RoomID,
         dateTime: Instant,
-    ): Boolean = this.databaseManager.updateMedicalTechnologyUsage(medicalTechnologyId, usage, dateTime)
+    ): Boolean = this.databaseManager.updateMedicalTechnologyUsage(medicalTechnologyId, usage, roomId, dateTime)
 }
