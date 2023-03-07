@@ -8,8 +8,8 @@
 
 package application.presenter.api.deserializer
 
-import application.presenter.api.model.MedicalTechnologyApiDto
 import application.presenter.api.model.MedicalTechnologyApiDtoType
+import application.presenter.api.model.MedicalTechnologyEntry
 import application.presenter.api.model.RoomApiDtoType
 import application.presenter.api.model.RoomEntry
 import entity.medicaltechnology.MedicalTechnology
@@ -25,7 +25,7 @@ import entity.zone.ZoneID
  */
 object ApiDeserializer {
     /**
-     * Extension method to convert Room API DTO to [entity.zone.Room] class.
+     * Extension method to convert Room Entry to [entity.zone.Room] class.
      */
     fun RoomEntry.toRoom() = Room(
         id = RoomID(this.id),
@@ -40,15 +40,13 @@ object ApiDeserializer {
     }
 
     /**
-     * Extension method to convert Medical Technology API DTO to [entity.medicaltechnology.MedicalTechnology] class.
+     * Extension method to convert Medical Technology Entry to [entity.medicaltechnology.MedicalTechnology] class.
      */
-    fun MedicalTechnologyApiDto.toMedicalTechnology() = MedicalTechnology(
+    fun MedicalTechnologyEntry.toMedicalTechnology() = MedicalTechnology(
         id = MedicalTechnologyID(this.id),
         name = this.name,
         description = this.description,
-        type = this.type.toMedicalTechnologyType(),
-        isInUse = this.inUse,
-        roomId = this.roomId?.let { RoomID(it) }
+        type = this.type.toMedicalTechnologyType()
     )
 
     private fun MedicalTechnologyApiDtoType.toMedicalTechnologyType() = when (this) {

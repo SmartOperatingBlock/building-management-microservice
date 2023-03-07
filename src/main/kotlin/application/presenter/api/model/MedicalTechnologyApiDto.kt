@@ -11,7 +11,7 @@ package application.presenter.api.model
 import kotlinx.serialization.Serializable
 
 /**
- * Presenter class to be able to handle data that comes from API.
+ * Presenter class to be able to handle data that is returned to the API.
  * It handles [id], [name], [description], [type], [inUse] and the [roomId].
  */
 @Serializable
@@ -25,7 +25,19 @@ data class MedicalTechnologyApiDto(
 )
 
 /**
- * Presenter enum to deserialize medical technology type that comes from API.
+ * It represents the presentation of a single [entity.medicaltechnology.MedicalTechnology] entry.
+ * The necessary information are [id], [name], [description] and the [type].
+ */
+@Serializable
+data class MedicalTechnologyEntry(
+    val id: String,
+    val name: String,
+    val description: String,
+    val type: MedicalTechnologyApiDtoType
+)
+
+/**
+ * Presenter enum to handle medical technology type.
  */
 @Serializable
 enum class MedicalTechnologyApiDtoType {

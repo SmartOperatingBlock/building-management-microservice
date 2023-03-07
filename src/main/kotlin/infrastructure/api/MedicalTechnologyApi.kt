@@ -11,7 +11,7 @@ package infrastructure.api
 import application.controller.MedicalTechnologyController
 import application.controller.RoomController
 import application.presenter.api.deserializer.ApiDeserializer.toMedicalTechnology
-import application.presenter.api.model.MedicalTechnologyApiDto
+import application.presenter.api.model.MedicalTechnologyEntry
 import application.presenter.api.model.MedicalTechnologyPatch
 import application.presenter.api.serializer.ApiSerializer.toMedicalTechnologyApiDto
 import application.service.MedicalTechnologyService
@@ -41,7 +41,7 @@ import java.time.Instant
 fun Application.medicalTechnologyAPI(apiPath: String, port: Int, provider: ManagerProvider) {
     routing {
         post("$apiPath/medical-technologies") {
-            val medicalTechnology = call.receive<MedicalTechnologyApiDto>().toMedicalTechnology()
+            val medicalTechnology = call.receive<MedicalTechnologyEntry>().toMedicalTechnology()
             MedicalTechnologyService.CreateMedicalTechnology(
                 medicalTechnology,
                 MedicalTechnologyController(
