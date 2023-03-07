@@ -8,22 +8,14 @@
 
 package application.presenter.api.deserializer
 
-import application.presenter.api.model.EnvironmentalDataApiDto
 import application.presenter.api.model.MedicalTechnologyApiDto
 import application.presenter.api.model.MedicalTechnologyApiDtoType
-import application.presenter.api.model.RoomApiDto
 import application.presenter.api.model.RoomApiDtoType
-import entity.environment.Humidity
-import entity.environment.LightUnit
-import entity.environment.Luminosity
-import entity.environment.Presence
-import entity.environment.Temperature
-import entity.environment.TemperatureUnit
+import application.presenter.api.model.RoomEntry
 import entity.medicaltechnology.MedicalTechnology
 import entity.medicaltechnology.MedicalTechnologyID
 import entity.medicaltechnology.MedicalTechnologyType
 import entity.zone.Room
-import entity.zone.RoomEnvironmentalData
 import entity.zone.RoomID
 import entity.zone.RoomType
 import entity.zone.ZoneID
@@ -35,19 +27,11 @@ object ApiDeserializer {
     /**
      * Extension method to convert Room API DTO to [entity.zone.Room] class.
      */
-    fun RoomApiDto.toRoom() = Room(
+    fun RoomEntry.toRoom() = Room(
         id = RoomID(this.id),
         type = this.type.toRoomType(),
         zoneId = ZoneID(this.zoneId),
-        name = this.name,
-        environmentalData = this.environmentalData.toRoomEnvironmentalData()
-    )
-
-    private fun EnvironmentalDataApiDto.toRoomEnvironmentalData() = RoomEnvironmentalData(
-        temperature = this.temperature?.let { Temperature(it.value, TemperatureUnit.valueOf(it.unit)) },
-        humidity = this.humidity?.let { Humidity(it) },
-        luminosity = this.luminosity?.let { Luminosity(it.value, LightUnit.valueOf(it.unit)) },
-        presence = this.presence?.let { Presence(it) }
+        name = this.name
     )
 
     private fun RoomApiDtoType.toRoomType() = when (this) {

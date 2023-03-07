@@ -10,7 +10,7 @@ package infrastructure.api
 
 import application.controller.RoomController
 import application.presenter.api.deserializer.ApiDeserializer.toRoom
-import application.presenter.api.model.RoomApiDto
+import application.presenter.api.model.RoomEntry
 import application.presenter.api.serializer.ApiSerializer.toRoomApiDto
 import application.service.RoomService
 import entity.zone.RoomID
@@ -38,7 +38,7 @@ import java.time.Instant
 fun Application.roomAPI(apiPath: String, port: Int, provider: ManagerProvider) {
     routing {
         post("$apiPath/rooms") {
-            val room = call.receive<RoomApiDto>().toRoom()
+            val room = call.receive<RoomEntry>().toRoom()
             RoomService.CreateRoom(
                 room,
                 RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)

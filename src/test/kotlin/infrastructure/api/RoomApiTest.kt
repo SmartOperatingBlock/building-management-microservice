@@ -12,7 +12,6 @@ import application.presenter.api.model.EnvironmentalDataApiDto
 import application.presenter.api.model.RoomApiDto
 import application.presenter.api.model.RoomApiDtoType
 import application.presenter.api.model.RoomEntry
-import application.presenter.api.model.ValueWithUnit
 import infrastructure.api.KtorTestingUtility.apiTestApplication
 import infrastructure.api.util.ApiResponses
 import io.kotest.assertions.ktor.client.shouldHaveStatus
@@ -35,20 +34,21 @@ import kotlinx.serialization.json.Json
 import java.time.Instant
 
 class RoomApiTest : StringSpec({
+    val roomEntry = RoomEntry(
+        "r1",
+        "name",
+        "z1",
+        RoomApiDtoType.OPERATING_ROOM
+    )
     val roomApiDto = RoomApiDto(
         "r1",
         "name",
         "z1",
         RoomApiDtoType.OPERATING_ROOM,
-        EnvironmentalDataApiDto(
-            ValueWithUnit(33.0, "CELSIUS"),
-            55.0,
-            ValueWithUnit(150.0, "LUX"),
-            true
-        )
+        EnvironmentalDataApiDto()
     )
 
-    suspend fun ApplicationTestBuilder.insertRoom(room: RoomApiDto) =
+    suspend fun ApplicationTestBuilder.insertRoom(room: RoomEntry) =
         client.post("/api/v1/rooms") {
             header(HttpHeaders.ContentType, ContentType.Application.Json.toString())
             setBody(Json.encodeToString(room))
@@ -56,7 +56,7 @@ class RoomApiTest : StringSpec({
 
     "I should be able to request the creation of a room" {
         apiTestApplication {
-            val response = insertRoom(roomApiDto)
+            val response = insertRoom(roomEntry)
             response shouldHaveStatus HttpStatusCode.Created
             response.headers[HttpHeaders.Location] shouldNotBe null
         }
@@ -64,16 +64,16 @@ class RoomApiTest : StringSpec({
 
     "When there is a request to add an existent room then the service should respond with a conflict status code" {
         apiTestApplication {
-            insertRoom(roomApiDto)
-            val response = insertRoom(roomApiDto)
+            insertRoom(roomEntry)
+            val response = insertRoom(roomEntry)
             response shouldHaveStatus HttpStatusCode.Conflict
         }
     }
 
     "It should be possible to obtain an existing room" {
         apiTestApplication {
-            insertRoom(roomApiDto)
-            val response = client.get("/api/v1/rooms/${roomApiDto.id}")
+            insertRoom(roomEntry)
+            val response = client.get("/api/v1/rooms/${roomEntry.id}")
             response shouldHaveStatus HttpStatusCode.OK
             Json.decodeFromString<RoomApiDto>(response.bodyAsText()) shouldBe roomApiDto
         }
@@ -81,21 +81,21 @@ class RoomApiTest : StringSpec({
 
     "It should be possible to obtain historical data about a room" {
         apiTestApplication {
-            insertRoom(roomApiDto)
-            val response = client.get("/api/v1/rooms/${roomApiDto.id}?dateTime=${Instant.now()}")
+            insertRoom(roomEntry)
+            val response = client.get("/api/v1/rooms/${roomEntry.id}?dateTime=${Instant.now()}")
             response shouldHaveStatus HttpStatusCode.OK
         }
     }
 
     "It should handle the get request on a non existing room" {
         apiTestApplication {
-            client.get("/api/v1/rooms/${roomApiDto.id}") shouldHaveStatus HttpStatusCode.NotFound
+            client.get("/api/v1/rooms/${roomEntry.id}") shouldHaveStatus HttpStatusCode.NotFound
         }
     }
 
     "It should be able to get all the room entries" {
         apiTestApplication {
-            insertRoom(roomApiDto)
+            insertRoom(roomEntry)
             val response = client.get("/api/v1/rooms")
             response shouldHaveStatus HttpStatusCode.OK
             Json.decodeFromString<ApiResponses.ResponseEntryList<ApiResponses.ResponseEntry<RoomEntry>>>(
@@ -116,14 +116,14 @@ class RoomApiTest : StringSpec({
 
     "It should be possible to delete an existing room" {
         apiTestApplication {
-            insertRoom(roomApiDto)
-            client.delete("/api/v1/rooms/${roomApiDto.id}") shouldHaveStatus HttpStatusCode.NoContent
+            insertRoom(roomEntry)
+            client.delete("/api/v1/rooms/${roomEntry.id}") shouldHaveStatus HttpStatusCode.NoContent
         }
     }
 
     "It should not be possible to delete a not-existent room" {
         apiTestApplication {
-            client.delete("/api/v1/rooms/${roomApiDto.id}") shouldHaveStatus HttpStatusCode.NotFound
+            client.delete("/api/v1/rooms/${roomEntry.id}") shouldHaveStatus HttpStatusCode.NotFound
         }
     }
 })

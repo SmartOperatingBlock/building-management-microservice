@@ -33,7 +33,7 @@ object ApiSerializer {
         id = this.id.value,
         name = this.name.orEmpty(),
         zoneId = this.zoneId.value,
-        type = this.type.toString()
+        type = this.type.toRoomApiDtoType()
     )
 
     /**
