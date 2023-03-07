@@ -11,6 +11,7 @@ package application.service
 import application.presenter.api.model.RoomEntry
 import application.presenter.api.serializer.ApiSerializer.toRoomEntry
 import entity.zone.Room
+import entity.zone.RoomEnvironmentalData
 import entity.zone.RoomID
 import usecase.repository.RoomRepository
 import java.time.Instant
@@ -58,5 +59,22 @@ object RoomService {
      */
     class GetAllRoomEntry(private val roomRepository: RoomRepository) : ApplicationService<Set<RoomEntry>> {
         override fun execute(): Set<RoomEntry> = this.roomRepository.getRooms().map { it.toRoomEntry() }.toSet()
+    }
+
+    /**
+     * Application Service that has the objective of updating the [environmentalData] about a room identified
+     * by its [roomId]. The data refers to a specific [dateTime] and it is updated via the provided
+     * [roomRepository].
+     */
+    class UpdateRoomEnvironmentData(
+        private val roomId: RoomID,
+        private val environmentalData: RoomEnvironmentalData,
+        private val dateTime: Instant,
+        private val roomRepository: RoomRepository
+    ) : ApplicationService<Boolean> {
+        override fun execute(): Boolean =
+            if (this.roomRepository.findBy(roomId, null) != null) {
+                this.roomRepository.updateRoomEnvironmentalData(roomId, environmentalData, dateTime)
+            } else false
     }
 }
