@@ -33,6 +33,13 @@ class MedicalTechnologyServiceTest : StringSpec({
         description = "description",
         type = MedicalTechnologyType.ENDOSCOPE
     )
+
+    val exampleRoom = Room(
+        RoomID("r1"),
+        RoomType.OPERATING_ROOM,
+        ZoneID("z1")
+    )
+
     val databaseManager by lazy { DatabaseManager("mongodb://localhost:27017") }
     fun medicalTechnologyController() = MedicalTechnologyController(DigitalTwinManagerTestDouble(), databaseManager)
     fun roomController() = RoomController(DigitalTwinManagerTestDouble(), databaseManager)
@@ -119,23 +126,15 @@ class MedicalTechnologyServiceTest : StringSpec({
             val roomController = roomController()
             MedicalTechnologyService.CreateMedicalTechnology(exampleMedicalTechnology, medicalTechnologyController)
                 .execute()
-            val roomId = RoomID("r1")
-            RoomService.CreateRoom(
-                Room(
-                    roomId,
-                    RoomType.OPERATING_ROOM,
-                    ZoneID("z1")
-                ),
-                roomController
-            ).execute()
+            RoomService.CreateRoom(exampleRoom, roomController).execute()
             MedicalTechnologyService.MapMedicalTechnologyToRoom(
                 exampleMedicalTechnology.id,
-                roomId,
+                exampleRoom.id,
                 roomController,
                 medicalTechnologyController
             ).execute() shouldBe true
             MedicalTechnologyService.GetMedicalTechnology(exampleMedicalTechnology.id, medicalTechnologyController)
-                .execute()?.roomId shouldBe roomId
+                .execute()?.roomId shouldBe exampleRoom.id
         }
     }
 
@@ -146,7 +145,7 @@ class MedicalTechnologyServiceTest : StringSpec({
                 .execute()
             MedicalTechnologyService.MapMedicalTechnologyToRoom(
                 exampleMedicalTechnology.id,
-                RoomID("r-1"),
+                exampleRoom.id,
                 roomController(),
                 medicalTechnologyController
             ).execute() shouldBe false
@@ -157,18 +156,63 @@ class MedicalTechnologyServiceTest : StringSpec({
         withMongo {
             val medicalTechnologyController = medicalTechnologyController()
             val roomController = roomController()
-            RoomService.CreateRoom(
-                Room(
-                    RoomID("r1"),
-                    RoomType.OPERATING_ROOM,
-                    ZoneID("z1")
-                ),
-                roomController
-            )
+            RoomService.CreateRoom(exampleRoom, roomController).execute()
             MedicalTechnologyService.MapMedicalTechnologyToRoom(
                 exampleMedicalTechnology.id,
-                RoomID("r-1"),
+                exampleRoom.id,
                 roomController,
+                medicalTechnologyController
+            ).execute() shouldBe false
+        }
+    }
+
+    "It should be possible to update the usage data of an existing medical technology that has a mapped room" {
+        withMongo {
+            val medicalTechnologyController = medicalTechnologyController()
+            val roomController = roomController()
+            MedicalTechnologyService.CreateMedicalTechnology(exampleMedicalTechnology, medicalTechnologyController)
+                .execute()
+            RoomService.CreateRoom(exampleRoom, roomController).execute()
+            MedicalTechnologyService.MapMedicalTechnologyToRoom(
+                exampleMedicalTechnology.id,
+                exampleRoom.id,
+                roomController,
+                medicalTechnologyController
+            ).execute()
+            MedicalTechnologyService.UpdateMedicalTechnologyUsage(
+                exampleMedicalTechnology.id,
+                true,
+                Instant.now(),
+                medicalTechnologyController
+            ).execute() shouldBe true
+            MedicalTechnologyService.GetMedicalTechnology(
+                exampleMedicalTechnology.id,
+                medicalTechnologyController,
+                Instant.now()
+            ).execute()?.isInUse shouldBe true
+        }
+    }
+
+    "It should not be possible to update the usage data of a not-existent medical technology" {
+        withMongo {
+            MedicalTechnologyService.UpdateMedicalTechnologyUsage(
+                exampleMedicalTechnology.id,
+                true,
+                Instant.now(),
+                medicalTechnologyController()
+            ).execute() shouldBe false
+        }
+    }
+
+    "It should not be possible to update the usage data of a medical technology if it doesn't have a mapped room" {
+        withMongo {
+            val medicalTechnologyController = medicalTechnologyController()
+            MedicalTechnologyService.CreateMedicalTechnology(exampleMedicalTechnology, medicalTechnologyController)
+                .execute()
+            MedicalTechnologyService.UpdateMedicalTechnologyUsage(
+                exampleMedicalTechnology.id,
+                true,
+                Instant.now(),
                 medicalTechnologyController
             ).execute() shouldBe false
         }
