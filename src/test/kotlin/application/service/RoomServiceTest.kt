@@ -9,6 +9,7 @@
 package application.service
 
 import application.controller.RoomController
+import entity.environment.Humidity
 import entity.environment.Temperature
 import entity.zone.Room
 import entity.zone.RoomEnvironmentalData
@@ -112,6 +113,36 @@ class RoomServiceTest : StringSpec({
         withMongo {
             val roomController = controller()
             RoomService.GetAllRoomEntry(roomController).execute().count() shouldBe 0
+        }
+    }
+
+    "It should be possible to update the data of an existent room" {
+        withMongo {
+            val roomController = controller()
+            RoomService.CreateRoom(exampleRoom, roomController).execute()
+            RoomService.UpdateRoomEnvironmentData(
+                exampleRoom.id,
+                exampleRoom.environmentalData.copy(humidity = Humidity(55.0)),
+                Instant.now(),
+                roomController
+            ).execute() shouldBe true
+            RoomService.GetRoom(exampleRoom.id, roomController, Instant.now()).execute()
+                ?.environmentalData shouldBe RoomEnvironmentalData(
+                temperature = Temperature(30.3),
+                humidity = Humidity(55.0)
+            )
+        }
+    }
+
+    "It should not be possible to update the data of a room that doesn't exist" {
+        withMongo {
+            val roomController = controller()
+            RoomService.UpdateRoomEnvironmentData(
+                exampleRoom.id,
+                exampleRoom.environmentalData.copy(humidity = Humidity(55.0)),
+                Instant.now(),
+                roomController
+            ).execute() shouldBe false
         }
     }
 })
