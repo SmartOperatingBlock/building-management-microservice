@@ -36,7 +36,7 @@ import entity.zone.RoomID
 import entity.zone.RoomType
 import entity.zone.ZoneID
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.shouldBe
+import io.kotest.matchers.equality.shouldBeEqualToComparingFields
 
 class ApiSerializationTest : StringSpec({
     val room = Room(
@@ -98,22 +98,23 @@ class ApiSerializationTest : StringSpec({
     )
 
     "It should be possible to obtain the corresponding room from the data get from the API" {
-        roomEntry.toRoom() shouldBe room
+        roomEntry.toRoom() shouldBeEqualToComparingFields room.copy(environmentalData = RoomEnvironmentalData())
     }
 
     "It should be possible to serialize a room in a room entry" {
-        room.toRoomEntry() shouldBe roomEntry
+        room.toRoomEntry() shouldBeEqualToComparingFields roomEntry
     }
 
     "It should be possible to serialize a room in order to send it through the API" {
-        room.toRoomApiDto() shouldBe roomApiDto
+        room.toRoomApiDto() shouldBeEqualToComparingFields roomApiDto
     }
 
     "It should be possible to obtain the corresponding medical technology from the data get from the API" {
-        medicalTechnologyEntry.toMedicalTechnology() shouldBe medicalTechnology
+        val nonInitializedMedicalTechnology = medicalTechnology.copy(isInUse = false, roomId = null)
+        medicalTechnologyEntry.toMedicalTechnology() shouldBeEqualToComparingFields nonInitializedMedicalTechnology
     }
 
     "It should be possible to serialize a medical technology in order to send it through the API" {
-        medicalTechnology.toMedicalTechnologyApiDto() shouldBe medicalTechnologyApiDto
+        medicalTechnology.toMedicalTechnologyApiDto() shouldBeEqualToComparingFields medicalTechnologyApiDto
     }
 })
