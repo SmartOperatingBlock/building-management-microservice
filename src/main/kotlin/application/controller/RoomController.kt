@@ -50,7 +50,5 @@ class RoomController(
         roomId: RoomID,
         environmentalData: RoomEnvironmentalData,
         dateTime: Instant,
-    ): Boolean {
-        TODO("Not yet implemented")
-    }
+    ): Boolean = this.roomDatabaseManager.updateRoomEnvironmentalData(roomId, environmentalData, dateTime)
 }
