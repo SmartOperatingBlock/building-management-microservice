@@ -76,7 +76,7 @@ paths:
         - in: query
           name: dateTime
           required: false
-          description: Specify a past date in order to obtain historical data
+          description: Specify a past date in order to obtain historical data. The date must be specified in the ISO 8601 UTC date format.
           schema:
             type: string
             format: date-time
@@ -133,7 +133,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MedicalTechnology'
+              $ref: '#/components/schemas/MedicalTechnologyEntry'
         description: Medical Technology to add
 
   /medical-technologies/{technologyId}:
@@ -153,7 +153,7 @@ paths:
         - in: query
           name: dateTime
           required: false
-          description: Specify a past date in order to obtain historical data
+          description: Specify a past date in order to obtain historical data. The date must be specified in the ISO 8601 UTC date format.
           schema:
             type: string
             format: date-time
@@ -165,8 +165,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MedicalTechnology'
-        '204':
-          description: no content about the medical technology was found
         '404':
           description: medical technology not found
         '500':
@@ -314,6 +312,25 @@ components:
           type: boolean
           example: true
 
+    MedicalTechnologyType:
+      type: string
+      enum: [ENDOSCOPE, XRAY]
+      example: ENDOSCOPE
+
+    MedicalTechnologyEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          example: mt-1
+        name:
+          type: string
+          example: Endoscope
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/MedicalTechnologyType'
+
     MedicalTechnology:
       type: object
       properties:
@@ -331,6 +348,4 @@ components:
           type: string
           example: Room-#1
         type:
-          type: string
-          enum: [ENDOSCOPE, XRAY]
-          example: ENDOSCOPE
+          $ref: '#/components/schemas/MedicalTechnologyType'
