@@ -44,12 +44,13 @@ interface MedicalTechnologyRepository {
     fun mapTechnologyTo(medicalTechnologyId: MedicalTechnologyID, roomId: RoomID?): Boolean
 
     /**
-     * Update the status of [usage] in a specified [dateTime] of a medical technology
-     * identified by its [medicalTechnologyId].
+     * Update the status of [usage] inside a room identified by its [roomId]
+     * in a specified [dateTime] of a medical technology identified by its [medicalTechnologyId].
      */
     fun updateMedicalTechnologyUsage(
         medicalTechnologyId: MedicalTechnologyID,
         usage: Boolean,
+        roomId: RoomID,
         dateTime: Instant
     ): Boolean
 }

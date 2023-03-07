@@ -53,6 +53,7 @@ interface MedicalTechnologyDatabaseManager {
     fun updateMedicalTechnologyUsage(
         medicalTechnologyId: MedicalTechnologyID,
         usage: Boolean,
+        roomId: RoomID,
         dateTime: Instant
     ): Boolean
 }
