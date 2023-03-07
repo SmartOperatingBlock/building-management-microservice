@@ -49,15 +49,14 @@ fun Application.medicalTechnologyAPI(apiPath: String, port: Int, provider: Manag
                     provider.medicalTechnologyDatabaseManager
                 )
             ).execute().apply {
-                when (this) {
-                    null -> call.respond(HttpStatusCode.Conflict)
-                    else -> {
-                        call.response.header(
-                            HttpHeaders.Location,
-                            "http://localhost:$port$apiPath/medical-technologies/${medicalTechnology.id.value}"
-                        )
-                        call.respond(HttpStatusCode.Created)
-                    }
+                if (this == null) {
+                    call.respond(HttpStatusCode.Conflict)
+                } else {
+                    call.response.header(
+                        HttpHeaders.Location,
+                        "http://localhost:$port$apiPath/medical-technologies/${medicalTechnology.id.value}"
+                    )
+                    call.respond(HttpStatusCode.Created)
                 }
             }
         }
