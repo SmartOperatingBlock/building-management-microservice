@@ -50,6 +50,7 @@ class ApiSerializationTest : StringSpec({
             Presence(true)
         )
     )
+
     val roomApiDto = RoomApiDto(
         "r1",
         "name",
@@ -61,6 +62,13 @@ class ApiSerializationTest : StringSpec({
             ValueWithUnit(150.0, "LUX"),
             true
         )
+    )
+
+    val roomEntry = RoomEntry(
+        id = "r1",
+        name = "name",
+        zoneId = "z1",
+        type = RoomApiDtoType.OPERATING_ROOM
     )
 
     val medicalTechnology = MedicalTechnology(
@@ -82,20 +90,15 @@ class ApiSerializationTest : StringSpec({
     )
 
     "It should be possible to obtain the corresponding room from the data get from the API" {
-        roomApiDto.toRoom() shouldBe room
+        roomEntry.toRoom() shouldBe room
+    }
+
+    "It should be possible to serialize a room in a room entry" {
+        room.toRoomEntry() shouldBe roomEntry
     }
 
     "It should be possible to serialize a room in order to send it through the API" {
         room.toRoomApiDto() shouldBe roomApiDto
-    }
-
-    "It should be possible to serialize a room in a room entry" {
-        room.toRoomEntry() shouldBe RoomEntry(
-            id = "r1",
-            name = "name",
-            zoneId = "z1",
-            type = "OPERATING_ROOM"
-        )
     }
 
     "It should be possible to obtain the corresponding medical technology from the data get from the API" {

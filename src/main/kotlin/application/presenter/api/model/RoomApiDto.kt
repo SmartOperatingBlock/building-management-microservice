@@ -11,8 +11,8 @@ package application.presenter.api.model
 import kotlinx.serialization.Serializable
 
 /**
- * Presenter class to be able to deserialize data that comes from API.
- * It deserializes [id], [name], [zoneId], the [type] of the room and [environmentalData].
+ * Presenter class to be able to serialize data returned by the API.
+ * It is composed by [id], [name], [zoneId], the [type] of the room and [environmentalData].
  */
 @Serializable
 data class RoomApiDto(
@@ -24,7 +24,19 @@ data class RoomApiDto(
 )
 
 /**
- * Presenter enum class to deserialize room type that comes from API.
+ * It represents the presentation of a single [entity.zone.Room] entry.
+ * The necessary information are [id], [name], [zoneId] and the [type].
+ */
+@Serializable
+data class RoomEntry(
+    val id: String,
+    val name: String,
+    val zoneId: String,
+    val type: RoomApiDtoType
+)
+
+/**
+ * Presenter enum class to represent the room type.
  */
 @Serializable
 enum class RoomApiDtoType {
