@@ -16,5 +16,5 @@ import infrastructure.provider.ManagerProviderImpl
 fun main() {
     val provider = ManagerProviderImpl()
     APIController(provider).start()
-    KafkaClient().start()
+    KafkaClient(provider).start()
 }
