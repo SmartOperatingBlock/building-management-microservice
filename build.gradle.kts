@@ -26,7 +26,7 @@ repositories {
 dependencies {
     implementation(libs.azure.digital.twins)
     implementation(libs.azure.identity)
-    implementation(libs.logback)
+    implementation(libs.jackson.module.kotlin)
     implementation(libs.kafka.clients)
     implementation(libs.kafka.json)
     implementation(libs.kmongo)
@@ -37,6 +37,7 @@ dependencies {
     implementation(libs.ktor.server.content.negotiation.json)
     implementation(libs.ktor.server.engine.netty)
     implementation(libs.ktor.server.status.pages)
+    implementation(libs.logback)
     testImplementation(libs.bundles.kotlin.testing)
 }
 
