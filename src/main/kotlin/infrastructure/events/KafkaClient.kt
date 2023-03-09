@@ -54,7 +54,7 @@ class KafkaClient(private val provider: ManagerProvider) {
      * Start consuming event on Kafka.
      */
     fun start() {
-        this.kafkaConsumer.subscribe(listOf(topic)).run {
+        this.kafkaConsumer.subscribe(listOf(roomEventsTopic, medicalTechnologyEventTopic)).run {
             while (true) {
                 kafkaConsumer.poll(Duration.ofMillis(pollingTime)).forEach { event ->
                     try {
@@ -126,7 +126,8 @@ class KafkaClient(private val provider: ManagerProvider) {
     companion object {
         private const val bootstrapServerUrlVariable = "BOOTSTRAP_SERVER_URL"
         private const val schemaRegistryUrlVariable = "SCHEMA_REGISTRY_URL"
-        private const val topic = "room-events"
+        private const val roomEventsTopic = "room-events"
+        private const val medicalTechnologyEventTopic = "process-events"
         private const val pollingTime = 100L
     }
 }
