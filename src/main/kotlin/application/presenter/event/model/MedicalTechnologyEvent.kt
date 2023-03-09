@@ -6,7 +6,7 @@
  * https://opensource.org/licenses/MIT.
  */
 
-package infrastructure.events.model
+package application.presenter.event.model
 
 import kotlinx.serialization.Serializable
 

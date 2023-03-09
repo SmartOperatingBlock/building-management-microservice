@@ -6,7 +6,7 @@
  * https://opensource.org/licenses/MIT.
  */
 
-package infrastructure.events.model
+package application.presenter.event.model
 
 /**
  * Interface that models a generic event with no additional fields but only with a [key],

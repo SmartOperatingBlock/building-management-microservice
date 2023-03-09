@@ -6,14 +6,8 @@
  * https://opensource.org/licenses/MIT.
  */
 
-package infrastructure.events.model
+package application.presenter.event.model
 
-import entity.environment.Humidity
-import entity.environment.LightUnit
-import entity.environment.Luminosity
-import entity.environment.Presence
-import entity.environment.Temperature
-import entity.environment.TemperatureUnit
 import kotlinx.serialization.Serializable
 
 /** Interface that identify a data payload that is accepted inside a [RoomEvent]. */
@@ -79,27 +73,6 @@ object RoomEventPayloads {
     @Serializable
     enum class LuminosityPayloadUnit {
         LUX
-    }
-
-    /** Convert a Temperature Payload to [Temperature]. */
-    fun TemperaturePayload.toTemperature() =
-        Temperature(this.temperatureValue, this.temperatureUnit.toTemperatureUnit())
-
-    /** Convert a Luminosity Payload to [Luminosity]. */
-    fun LuminosityPayload.toLuminosity() = Luminosity(this.luminosityValue, this.luminosityUnit.toLightUnit())
-
-    /** Convert a Humidity Payload to [Humidity]. */
-    fun HumidityPayload.toHumidity() = Humidity(this.humidityPercentage.toDouble())
-
-    /** Convert a Presence Payload to [Presence]. */
-    fun PresencePayload.toPresence() = Presence(this.presenceDetected)
-
-    private fun TemperaturePayloadUnit.toTemperatureUnit() = when (this) {
-        TemperaturePayloadUnit.CELSIUS -> TemperatureUnit.CELSIUS
-    }
-
-    private fun LuminosityPayloadUnit.toLightUnit() = when (this) {
-        LuminosityPayloadUnit.LUX -> LightUnit.LUX
     }
 }
 
