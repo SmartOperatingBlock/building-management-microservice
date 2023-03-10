@@ -19,11 +19,11 @@ data class MedicalTechnologyEvent(
 ) : Event<MedicalTechnologyUsagePayload>
 
 /**
- * [MedicalTechnologyEvent] payload that refers to the usage described by the [isInUse] property of
+ * [MedicalTechnologyEvent] payload that refers to the usage described by the [inUse] property of
  * a medical technology identified by its [medicalTechnologyID].
  */
 @Serializable
-data class MedicalTechnologyUsagePayload(val medicalTechnologyID: String, val isInUse: Boolean)
+data class MedicalTechnologyUsagePayload(val medicalTechnologyID: String, val inUse: Boolean)
 
 /** Module that wraps the possible keys for a [MedicalTechnologyEvent]. */
 object MedicalTechnologyEventKey {
