@@ -30,8 +30,10 @@ import java.time.Instant
  */
 object EventHandlers {
     /** Event handler for room temperature update event. */
-    class TemperatureEventHandler(private val roomRepository: RoomRepository): EventHandler {
-        override fun canHandle(event: Event<*>): Boolean = event.cast<RoomEvent<RoomEventPayloads.TemperaturePayload>>()
+    class TemperatureEventHandler(private val roomRepository: RoomRepository) : EventHandler {
+        override fun canHandle(event: Event<*>): Boolean = event.cast<RoomEvent<*>> {
+            this.data.cast<RoomEventPayloads.TemperaturePayload>()
+        }
 
         override fun consume(event: Event<*>) {
             event.cast<RoomEvent<RoomEventPayloads.TemperaturePayload>>() {
@@ -45,8 +47,10 @@ object EventHandlers {
     }
 
     /** Event handler for room humidity update event. */
-    class HumidityEventHandler(private val roomRepository: RoomRepository): EventHandler {
-        override fun canHandle(event: Event<*>): Boolean = event.cast<RoomEvent<RoomEventPayloads.HumidityPayload>>()
+    class HumidityEventHandler(private val roomRepository: RoomRepository) : EventHandler {
+        override fun canHandle(event: Event<*>): Boolean = event.cast<RoomEvent<*>> {
+            this.data.cast<RoomEventPayloads.HumidityPayload>()
+        }
 
         override fun consume(event: Event<*>) {
             event.cast<RoomEvent<RoomEventPayloads.HumidityPayload>>() {
@@ -60,8 +64,10 @@ object EventHandlers {
     }
 
     /** Event handler for room luminosity update event. */
-    class LuminosityEventHandler(private val roomRepository: RoomRepository): EventHandler {
-        override fun canHandle(event: Event<*>): Boolean = event.cast<RoomEvent<RoomEventPayloads.LuminosityPayload>>()
+    class LuminosityEventHandler(private val roomRepository: RoomRepository) : EventHandler {
+        override fun canHandle(event: Event<*>): Boolean = event.cast<RoomEvent<*>> {
+            this.data.cast<RoomEventPayloads.LuminosityPayload>()
+        }
 
         override fun consume(event: Event<*>) {
             event.cast<RoomEvent<RoomEventPayloads.LuminosityPayload>>() {
@@ -75,8 +81,10 @@ object EventHandlers {
     }
 
     /** Event handler for room presence update event. */
-    class PresenceEventHandler(private val roomRepository: RoomRepository): EventHandler {
-        override fun canHandle(event: Event<*>): Boolean = event.cast<RoomEvent<RoomEventPayloads.PresencePayload>>()
+    class PresenceEventHandler(private val roomRepository: RoomRepository) : EventHandler {
+        override fun canHandle(event: Event<*>): Boolean = event.cast<RoomEvent<*>> {
+            this.data.cast<RoomEventPayloads.PresencePayload>()
+        }
 
         override fun consume(event: Event<*>) {
             event.cast<RoomEvent<RoomEventPayloads.PresencePayload>>() {
@@ -92,17 +100,17 @@ object EventHandlers {
     /** Event handler for medical technology usage update event. */
     class MedicalTechnologyEventHandler(
         private val medicalTechnologyRepository: MedicalTechnologyRepository
-    ): EventHandler {
+    ) : EventHandler {
         override fun canHandle(event: Event<*>): Boolean = event is MedicalTechnologyEvent
 
         override fun consume(event: Event<*>) {
             event.cast<MedicalTechnologyEvent>() {
                 MedicalTechnologyService.UpdateMedicalTechnologyUsage(
                     MedicalTechnologyID(this.data.medicalTechnologyID),
-                    this.data.isInUse,
+                    this.data.inUse,
                     Instant.parse(this.dateTime),
                     medicalTechnologyRepository
-                )
+                ).execute()
             }
         }
     }
@@ -119,9 +127,7 @@ object EventHandlers {
             roomRepository
         ).execute()
 
-    private inline fun <reified T> Any?.cast(operation: T.() -> Unit = {}): Boolean =
-        if(this is T) {
-            operation()
-            true
-        } else false
+    private inline fun <reified T> Any?.cast(operation: T.() -> Boolean = { true }): Boolean = if (this is T) {
+        operation()
+    } else false
 }
