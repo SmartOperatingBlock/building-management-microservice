@@ -1,3 +1,19 @@
+## [1.1.1](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.1.0...1.1.1) (2023-03-11)
+
+
+### Dependency updates
+
+* **deps:** update dependency com.azure:azure-digitaltwins-core to v1.3.7 ([bb1a350](https://github.com/SmartOperatingBlock/building-management-microservice/commit/bb1a3500e7ba32f6be5d076b4aa1c7b7f8c2dbb8))
+* **deps:** update dependency com.azure:azure-identity to v1.8.1 ([1b0af46](https://github.com/SmartOperatingBlock/building-management-microservice/commit/1b0af461796532348be349c07f187616aed46596))
+* **deps:** update node.js to 18.15 ([b9562ff](https://github.com/SmartOperatingBlock/building-management-microservice/commit/b9562ff1619d0f7402a9e5e14570b3c09f2110ae))
+* **deps:** update plugin com.gradle.enterprise to v3.12.4 ([4434597](https://github.com/SmartOperatingBlock/building-management-microservice/commit/44345972ad954bba3ab60a9ca88ba749a50868a8))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.5 ([9adc235](https://github.com/SmartOperatingBlock/building-management-microservice/commit/9adc235633d9f63aa9cff49f54418638415f1bb3))
+
+
+### Documentation
+
+* **deps:** update plugin dokka to v1.8.10 ([79cf5ca](https://github.com/SmartOperatingBlock/building-management-microservice/commit/79cf5cad53867ba59be52b674890df94954cf9af))
+
 ## [1.1.0](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.0.1...1.1.0) (2023-03-07)
 
 
