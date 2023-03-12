@@ -63,6 +63,9 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
     }
 
     override fun deleteRoom(roomId: RoomID): Boolean = this.roomCollection.safeMongoDbWrite(defaultResult = false) {
+        roomTimeSeriesCollection.deleteMany(
+            TimeSeriesRoomEnvironmentalData::metadata / TimeSeriesRoomMetadata::roomId eq roomId
+        )
         deleteOne(Room::id eq roomId).deletedCount > 0
     }
 
@@ -121,6 +124,10 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
 
     override fun deleteMedicalTechnology(medicalTechnologyId: MedicalTechnologyID): Boolean =
         this.medicalTechnologiesCollection.safeMongoDbWrite(defaultResult = false) {
+            medicalTechnologyDataCollection.deleteMany(
+                TimeSeriesMedicalTechnologyUsage::metadata /
+                    TimeSeriesMedicalTechnologyMetadata::medicalTechnologyId eq medicalTechnologyId
+            )
             deleteOne(MedicalTechnology::id eq medicalTechnologyId).deletedCount > 0
         }
 
