@@ -1,3 +1,57 @@
+## [1.2.0](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.1.1...1.2.0) (2023-03-12)
+
+
+### Features
+
+* handle kafka events in order to historicize room and medical technology data ([98e911e](https://github.com/SmartOperatingBlock/building-management-microservice/commit/98e911e4ccbfb77b779f29cc754df8f7e64f2ed6))
+* implement history storage on database of medical technology usage data ([59fc05b](https://github.com/SmartOperatingBlock/building-management-microservice/commit/59fc05b8a067b53794baa54595d0c6af7f4e8bbd))
+* implement history storage on database of room environmental data ([e5bc54d](https://github.com/SmartOperatingBlock/building-management-microservice/commit/e5bc54db84d704055537c43093ae4c5e25873a86))
+* implement update medical technology usage data service ([7681c9f](https://github.com/SmartOperatingBlock/building-management-microservice/commit/7681c9fb5b0f1eebf218efbfb23fc85b4858c4e8))
+* implement update room environmental data service ([ec1598b](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ec1598b583a1acb3e0f580c33555b887931a8a79))
+
+
+### Dependency updates
+
+* **deps:** add jackson for deserialize kafka linked hash map ([0771a3a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/0771a3ae3e8cfc0effb19d0ce532c460ccf9a72e))
+* **deps:** add kafka dependencies ([bcab2cd](https://github.com/SmartOperatingBlock/building-management-microservice/commit/bcab2cde16787fe5f9cc202b1a75c24b8f542b7c))
+
+
+### Refactoring
+
+* move the event models and deserializer to application layer ([6716f52](https://github.com/SmartOperatingBlock/building-management-microservice/commit/6716f52a70f06029671a8411586188f8a10bccc7))
+* use event handlers defined at the application level ([a1d88e4](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a1d88e4c88a4704ff8b3a983c981a70caa2048fe))
+
+
+### Tests
+
+* add event handlers logic tests ([0800170](https://github.com/SmartOperatingBlock/building-management-microservice/commit/0800170d5aa547fb227001f6b570416e61e2727d))
+* add service test for updating medical technologies usage data ([cb6a167](https://github.com/SmartOperatingBlock/building-management-microservice/commit/cb6a16748ba9651aeb12d82e1eae15562b3d6011))
+* add test for updating room environmental data ([b435283](https://github.com/SmartOperatingBlock/building-management-microservice/commit/b435283d38c82e6b47085a6d0233433acf7a05b0))
+* add time series room environmental data serialization tests ([f8998c5](https://github.com/SmartOperatingBlock/building-management-microservice/commit/f8998c5075a3bcaaa725fb26de6819b2f7dcf0f2))
+* deeply test the room and medical technology presentation ([fe3fd6c](https://github.com/SmartOperatingBlock/building-management-microservice/commit/fe3fd6c80ac81778ed9c7de9f741e693719f3d07))
+
+
+### General maintenance
+
+* add kafka client start to microservice boot ([b182969](https://github.com/SmartOperatingBlock/building-management-microservice/commit/b182969a309ceb13c156d348deb5621f27cc8851))
+* add medical technology kafka event model ([820aded](https://github.com/SmartOperatingBlock/building-management-microservice/commit/820adedaedd9659cda0fea96b4b3a2446f707006))
+* add medical technology topic to kafka poll ([6cee167](https://github.com/SmartOperatingBlock/building-management-microservice/commit/6cee16713ed0a2912f1c8d1834e234ead563a163))
+* add room kafka event model ([303dd22](https://github.com/SmartOperatingBlock/building-management-microservice/commit/303dd22138fefd9f51fd4ab59a12e277a6bdec17))
+* add serialization of external events ([708c858](https://github.com/SmartOperatingBlock/building-management-microservice/commit/708c858b6a09cb318e8e20504633130a3cf94dfa))
+* add simple kafka client ([a64e44e](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a64e44e34d3c87bb4d1076d48ef1879f4f29ed3e))
+* change strategy to inject the roomId from the caller ([d447e51](https://github.com/SmartOperatingBlock/building-management-microservice/commit/d447e518391769cc04d916e961e7c0dfdb80a669))
+* change way to check event types ([bb37d0a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/bb37d0a7aeb80e839bb4c576310b74f0372c7ec3))
+* configure ktor to not block the execution thread ([cb321d3](https://github.com/SmartOperatingBlock/building-management-microservice/commit/cb321d3797e1d7e3db968f389ec5b1ee43ab1423))
+* create event handler interface ([9212671](https://github.com/SmartOperatingBlock/building-management-microservice/commit/92126715eaf10e7a67c88b44e9e8b216177c88bb))
+* delegate to database manager the update of medical technology usage data ([3ec3d40](https://github.com/SmartOperatingBlock/building-management-microservice/commit/3ec3d40c7f5ec900dbca681e9ec73e10eb7d24f8))
+* delegate to database manager the update of room environmental data ([bf7103a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/bf7103ae1372d9a30a9a1a4e846cf6b280dc4060))
+* delete also time series data when perform delete on rooms and medical technologies ([ceb4d50](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ceb4d50041855fe813811f53afd2d3da70ce0638))
+* implement event handler logic to handle external events ([903d283](https://github.com/SmartOperatingBlock/building-management-microservice/commit/903d2836bb0aac490918360efbf914fd28fcdb34))
+* model kafka event interface ([16e944f](https://github.com/SmartOperatingBlock/building-management-microservice/commit/16e944fa90b695661970354ae9f7f36a530ed1a8))
+* rename medical technology event payload data name ([ebd1ba3](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ebd1ba396eac131ee8328efa888357d7f75dc597))
+* update Dockerfile ([7f48fa2](https://github.com/SmartOperatingBlock/building-management-microservice/commit/7f48fa229880428d87a772a87760902921acf3d8))
+* update README with microservice information and badges ([ac838b3](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ac838b340710342308a845afe68ce9e29321fcc3))
+
 ## [1.1.1](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.1.0...1.1.1) (2023-03-11)
 
 
