@@ -1,3 +1,60 @@
+## [1.3.0](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.2.0...1.3.0) (2023-03-21)
+
+
+### Features
+
+* implement api endpoint to export historical room environmental data ([ef6c21d](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ef6c21d80213f46a821c5af0f34a51b5849d3dae))
+* implement extractor of room historical environmental data ([406047b](https://github.com/SmartOperatingBlock/building-management-microservice/commit/406047ba287738223ce31483547fdbfd0436d586))
+
+
+### Dependency updates
+
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.4.6 ([1d92a2d](https://github.com/SmartOperatingBlock/building-management-microservice/commit/1d92a2db823c1572a42bcbb33789799d771dce3d))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.6.2 ([0c95c28](https://github.com/SmartOperatingBlock/building-management-microservice/commit/0c95c28b349f5dbef5377747a9de8d87705bb9c3))
+* **deps:** update dependency io.kotest.extensions:kotest-assertions-ktor to v2 ([1a0e41a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/1a0e41aed589d3aee2a235084b0fdcfca5d587d7))
+* **deps:** update dependency org.apache.kafka:kafka-clients to v5 ([a6e9d2a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a6e9d2addee7ad50e7e1243d6ed4406407c1c71f))
+* **deps:** update dependency org.apache.kafka:kafka-clients to v6 ([6ed0d82](https://github.com/SmartOperatingBlock/building-management-microservice/commit/6ed0d82fc35b7821a56bee95051a25ffb82f515b))
+* **deps:** update dependency org.apache.kafka:kafka-clients to v7 ([523c724](https://github.com/SmartOperatingBlock/building-management-microservice/commit/523c72464ad4874973e4ccafc17be7b1b3a4b6a6))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.17 ([e197884](https://github.com/SmartOperatingBlock/building-management-microservice/commit/e197884914dbb9e097e5e4c07eecb362057af21d))
+
+
+### Build and continuous integration
+
+* add validation of gradle wrapper to success job ([a7a21c0](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a7a21c04b462423c40304cd48a565329a63d6ffc))
+* usage of different java version in CI ([349c181](https://github.com/SmartOperatingBlock/building-management-microservice/commit/349c1812b5bb04d2d651788d3ea9082f5a081c6a))
+
+
+### Documentation
+
+* **rest-api:** add room historical data extractor api ([b7475ab](https://github.com/SmartOperatingBlock/building-management-microservice/commit/b7475ab18769247b6555253476f57a05fd5104cb))
+* **rest-api:** correct base url based on major version ([cb03aea](https://github.com/SmartOperatingBlock/building-management-microservice/commit/cb03aea1284a3468480437ad4553ac3f2328abc5))
+
+
+### General maintenance
+
+* add getter of room historical data in room repository ([0d5006e](https://github.com/SmartOperatingBlock/building-management-microservice/commit/0d5006ecb5237cdb17b1b33b79dfa3829adfacf9))
+* add getter of room historical data in room repository ([19e96b0](https://github.com/SmartOperatingBlock/building-management-microservice/commit/19e96b0b73c448c9dc4d53f3259b8c505e700464))
+* add response entry with date time ([0720b6e](https://github.com/SmartOperatingBlock/building-management-microservice/commit/0720b6ecdbbe121ab7e8b5990c4504b7cfde8f0a))
+* take start room environmental data in deserialization from time series room data ([f00da57](https://github.com/SmartOperatingBlock/building-management-microservice/commit/f00da576ec6f4b89ba52d3675191dcf067ab2e83))
+
+
+### Refactoring
+
+* rename room api function route names ([f21337f](https://github.com/SmartOperatingBlock/building-management-microservice/commit/f21337f1822780f4405466218267be4106ade0cb))
+* split api in route extension function ([24793f4](https://github.com/SmartOperatingBlock/building-management-microservice/commit/24793f471279d743db4c29d1444d3401e7011450))
+* split api in route extension function ([5bac204](https://github.com/SmartOperatingBlock/building-management-microservice/commit/5bac204135dd53fbe05e1cb3520dc6a88eb6f8ac))
+
+
+### Tests
+
+* add tests for room historical data extractor api ([a3bd789](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a3bd78938c7a21bd1db7506c13c1af7b4c4fc875))
+* add tests for room historical data extractor service ([8c6ac38](https://github.com/SmartOperatingBlock/building-management-microservice/commit/8c6ac388e94f9cd162b0bd58a6a97f2e85e22468))
+
+
+### Style improvements
+
+* solve style issues ([6c3b90e](https://github.com/SmartOperatingBlock/building-management-microservice/commit/6c3b90ee0e4b3e4ec9806cf9f280f94e5e2e1eaa))
+
 ## [1.2.0](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.1.1...1.2.0) (2023-03-12)
 
 
