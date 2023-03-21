@@ -38,15 +38,15 @@ import java.time.Instant
  */
 fun Application.roomAPI(apiPath: String, port: Int, provider: ManagerProvider) {
     routing {
-        createRoom(apiPath, port, provider)
-        getAllRooms(apiPath, port, provider)
-        getRoom(apiPath, provider)
-        deleteRoom(apiPath, provider)
-        getHistoricalRoomEnvironmentData(apiPath, provider)
+        createRoomRoute(apiPath, port, provider)
+        getAllRoomsRoute(apiPath, port, provider)
+        getRoomRoute(apiPath, provider)
+        deleteRoomRoute(apiPath, provider)
+        getHistoricalRoomEnvironmentDataRoute(apiPath, provider)
     }
 }
 
-private fun Route.createRoom(apiPath: String, port: Int, provider: ManagerProvider) =
+private fun Route.createRoomRoute(apiPath: String, port: Int, provider: ManagerProvider) =
     post("$apiPath/rooms") {
         val room = call.receive<RoomEntry>().toRoom()
         RoomService.CreateRoom(
@@ -66,7 +66,7 @@ private fun Route.createRoom(apiPath: String, port: Int, provider: ManagerProvid
         }
     }
 
-private fun Route.getAllRooms(apiPath: String, port: Int, provider: ManagerProvider) =
+private fun Route.getAllRoomsRoute(apiPath: String, port: Int, provider: ManagerProvider) =
     get("$apiPath/rooms") {
         val entries = RoomService.GetAllRoomEntry(
             RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
@@ -77,7 +77,7 @@ private fun Route.getAllRooms(apiPath: String, port: Int, provider: ManagerProvi
         call.respond(ApiResponses.ResponseEntryList(entries))
     }
 
-private fun Route.getRoom(apiPath: String, provider: ManagerProvider) =
+private fun Route.getRoomRoute(apiPath: String, provider: ManagerProvider) =
     get("$apiPath/rooms/{roomId}") {
         RoomService.GetRoom(
             RoomID(call.parameters["roomId"].orEmpty()),
@@ -91,7 +91,7 @@ private fun Route.getRoom(apiPath: String, provider: ManagerProvider) =
         }
     }
 
-private fun Route.deleteRoom(apiPath: String, provider: ManagerProvider) =
+private fun Route.deleteRoomRoute(apiPath: String, provider: ManagerProvider) =
     delete("$apiPath/rooms/{roomId}") {
         call.respond(
             RoomService.DeleteRoom(
@@ -103,7 +103,7 @@ private fun Route.deleteRoom(apiPath: String, provider: ManagerProvider) =
         )
     }
 
-private fun Route.getHistoricalRoomEnvironmentData(apiPath: String, provider: ManagerProvider) =
+private fun Route.getHistoricalRoomEnvironmentDataRoute(apiPath: String, provider: ManagerProvider) =
     get("$apiPath/rooms/data/{roomId}") {
         RoomService.ExportRoomEnvironmentalData(
             RoomID(call.parameters["roomId"].orEmpty()),
