@@ -134,7 +134,7 @@ class RoomApiTest : StringSpec({
             val response = client.get("/api/v1/rooms/data/${roomEntry.id}")
             response shouldHaveStatus HttpStatusCode.OK
             Json.decodeFromString<ApiResponses.ResponseEntryList<ApiResponses.ResponseTimedEntry<
-                    RoomEnvironmentalData>>>(
+                        RoomEnvironmentalData>>>(
                 response.bodyAsText()
             ).total shouldBe 0
         }

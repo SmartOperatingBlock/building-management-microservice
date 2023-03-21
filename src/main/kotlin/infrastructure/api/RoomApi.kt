@@ -111,8 +111,8 @@ private fun Route.getHistoricalRoomEnvironmentDataRoute(apiPath: String, provide
             call.request.queryParameters["from"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
                 ?: Instant.now(),
             call.request.queryParameters["to"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
-        ).execute()?.map {
-            ApiResponses.ResponseTimedEntry(it.second, it.first.toString())
+        ).execute()?.map { pair ->
+            ApiResponses.ResponseTimedEntry(pair.second, pair.first.toString())
         }.apply {
             when (this) {
                 null -> call.respond(HttpStatusCode.NotFound)
