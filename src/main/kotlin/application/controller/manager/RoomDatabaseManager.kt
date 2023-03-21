@@ -39,6 +39,17 @@ interface RoomDatabaseManager {
     fun findBy(roomId: RoomID, dateTime: Instant): Room?
 
     /**
+     * Get all the room environmental data withing a range of dates.
+     * The room is identified by its [roomId] and the data is obtained from the [start] instant to the [end] one.
+     * @return the list of room data associated to its date-time if the room exist, null otherwise.
+     */
+    fun getRoomEnvironmentalData(
+        roomId: RoomID,
+        start: Instant,
+        end: Instant
+    ): List<Pair<Instant, RoomEnvironmentalData>>?
+
+    /**
      * Get all the rooms available.
      * @return a set of rooms.
      */
