@@ -25,6 +25,7 @@ import io.ktor.server.application.call
 import io.ktor.server.request.receive
 import io.ktor.server.response.header
 import io.ktor.server.response.respond
+import io.ktor.server.routing.Route
 import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
 import io.ktor.server.routing.patch
@@ -40,60 +41,72 @@ import java.time.Instant
  */
 fun Application.medicalTechnologyAPI(apiPath: String, port: Int, provider: ManagerProvider) {
     routing {
-        post("$apiPath/medical-technologies") {
-            val medicalTechnology = call.receive<MedicalTechnologyEntry>().toMedicalTechnology()
-            MedicalTechnologyService.CreateMedicalTechnology(
-                medicalTechnology,
-                MedicalTechnologyController(
-                    provider.medicalTechnologyDigitalTwinManager,
-                    provider.medicalTechnologyDatabaseManager
-                )
-            ).execute()?.apply {
-                call.response.header(
-                    HttpHeaders.Location,
-                    "http://localhost:$port$apiPath/medical-technologies/${medicalTechnology.id.value}"
-                )
-                call.respond(HttpStatusCode.Created)
-            } ?: call.respond(HttpStatusCode.Conflict)
-        }
-        get("$apiPath/medical-technologies/{technologyId}") {
-            MedicalTechnologyService.GetMedicalTechnology(
+        createMedicalTechnologyRoute(apiPath, port, provider)
+        getMedicalTechnologyRoute(apiPath, provider)
+        deleteMedicalTechnologyRoute(apiPath, provider)
+        mapMedicalTechnologyRoute(apiPath, provider)
+    }
+}
+
+private fun Route.createMedicalTechnologyRoute(apiPath: String, port: Int, provider: ManagerProvider) =
+    post("$apiPath/medical-technologies") {
+        val medicalTechnology = call.receive<MedicalTechnologyEntry>().toMedicalTechnology()
+        MedicalTechnologyService.CreateMedicalTechnology(
+            medicalTechnology,
+            MedicalTechnologyController(
+                provider.medicalTechnologyDigitalTwinManager,
+                provider.medicalTechnologyDatabaseManager
+            )
+        ).execute()?.apply {
+            call.response.header(
+                HttpHeaders.Location,
+                "http://localhost:$port$apiPath/medical-technologies/${medicalTechnology.id.value}"
+            )
+            call.respond(HttpStatusCode.Created)
+        } ?: call.respond(HttpStatusCode.Conflict)
+    }
+
+private fun Route.getMedicalTechnologyRoute(apiPath: String, provider: ManagerProvider) =
+    get("$apiPath/medical-technologies/{technologyId}") {
+        MedicalTechnologyService.GetMedicalTechnology(
+            MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
+            MedicalTechnologyController(
+                provider.medicalTechnologyDigitalTwinManager,
+                provider.medicalTechnologyDatabaseManager
+            ),
+            call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
+        ).execute()?.apply { call.respond(this.toMedicalTechnologyApiDto()) }
+            ?: call.respond(HttpStatusCode.NotFound)
+    }
+
+private fun Route.deleteMedicalTechnologyRoute(apiPath: String, provider: ManagerProvider) =
+    delete("$apiPath/medical-technologies/{technologyId}") {
+        call.respond(
+            MedicalTechnologyService.DeleteMedicalTechnology(
                 MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
                 MedicalTechnologyController(
                     provider.medicalTechnologyDigitalTwinManager,
                     provider.medicalTechnologyDatabaseManager
                 ),
-                call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
-            ).execute()?.apply { call.respond(this.toMedicalTechnologyApiDto()) }
-                ?: call.respond(HttpStatusCode.NotFound)
-        }
-        delete("$apiPath/medical-technologies/{technologyId}") {
-            call.respond(
-                MedicalTechnologyService.DeleteMedicalTechnology(
-                    MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
-                    MedicalTechnologyController(
-                        provider.medicalTechnologyDigitalTwinManager,
-                        provider.medicalTechnologyDatabaseManager
-                    ),
-                ).execute().let { result ->
-                    if (result) HttpStatusCode.NoContent else HttpStatusCode.NotFound
-                }
-            )
-        }
-        patch("$apiPath/medical-technologies/{technologyId}") {
-            call.respond(
-                MedicalTechnologyService.MapMedicalTechnologyToRoom(
-                    MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
-                    call.receive<MedicalTechnologyPatch>().roomId?.let { roomId -> RoomID(roomId.trim()) },
-                    RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
-                    MedicalTechnologyController(
-                        provider.medicalTechnologyDigitalTwinManager,
-                        provider.medicalTechnologyDatabaseManager
-                    )
-                ).execute().let { result ->
-                    if (result) HttpStatusCode.NoContent else HttpStatusCode.NotFound
-                }
-            )
-        }
+            ).execute().let { result ->
+                if (result) HttpStatusCode.NoContent else HttpStatusCode.NotFound
+            }
+        )
     }
-}
+
+private fun Route.mapMedicalTechnologyRoute(apiPath: String, provider: ManagerProvider) =
+    patch("$apiPath/medical-technologies/{technologyId}") {
+        call.respond(
+            MedicalTechnologyService.MapMedicalTechnologyToRoom(
+                MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
+                call.receive<MedicalTechnologyPatch>().roomId?.let { roomId -> RoomID(roomId.trim()) },
+                RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
+                MedicalTechnologyController(
+                    provider.medicalTechnologyDigitalTwinManager,
+                    provider.medicalTechnologyDatabaseManager
+                )
+            ).execute().let { result ->
+                if (result) HttpStatusCode.NoContent else HttpStatusCode.NotFound
+            }
+        )
+    }
