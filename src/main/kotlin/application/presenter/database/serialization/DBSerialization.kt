@@ -24,25 +24,28 @@ import java.time.Instant
 /**
  * Extension method that allows to convert a map of [TimeSeriesDataType] -> [TimeSeriesRoomEnvironmentalData]
  * to domain [RoomEnvironmentalData].
+ * It is possible to provide some [startData] to initialize missed values.
  * @return the resulting [RoomEnvironmentalData].
  */
-fun Map<TimeSeriesDataType, TimeSeriesRoomEnvironmentalData?>.toRoomEnvironmentalData() =
-    RoomEnvironmentalData(
-        temperature = this[TimeSeriesDataType.TEMPERATURE]?.let {
-            Temperature(
-                it.value,
-                it.metadata.unit?.let { unit -> TemperatureUnit.valueOf(unit) } ?: TemperatureUnit.CELSIUS
-            )
-        },
-        humidity = this[TimeSeriesDataType.HUMIDITY]?.let { Humidity(it.value) },
-        luminosity = this[TimeSeriesDataType.LUMINOSITY]?.let {
-            Luminosity(
-                it.value,
-                it.metadata.unit?.let { unit -> LightUnit.valueOf(unit) } ?: LightUnit.LUX
-            )
-        },
-        presence = this[TimeSeriesDataType.PRESENCE]?.let { Presence(it.value > 0) }
-    )
+fun Map<TimeSeriesDataType, TimeSeriesRoomEnvironmentalData?>.toRoomEnvironmentalData(
+    startData: RoomEnvironmentalData? = null
+) = RoomEnvironmentalData(
+    temperature = this[TimeSeriesDataType.TEMPERATURE]?.let {
+        Temperature(
+            it.value,
+            it.metadata.unit?.let { unit -> TemperatureUnit.valueOf(unit) } ?: TemperatureUnit.CELSIUS
+        )
+    } ?: startData?.temperature,
+    humidity = this[TimeSeriesDataType.HUMIDITY]?.let { Humidity(it.value) } ?: startData?.humidity,
+    luminosity = this[TimeSeriesDataType.LUMINOSITY]?.let {
+        Luminosity(
+            it.value,
+            it.metadata.unit?.let { unit -> LightUnit.valueOf(unit) } ?: LightUnit.LUX
+        )
+    } ?: startData?.luminosity,
+    presence = this[TimeSeriesDataType.PRESENCE]?.let { Presence(it.value > 0) }
+        ?: startData?.presence
+)
 
 /**
  * Extension method that allows to convert [RoomEnvironmentalData] in a map of [TimeSeriesRoomEnvironmentalData].
