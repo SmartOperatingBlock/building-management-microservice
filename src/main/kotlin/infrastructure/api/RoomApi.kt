@@ -42,6 +42,7 @@ fun Application.roomAPI(apiPath: String, port: Int, provider: ManagerProvider) {
         getAllRooms(apiPath, port, provider)
         getRoom(apiPath, provider)
         deleteRoom(apiPath, provider)
+        getHistoricalRoomEnvironmentData(apiPath, provider)
     }
 }
 
@@ -100,4 +101,22 @@ private fun Route.deleteRoom(apiPath: String, provider: ManagerProvider) =
                 if (result) HttpStatusCode.NoContent else HttpStatusCode.NotFound
             }
         )
+    }
+
+private fun Route.getHistoricalRoomEnvironmentData(apiPath: String, provider: ManagerProvider) =
+    get("$apiPath/rooms/data/{roomId}") {
+        RoomService.ExportRoomEnvironmentalData(
+            RoomID(call.parameters["roomId"].orEmpty()),
+            RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
+            call.request.queryParameters["from"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
+                ?: Instant.now(),
+            call.request.queryParameters["to"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
+        ).execute()?.map {
+            ApiResponses.ResponseTimedEntry(it.second, it.first.toString())
+        }.apply {
+            when (this) {
+                null -> call.respond(HttpStatusCode.NotFound)
+                else -> call.respond(ApiResponses.ResponseEntryList(this))
+            }
+        }
     }
