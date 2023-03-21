@@ -145,4 +145,35 @@ class RoomServiceTest : StringSpec({
             ).execute() shouldBe false
         }
     }
+
+    "It should be possible to extract the historical room environmental data of an existing room" {
+        withMongo {
+            val roomController = controller()
+            RoomService.CreateRoom(exampleRoom, roomController).execute()
+            RoomService.UpdateRoomEnvironmentData(
+                exampleRoom.id,
+                RoomEnvironmentalData(humidity = Humidity(55.0)),
+                Instant.now().minus(1, ChronoUnit.DAYS),
+                roomController
+            ).execute()
+            RoomService.ExportRoomEnvironmentalData(
+                exampleRoom.id,
+                roomController,
+                Instant.now().minus(2, ChronoUnit.DAYS),
+                Instant.now()
+            ).execute()?.size shouldBe 1
+        }
+    }
+
+    "It should not be possible to extract historical room environmental data of a room that doesn't exist" {
+        withMongo {
+            val roomController = controller()
+            RoomService.ExportRoomEnvironmentalData(
+                exampleRoom.id,
+                roomController,
+                Instant.now().minus(2, ChronoUnit.DAYS),
+                Instant.now()
+            ).execute() shouldBe null
+        }
+    }
 })
