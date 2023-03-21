@@ -44,6 +44,13 @@ class RoomController(
             this.roomDatabaseManager.findBy(roomId, dateTime)
         }
 
+    override fun getRoomEnvironmentalData(
+        roomId: RoomID,
+        start: Instant,
+        end: Instant,
+    ): List<Pair<Instant, RoomEnvironmentalData>>? =
+        this.roomDatabaseManager.getRoomEnvironmentalData(roomId, start, end)
+
     override fun getRooms(): Set<Room> = this.roomDatabaseManager.getAllRooms()
 
     override fun updateRoomEnvironmentalData(

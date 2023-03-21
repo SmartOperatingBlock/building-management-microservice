@@ -53,6 +53,20 @@ object RoomService {
     }
 
     /**
+     * Application Service that has the object to obtain all the environmental data about a room, identified by
+     * its [roomID], within a range of date [startDateTime] - [endDateTime] using the provided [roomRepository].
+     */
+    class ExportRoomEnvironmentalData(
+        private val roomID: RoomID,
+        private val roomRepository: RoomRepository,
+        private val startDateTime: Instant,
+        private val endDateTime: Instant?
+    ) : ApplicationService<List<Pair<Instant, RoomEnvironmentalData>>?> {
+        override fun execute(): List<Pair<Instant, RoomEnvironmentalData>>? =
+            this.roomRepository.getRoomEnvironmentalData(roomID, startDateTime, endDateTime ?: Instant.now())
+    }
+
+    /**
      * Application Service that has the objective of getting all the room that are inside the building using
      * the provided [roomRepository].
      * This method will not return all the information about a room, but only its [RoomEntry].

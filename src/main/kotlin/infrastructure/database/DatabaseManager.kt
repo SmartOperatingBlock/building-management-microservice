@@ -25,12 +25,14 @@ import entity.zone.Room
 import entity.zone.RoomEnvironmentalData
 import entity.zone.RoomID
 import org.litote.kmongo.KMongo
+import org.litote.kmongo.ascendingSort
 import org.litote.kmongo.descendingSort
 import org.litote.kmongo.div
 import org.litote.kmongo.eq
 import org.litote.kmongo.find
 import org.litote.kmongo.findOne
 import org.litote.kmongo.getCollection
+import org.litote.kmongo.gt
 import org.litote.kmongo.lte
 import org.litote.kmongo.setValue
 import java.time.Instant
@@ -79,6 +81,30 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
                 ).descendingSort(TimeSeriesRoomEnvironmentalData::dateTime).first() ?: null
             }.toRoomEnvironmentalData()
         )
+
+    override fun getRoomEnvironmentalData(
+        roomId: RoomID,
+        start: Instant,
+        end: Instant,
+    ): List<Pair<Instant, RoomEnvironmentalData>>? {
+        var roomCurrentData = this.findBy(roomId, start)?.environmentalData
+        if (roomCurrentData != null) {
+            // The room exist
+            return this.roomTimeSeriesCollection.find(
+                TimeSeriesRoomEnvironmentalData::metadata / TimeSeriesRoomMetadata::roomId eq roomId,
+                TimeSeriesRoomEnvironmentalData::dateTime gt start,
+                TimeSeriesRoomEnvironmentalData::dateTime lte end
+            ).ascendingSort(TimeSeriesRoomEnvironmentalData::dateTime).toList().map {
+                // update current data about the room in order to have an update image of it
+                val updatedRoom = mapOf(it.metadata.type to it).toRoomEnvironmentalData(roomCurrentData)
+                roomCurrentData = updatedRoom
+                // map the update to corresponding date time
+                it.dateTime to updatedRoom
+            }
+        } else {
+            return null // The room does not exist
+        }
+    }
 
     override fun getAllRooms(): Set<Room> = this.roomCollection.find().toSet()
 
