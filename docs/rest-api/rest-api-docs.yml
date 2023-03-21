@@ -4,7 +4,7 @@ servers:
     url: http://localhost:<port>/api
 info:
   description: This is the API of the Building Management microservice within the Smart Operating Block project
-  version: 1.0.0
+  version: 1.1.0
   title: Building Management API
   contact:
     email: info@smartoperatingblock.com
@@ -108,6 +108,48 @@ paths:
       responses:
         '204':
           description: room deleted
+        '404':
+          description: room not found
+        '500':
+          description: server error occurred
+
+  /rooms/data/{roomId}:
+    get:
+      tags:
+        - Room API
+      summary: get the historical room environmental data
+      operationId: getHistoricalRoomEnvironmentalData
+      description: Get historical room environmental data
+      parameters:
+        - in: path
+          name: roomId
+          description: the room's ID
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: from
+          required: true
+          description: Specify the start range date in order to obtain historical data. The date must be specified in the ISO 8601 UTC date format.
+          schema:
+            type: string
+            format: date-time
+            example: '2017-07-21T17:32:28Z'
+        - in: query
+          name: to
+          required: false
+          description: Specify the end range date. The date must be specified in the ISO 8601 UTC date format.
+          schema:
+            type: string
+            format: date-time
+            example: '2017-07-22T17:32:28Z'
+      responses:
+        '200':
+          description: search result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfRoomEnvironmentalData'
         '404':
           description: room not found
         '500':
@@ -263,7 +305,7 @@ components:
         total:
           type: integer
           description: the total number of room entries
-          example: 34
+          example: 1
 
     Room:
       type: object
@@ -311,6 +353,26 @@ components:
         presence:
           type: boolean
           example: true
+
+    ArrayOfRoomEnvironmentalData:
+      type: object
+      properties:
+        entries:
+          type: array
+          description: room's environmental data entries
+          items:
+            type: object
+            properties:
+              entry:
+                $ref: '#/components/schemas/RoomEnvironmentalData'
+              date:
+                type: string
+                format: date-time
+                example: '2017-07-21T17:32:28Z'
+        total:
+          type: integer
+          description: the total number of room's environmental data entries
+          example: 1
 
     MedicalTechnologyType:
       type: string
