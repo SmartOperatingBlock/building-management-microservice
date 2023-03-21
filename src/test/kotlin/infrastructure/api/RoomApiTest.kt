@@ -12,6 +12,7 @@ import application.presenter.api.model.EnvironmentalDataApiDto
 import application.presenter.api.model.RoomApiDto
 import application.presenter.api.model.RoomApiDtoType
 import application.presenter.api.model.RoomEntry
+import entity.zone.RoomEnvironmentalData
 import infrastructure.api.KtorTestingUtility.apiTestApplication
 import infrastructure.api.util.ApiResponses
 import io.kotest.assertions.ktor.client.shouldHaveStatus
@@ -124,6 +125,24 @@ class RoomApiTest : StringSpec({
     "It should not be possible to delete a not-existent room" {
         apiTestApplication {
             client.delete("/api/v1/rooms/${roomEntry.id}") shouldHaveStatus HttpStatusCode.NotFound
+        }
+    }
+
+    "It should be possible to ask for historical room environmental data of an existing room" {
+        apiTestApplication {
+            insertRoom(roomEntry)
+            val response = client.get("/api/v1/rooms/data/${roomEntry.id}")
+            response shouldHaveStatus HttpStatusCode.OK
+            Json.decodeFromString<ApiResponses.ResponseEntryList<ApiResponses.ResponseTimedEntry<
+                    RoomEnvironmentalData>>>(
+                response.bodyAsText()
+            ).total shouldBe 0
+        }
+    }
+
+    "It should handle the get request on the historical room environmental data of a non existing room" {
+        apiTestApplication {
+            client.get("/api/v1/rooms/data/${roomEntry.id}") shouldHaveStatus HttpStatusCode.NotFound
         }
     }
 })
