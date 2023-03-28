@@ -15,12 +15,13 @@ interface RoomEventPayload
 
 /**
  * Room environment conditions update event.
- * In addition to a normal [Event] it has the [roomId] to which the event refers.
+ * In addition to a normal [Event] it has the [roomId] and the [roomType] to which the event refers.
  */
 @Serializable
 data class RoomEvent<E : RoomEventPayload>(
     override val key: String,
     val roomId: String,
+    val roomType: RoomTypePayload,
     override val data: E,
     override val dateTime: String
 ) : Event<E>
@@ -74,6 +75,16 @@ object RoomEventPayloads {
     enum class LuminosityPayloadUnit {
         LUX
     }
+}
+
+/**
+ * The type of the room described in the [RoomEvent].
+ */
+enum class RoomTypePayload {
+    /** Operating room type. */
+    OPERATING_ROOM,
+    /** Pre operating room type. */
+    PRE_OPERATING_ROOM
 }
 
 /** Module that wraps the possible keys for a [RoomEvent]. */

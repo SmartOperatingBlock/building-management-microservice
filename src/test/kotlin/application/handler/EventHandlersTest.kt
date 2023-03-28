@@ -17,6 +17,7 @@ import application.presenter.event.model.MedicalTechnologyUsagePayload
 import application.presenter.event.model.RoomEvent
 import application.presenter.event.model.RoomEventKey
 import application.presenter.event.model.RoomEventPayloads
+import application.presenter.event.model.RoomTypePayload
 import application.service.MedicalTechnologyService
 import application.service.RoomService
 import entity.medicaltechnology.MedicalTechnology
@@ -76,6 +77,7 @@ class EventHandlersTest : StringSpec({
             val event = RoomEvent(
                 RoomEventKey.TEMPERATURE_EVENT,
                 exampleRoom.id.value,
+                RoomTypePayload.OPERATING_ROOM,
                 RoomEventPayloads.TemperaturePayload(34.0, RoomEventPayloads.TemperaturePayloadUnit.CELSIUS),
                 Instant.now().toString()
             )
@@ -94,6 +96,7 @@ class EventHandlersTest : StringSpec({
             val event = RoomEvent(
                 RoomEventKey.HUMIDITY_EVENT,
                 exampleRoom.id.value,
+                RoomTypePayload.OPERATING_ROOM,
                 RoomEventPayloads.HumidityPayload(55),
                 Instant.now().toString()
             )
@@ -112,6 +115,7 @@ class EventHandlersTest : StringSpec({
             val event = RoomEvent(
                 RoomEventKey.LUMINOSITY_EVENT,
                 exampleRoom.id.value,
+                RoomTypePayload.OPERATING_ROOM,
                 RoomEventPayloads.LuminosityPayload(150.0, RoomEventPayloads.LuminosityPayloadUnit.LUX),
                 Instant.now().toString()
             )
@@ -130,6 +134,7 @@ class EventHandlersTest : StringSpec({
             val event = RoomEvent(
                 RoomEventKey.PRESENCE_EVENT,
                 exampleRoom.id.value,
+                RoomTypePayload.OPERATING_ROOM,
                 RoomEventPayloads.PresencePayload(true),
                 Instant.now().toString()
             )
