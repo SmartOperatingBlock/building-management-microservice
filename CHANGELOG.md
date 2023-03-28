@@ -1,3 +1,20 @@
+## [1.4.0](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.3.0...1.4.0) (2023-03-28)
+
+
+### Features
+
+* add room type to room events ([919dd68](https://github.com/SmartOperatingBlock/building-management-microservice/commit/919dd686932cd1fa2f38839e583d4cd4a2175021))
+
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.19 ([c194c4a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/c194c4adfa41efc80f3cc4d651c35567a2e31d2c))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.20 ([5b40e44](https://github.com/SmartOperatingBlock/building-management-microservice/commit/5b40e44efe78e78e23a01abf5edb562daee053c6))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.21 ([25ac184](https://github.com/SmartOperatingBlock/building-management-microservice/commit/25ac1840812cd63dd055d7712105ca59bc7b1f91))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.22 ([8f5cded](https://github.com/SmartOperatingBlock/building-management-microservice/commit/8f5cded795e67c9e9625b478c692c8fdae97aa97))
+* **deps:** update plugin com.gradle.enterprise to v3.12.5 ([502fc0e](https://github.com/SmartOperatingBlock/building-management-microservice/commit/502fc0eaca040d3b7208d85daa119d2e77efde2a))
+* **deps:** update plugin com.gradle.enterprise to v3.12.6 ([f809e09](https://github.com/SmartOperatingBlock/building-management-microservice/commit/f809e0989fd2603af618c55448a98826bd536dc5))
+
 ## [1.3.0](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.2.0...1.3.0) (2023-03-21)
 
 
