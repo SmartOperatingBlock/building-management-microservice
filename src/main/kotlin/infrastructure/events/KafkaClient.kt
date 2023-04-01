@@ -61,7 +61,7 @@ class KafkaClient(private val provider: ManagerProvider) {
                     try {
                         consumeEvent(event)
                     } catch (e: IllegalArgumentException) {
-                        println("ERROR: Invalid Event Schema. Event discarded! - $e")
+                        println("INFO: Event discarded! - $e")
                     } catch (e: DateTimeParseException) {
                         println("ERROR: Invalid Date in event. Event discarded! - $e")
                     }
