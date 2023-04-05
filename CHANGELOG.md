@@ -1,3 +1,19 @@
+## [1.4.1](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.0...1.4.1) (2023-04-05)
+
+
+### General maintenance
+
+* correct message in not handled events ([767dd3f](https://github.com/SmartOperatingBlock/building-management-microservice/commit/767dd3f64e428e376471fdd117bad3de227f0c10))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v1.8.20 ([21377cb](https://github.com/SmartOperatingBlock/building-management-microservice/commit/21377cb591ac3a7918f91c9d639f2ff640f3d6f1))
+* **core-deps:** update plugin kotlin-serialization to v1.8.20 ([2636bc4](https://github.com/SmartOperatingBlock/building-management-microservice/commit/2636bc4e2187b76d2d061081ec56b1d408433b77))
+* **deps:** update dependency io.confluent:kafka-json-serializer to v7.3.3 ([8354b36](https://github.com/SmartOperatingBlock/building-management-microservice/commit/8354b36725982d65400cf65ded8333af9fd09b05))
+* **deps:** update dependency org.apache.kafka:kafka-clients to v7.3.3-ce ([a0b8b63](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a0b8b635b2ded9aa7e733a95b915f9dbdc67a307))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.6 ([39be197](https://github.com/SmartOperatingBlock/building-management-microservice/commit/39be197713c3a079d99fb440d891cd4ccc98693c))
+
 ## [1.4.0](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.3.0...1.4.0) (2023-03-28)
 
 
