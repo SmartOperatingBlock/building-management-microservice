@@ -94,16 +94,18 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
                         .joinRelationship(
                             "CT",
                             "T",
-                            MedicalTechnologyAdtPresentation.IS_LOCATED_IN_OPERATING_ROOM_RELATIONSHIP
+                            MedicalTechnologyAdtPresentation.IS_LOCATED_IN_OPERATING_ROOM_RELATIONSHIP,
                         ).where("T.\$dtId" eq medicalTechnologyId.value).query,
-                    String::class.java
+                    String::class.java,
                 ).let {
                     if (it.count() == 1) {
                         Json.parseToJsonElement(it.first()).jsonObject["\$dtId"]?.let { id ->
                             RoomID(id.jsonPrimitive.content)
                         }
-                    } else null
-                }
+                    } else {
+                        null
+                    }
+                },
             )
         }
 
@@ -112,7 +114,7 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
             // first delete the existing relationship
             deleteOutgoingRelationships(
                 medicalTechnologyId.value,
-                MedicalTechnologyAdtPresentation.IS_LOCATED_IN_OPERATING_ROOM_RELATIONSHIP
+                MedicalTechnologyAdtPresentation.IS_LOCATED_IN_OPERATING_ROOM_RELATIONSHIP,
             )
             // then if there is a new specified, update the mapping
             if (roomId != null) {
@@ -124,9 +126,9 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
                         MedicalTechnologyAdtPresentation.isLocatedRelationshipId(medicalTechnologyId),
                         medicalTechnologyId.value,
                         roomId.value,
-                        MedicalTechnologyAdtPresentation.IS_LOCATED_IN_OPERATING_ROOM_RELATIONSHIP
+                        MedicalTechnologyAdtPresentation.IS_LOCATED_IN_OPERATING_ROOM_RELATIONSHIP,
                     ),
-                    BasicRelationship::class.java
+                    BasicRelationship::class.java,
                 )
             }
             true
@@ -148,7 +150,7 @@ class DigitalTwinManager : RoomDigitalTwinManager, MedicalTechnologyDigitalTwinM
 
     private fun <R> DigitalTwinsClient.applySafeDigitalTwinOperation(
         defaultResult: R,
-        operation: DigitalTwinsClient.() -> R
+        operation: DigitalTwinsClient.() -> R,
     ): R =
         try {
             operation()

@@ -30,12 +30,12 @@ class RoomServiceTest : StringSpec({
         RoomID("r1"),
         RoomType.OPERATING_ROOM,
         ZoneID("z1"),
-        environmentalData = RoomEnvironmentalData(temperature = Temperature(30.3))
+        environmentalData = RoomEnvironmentalData(temperature = Temperature(30.3)),
     )
 
     fun controller() = RoomController(
         DigitalTwinManagerTestDouble(),
-        DatabaseManager("mongodb://localhost:27017")
+        DatabaseManager("mongodb://localhost:27017"),
     )
 
     "I should be able to create a room" {
@@ -124,12 +124,12 @@ class RoomServiceTest : StringSpec({
                 exampleRoom.id,
                 exampleRoom.environmentalData.copy(humidity = Humidity(55.0)),
                 Instant.now(),
-                roomController
+                roomController,
             ).execute() shouldBe true
             RoomService.GetRoom(exampleRoom.id, roomController, Instant.now()).execute()
                 ?.environmentalData shouldBe RoomEnvironmentalData(
                 temperature = Temperature(30.3),
-                humidity = Humidity(55.0)
+                humidity = Humidity(55.0),
             )
         }
     }
@@ -141,7 +141,7 @@ class RoomServiceTest : StringSpec({
                 exampleRoom.id,
                 exampleRoom.environmentalData.copy(humidity = Humidity(55.0)),
                 Instant.now(),
-                roomController
+                roomController,
             ).execute() shouldBe false
         }
     }
@@ -154,13 +154,13 @@ class RoomServiceTest : StringSpec({
                 exampleRoom.id,
                 RoomEnvironmentalData(humidity = Humidity(55.0)),
                 Instant.now().minus(1, ChronoUnit.DAYS),
-                roomController
+                roomController,
             ).execute()
             RoomService.ExportRoomEnvironmentalData(
                 exampleRoom.id,
                 roomController,
                 Instant.now().minus(2, ChronoUnit.DAYS),
-                Instant.now()
+                Instant.now(),
             ).execute()?.size shouldBe 1
         }
     }
@@ -172,7 +172,7 @@ class RoomServiceTest : StringSpec({
                 exampleRoom.id,
                 roomController,
                 Instant.now().minus(2, ChronoUnit.DAYS),
-                Instant.now()
+                Instant.now(),
             ).execute() shouldBe null
         }
     }

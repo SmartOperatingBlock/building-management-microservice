@@ -21,7 +21,7 @@ data class MedicalTechnologyApiDto(
     val description: String,
     val type: MedicalTechnologyApiDtoType,
     val inUse: Boolean = false,
-    val roomId: String? = null
+    val roomId: String? = null,
 )
 
 /**
@@ -33,7 +33,7 @@ data class MedicalTechnologyEntry(
     val id: String,
     val name: String,
     val description: String,
-    val type: MedicalTechnologyApiDtoType
+    val type: MedicalTechnologyApiDtoType,
 )
 
 /**

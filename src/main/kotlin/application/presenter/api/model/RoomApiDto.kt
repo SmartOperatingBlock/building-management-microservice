@@ -20,7 +20,7 @@ data class RoomApiDto(
     val name: String,
     val zoneId: String,
     val type: RoomApiDtoType,
-    val environmentalData: EnvironmentalDataApiDto = EnvironmentalDataApiDto()
+    val environmentalData: EnvironmentalDataApiDto = EnvironmentalDataApiDto(),
 )
 
 /**
@@ -32,7 +32,7 @@ data class RoomEntry(
     val id: String,
     val name: String,
     val zoneId: String,
-    val type: RoomApiDtoType
+    val type: RoomApiDtoType,
 )
 
 /**
@@ -42,8 +42,9 @@ data class RoomEntry(
 enum class RoomApiDtoType {
     /** Operating room type. */
     OPERATING_ROOM,
+
     /** Pre-operating room type. */
-    PRE_OPERATING_ROOM
+    PRE_OPERATING_ROOM,
 }
 
 /**
@@ -67,5 +68,5 @@ data class EnvironmentalDataApiDto(
     val temperature: ValueWithUnit<Double>? = null,
     val humidity: Double? = null,
     val luminosity: ValueWithUnit<Double>? = null,
-    val presence: Boolean? = null
+    val presence: Boolean? = null,
 )

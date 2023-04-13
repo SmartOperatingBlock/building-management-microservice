@@ -45,7 +45,7 @@ object MedicalTechnologyAdtPresentation {
                 when (this.type) {
                     MedicalTechnologyType.ENDOSCOPE -> TYPE_ENDOSCOPE
                     MedicalTechnologyType.XRAY -> TYPE_XRAY
-                }
+                },
             )
             .addToContents(IS_IN_USE_PROPERTY, this.isInUse)
 
@@ -63,7 +63,7 @@ object MedicalTechnologyAdtPresentation {
                 TYPE_XRAY -> MedicalTechnologyType.XRAY
                 else -> throw IllegalArgumentException("medical technology type not supported")
             },
-            isInUse = this.contents[IS_IN_USE_PROPERTY].propertyAs(defaultValue = false)
+            isInUse = this.contents[IS_IN_USE_PROPERTY].propertyAs(defaultValue = false),
         )
 
     /**

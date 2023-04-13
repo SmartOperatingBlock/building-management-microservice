@@ -25,7 +25,7 @@ import java.time.Instant
  */
 class MedicalTechnologyController(
     private val digitalTwinManager: MedicalTechnologyDigitalTwinManager,
-    private val databaseManager: MedicalTechnologyDatabaseManager
+    private val databaseManager: MedicalTechnologyDatabaseManager,
 ) : MedicalTechnologyRepository {
     override fun createMedicalTechnology(medicalTechnology: MedicalTechnology): MedicalTechnology? = (
         this.digitalTwinManager.createMedicalTechnologyDigitalTwin(medicalTechnology) &&

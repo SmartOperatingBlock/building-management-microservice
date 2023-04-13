@@ -51,14 +51,14 @@ private fun Route.createRoomRoute(apiPath: String, port: Int, provider: ManagerP
         val room = call.receive<RoomEntry>().toRoom()
         RoomService.CreateRoom(
             room,
-            RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
+            RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
         ).execute().apply {
             when (this) {
                 null -> call.respond(HttpStatusCode.Conflict)
                 else -> {
                     call.response.header(
                         HttpHeaders.Location,
-                        "http://localhost:$port$apiPath/rooms/${room.id.value}"
+                        "http://localhost:$port$apiPath/rooms/${room.id.value}",
                     )
                     call.respond(HttpStatusCode.Created)
                 }
@@ -69,7 +69,7 @@ private fun Route.createRoomRoute(apiPath: String, port: Int, provider: ManagerP
 private fun Route.getAllRoomsRoute(apiPath: String, port: Int, provider: ManagerProvider) =
     get("$apiPath/rooms") {
         val entries = RoomService.GetAllRoomEntry(
-            RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
+            RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
         ).execute().map { entry ->
             ApiResponses.ResponseEntry(entry, "http://localhost:$port$apiPath/rooms/${entry.id}")
         }
@@ -82,7 +82,7 @@ private fun Route.getRoomRoute(apiPath: String, provider: ManagerProvider) =
         RoomService.GetRoom(
             RoomID(call.parameters["roomId"].orEmpty()),
             RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
-            call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
+            call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) },
         ).execute().apply {
             when (this) {
                 null -> call.respond(HttpStatusCode.NotFound)
@@ -96,10 +96,10 @@ private fun Route.deleteRoomRoute(apiPath: String, provider: ManagerProvider) =
         call.respond(
             RoomService.DeleteRoom(
                 RoomID(call.parameters["roomId"].orEmpty()),
-                RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
+                RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
             ).execute().let { result ->
                 if (result) HttpStatusCode.NoContent else HttpStatusCode.NotFound
-            }
+            },
         )
     }
 
@@ -110,7 +110,7 @@ private fun Route.getHistoricalRoomEnvironmentDataRoute(apiPath: String, provide
             RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
             call.request.queryParameters["from"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
                 ?: Instant.now(),
-            call.request.queryParameters["to"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
+            call.request.queryParameters["to"]?.let { rawDateTime -> Instant.parse(rawDateTime) },
         ).execute()?.map { pair ->
             ApiResponses.ResponseTimedEntry(pair.second, pair.first.toString())
         }.apply {

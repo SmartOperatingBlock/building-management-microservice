@@ -33,7 +33,7 @@ object ApiSerializer {
         id = this.id.value,
         name = this.name.orEmpty(),
         zoneId = this.zoneId.value,
-        type = this.type.toRoomApiDtoType()
+        type = this.type.toRoomApiDtoType(),
     )
 
     /**
@@ -44,14 +44,14 @@ object ApiSerializer {
         name = this.name.orEmpty(),
         zoneId = this.zoneId.value,
         type = this.type.toRoomApiDtoType(),
-        environmentalData = this.environmentalData.toEnvironmentDataApiDto()
+        environmentalData = this.environmentalData.toEnvironmentDataApiDto(),
     )
 
     private fun RoomEnvironmentalData.toEnvironmentDataApiDto() = EnvironmentalDataApiDto(
         temperature = this.temperature?.let { ValueWithUnit(it.value, it.unit.toString()) },
         humidity = this.humidity?.percentage,
         luminosity = this.luminosity?.let { ValueWithUnit(it.value, it.unit.toString()) },
-        presence = this.presence?.presenceDetected
+        presence = this.presence?.presenceDetected,
     )
 
     private fun RoomType.toRoomApiDtoType() = when (this) {
@@ -69,7 +69,7 @@ object ApiSerializer {
         description = this.description,
         type = this.type.toMedicalTechnologyApiDtoType(),
         inUse = this.isInUse,
-        roomId = this.roomId?.value
+        roomId = this.roomId?.value,
     )
 
     private fun MedicalTechnologyType.toMedicalTechnologyApiDtoType() = when (this) {

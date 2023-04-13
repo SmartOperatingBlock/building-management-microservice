@@ -51,6 +51,6 @@ interface MedicalTechnologyRepository {
         medicalTechnologyId: MedicalTechnologyID,
         usage: Boolean,
         roomId: RoomID,
-        dateTime: Instant
+        dateTime: Instant,
     ): Boolean
 }

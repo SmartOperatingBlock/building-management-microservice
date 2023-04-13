@@ -60,6 +60,7 @@ data class MedicalTechnologyID(val value: String) {
 enum class MedicalTechnologyType {
     /** Endoscope technology. */
     ENDOSCOPE,
+
     /** X-ray technology. */
     XRAY,
 }

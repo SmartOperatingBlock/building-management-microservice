@@ -23,7 +23,7 @@ import java.time.Instant
 data class TimeSeriesMedicalTechnologyUsage(
     @Contextual val dateTime: Instant,
     val metadata: TimeSeriesMedicalTechnologyMetadata,
-    val value: Boolean
+    val value: Boolean,
 )
 
 /**

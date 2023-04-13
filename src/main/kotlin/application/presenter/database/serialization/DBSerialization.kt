@@ -28,23 +28,23 @@ import java.time.Instant
  * @return the resulting [RoomEnvironmentalData].
  */
 fun Map<TimeSeriesDataType, TimeSeriesRoomEnvironmentalData?>.toRoomEnvironmentalData(
-    startData: RoomEnvironmentalData? = null
+    startData: RoomEnvironmentalData? = null,
 ) = RoomEnvironmentalData(
     temperature = this[TimeSeriesDataType.TEMPERATURE]?.let {
         Temperature(
             it.value,
-            it.metadata.unit?.let { unit -> TemperatureUnit.valueOf(unit) } ?: TemperatureUnit.CELSIUS
+            it.metadata.unit?.let { unit -> TemperatureUnit.valueOf(unit) } ?: TemperatureUnit.CELSIUS,
         )
     } ?: startData?.temperature,
     humidity = this[TimeSeriesDataType.HUMIDITY]?.let { Humidity(it.value) } ?: startData?.humidity,
     luminosity = this[TimeSeriesDataType.LUMINOSITY]?.let {
         Luminosity(
             it.value,
-            it.metadata.unit?.let { unit -> LightUnit.valueOf(unit) } ?: LightUnit.LUX
+            it.metadata.unit?.let { unit -> LightUnit.valueOf(unit) } ?: LightUnit.LUX,
         )
     } ?: startData?.luminosity,
     presence = this[TimeSeriesDataType.PRESENCE]?.let { Presence(it.value > 0) }
-        ?: startData?.presence
+        ?: startData?.presence,
 )
 
 /**
@@ -57,16 +57,16 @@ fun RoomEnvironmentalData.toTimeSeries(dateTime: Instant, roomId: RoomID) = mapO
             TimeSeriesRoomMetadata(
                 roomId,
                 TimeSeriesDataType.TEMPERATURE,
-                it.unit.toString()
+                it.unit.toString(),
             ),
-            it.value
+            it.value,
         )
     },
     TimeSeriesDataType.HUMIDITY to this.humidity?.let {
         TimeSeriesRoomEnvironmentalData(
             dateTime,
             TimeSeriesRoomMetadata(roomId, TimeSeriesDataType.HUMIDITY),
-            it.percentage
+            it.percentage,
         )
     },
     TimeSeriesDataType.LUMINOSITY to this.luminosity?.let {
@@ -75,16 +75,16 @@ fun RoomEnvironmentalData.toTimeSeries(dateTime: Instant, roomId: RoomID) = mapO
             TimeSeriesRoomMetadata(
                 roomId,
                 TimeSeriesDataType.LUMINOSITY,
-                it.unit.toString()
+                it.unit.toString(),
             ),
-            it.value
+            it.value,
         )
     },
     TimeSeriesDataType.PRESENCE to this.presence?.let {
         TimeSeriesRoomEnvironmentalData(
             dateTime,
             TimeSeriesRoomMetadata(roomId, TimeSeriesDataType.PRESENCE),
-            it.presenceDetected.let { p -> if (p) 1.0 else 0.0 }
+            it.presenceDetected.let { p -> if (p) 1.0 else 0.0 },
         )
-    }
+    },
 ).filter { it.value != null }

@@ -28,6 +28,7 @@ import entity.zone.ZoneID
 object RoomAdtPresentation {
     /** Operating room Azure Digital Twins model. */
     private const val OPERATING_ROOM_MODEL = "dtmi:io:github:smartoperatingblock:OperatingRoom;1"
+
     /** Pre-operating room Azure Digital Twins model. */
     private const val PRE_OPERATING_ROOM_MODEL = "dtmi:io:github:smartoperatingblock:PrePostOperatingRoom;1"
     private const val NAME_PROPERTY = "name"
@@ -49,8 +50,8 @@ object RoomAdtPresentation {
                     when (this.type) {
                         RoomType.OPERATING_ROOM -> OPERATING_ROOM_MODEL
                         RoomType.PRE_OPERATING_ROOM -> PRE_OPERATING_ROOM_MODEL
-                    }
-                )
+                    },
+                ),
             )
             .addToContents(NAME_PROPERTY, this.name.orEmpty())
             .addToContents(ZONE_ID_PROPERTY, this.zoneId.value)
@@ -66,7 +67,9 @@ object RoomAdtPresentation {
             name = this.contents[NAME_PROPERTY].propertyAs(defaultValue = ""),
             type = if (this.metadata.modelId == OPERATING_ROOM_MODEL) {
                 RoomType.OPERATING_ROOM
-            } else RoomType.PRE_OPERATING_ROOM,
+            } else {
+                RoomType.PRE_OPERATING_ROOM
+            },
             environmentalData = RoomEnvironmentalData(
                 temperature = this.contents[TEMPERATURE_PROPERTY]?.let {
                     Temperature((it as Number).toDouble(), TemperatureUnit.CELSIUS)
@@ -75,7 +78,7 @@ object RoomAdtPresentation {
                 luminosity = this.contents[LUMINOSITY_PROPERTY]?.let {
                     Luminosity((it as Number).toDouble(), LightUnit.LUX)
                 },
-                presence = this.contents[PRESENCE_INSIDE_PROPERTY]?.let { Presence(it as Boolean) }
-            )
+                presence = this.contents[PRESENCE_INSIDE_PROPERTY]?.let { Presence(it as Boolean) },
+            ),
         )
 }

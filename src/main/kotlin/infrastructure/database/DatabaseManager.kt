@@ -53,7 +53,7 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
     private val database = KMongo.createClient(this.connectionString).getDatabase(databaseName)
     private val roomCollection = this.database.getCollection<Room>(roomCollectionName)
     private val roomTimeSeriesCollection = this.database.getCollection<TimeSeriesRoomEnvironmentalData>(
-        roomEnvironmentalDataCollectionName
+        roomEnvironmentalDataCollectionName,
     )
     private val medicalTechnologiesCollection =
         this.database.getCollection<MedicalTechnology>(medicalTechnologyCollectionName)
@@ -66,7 +66,7 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
 
     override fun deleteRoom(roomId: RoomID): Boolean = this.roomCollection.safeMongoDbWrite(defaultResult = false) {
         roomTimeSeriesCollection.deleteMany(
-            TimeSeriesRoomEnvironmentalData::metadata / TimeSeriesRoomMetadata::roomId eq roomId
+            TimeSeriesRoomEnvironmentalData::metadata / TimeSeriesRoomMetadata::roomId eq roomId,
         )
         deleteOne(Room::id eq roomId).deletedCount > 0
     }
@@ -77,9 +77,9 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
                 this.roomTimeSeriesCollection.find(
                     TimeSeriesRoomEnvironmentalData::metadata / TimeSeriesRoomMetadata::roomId eq roomId,
                     TimeSeriesRoomEnvironmentalData::metadata / TimeSeriesRoomMetadata::type eq it,
-                    TimeSeriesRoomEnvironmentalData::dateTime lte dateTime
+                    TimeSeriesRoomEnvironmentalData::dateTime lte dateTime,
                 ).descendingSort(TimeSeriesRoomEnvironmentalData::dateTime).first() ?: null
-            }.toRoomEnvironmentalData()
+            }.toRoomEnvironmentalData(),
         )
 
     override fun getRoomEnvironmentalData(
@@ -93,7 +93,7 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
             return this.roomTimeSeriesCollection.find(
                 TimeSeriesRoomEnvironmentalData::metadata / TimeSeriesRoomMetadata::roomId eq roomId,
                 TimeSeriesRoomEnvironmentalData::dateTime gt start,
-                TimeSeriesRoomEnvironmentalData::dateTime lte end
+                TimeSeriesRoomEnvironmentalData::dateTime lte end,
             ).ascendingSort(TimeSeriesRoomEnvironmentalData::dateTime).toList().map {
                 // update current data about the room in order to have an update image of it
                 val updatedRoom = mapOf(it.metadata.type to it).toRoomEnvironmentalData(roomCurrentData)
@@ -111,7 +111,7 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
     override fun updateRoomEnvironmentalData(
         roomId: RoomID,
         environmentalData: RoomEnvironmentalData,
-        dateTime: Instant
+        dateTime: Instant,
     ): Boolean = this.roomTimeSeriesCollection.safeMongoDbWrite(mapOf()) {
         // update time series
         val updatesMap = environmentalData.toTimeSeries(dateTime, roomId)
@@ -135,9 +135,9 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
                         },
                         roomEnvData.presence?.let { t ->
                             setValue(Room::environmentalData / RoomEnvironmentalData::presence, t)
-                        }
+                        },
                     )
-                }
+                },
             )
             true
         }
@@ -152,7 +152,7 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
         this.medicalTechnologiesCollection.safeMongoDbWrite(defaultResult = false) {
             medicalTechnologyDataCollection.deleteMany(
                 TimeSeriesMedicalTechnologyUsage::metadata /
-                    TimeSeriesMedicalTechnologyMetadata::medicalTechnologyId eq medicalTechnologyId
+                    TimeSeriesMedicalTechnologyMetadata::medicalTechnologyId eq medicalTechnologyId,
             )
             deleteOne(MedicalTechnology::id eq medicalTechnologyId).deletedCount > 0
         }
@@ -162,8 +162,8 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
             this.medicalTechnologyDataCollection.find(
                 TimeSeriesMedicalTechnologyUsage::metadata /
                     TimeSeriesMedicalTechnologyMetadata::medicalTechnologyId eq medicalTechnologyId,
-                TimeSeriesMedicalTechnologyUsage::dateTime lte dateTime
-            ).descendingSort(TimeSeriesMedicalTechnologyUsage::dateTime).first()
+                TimeSeriesMedicalTechnologyUsage::dateTime lte dateTime,
+            ).descendingSort(TimeSeriesMedicalTechnologyUsage::dateTime).first(),
         ) {
             this@DatabaseManager.medicalTechnologiesCollection.findOne {
                 MedicalTechnology::id eq medicalTechnologyId
@@ -187,8 +187,8 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
             TimeSeriesMedicalTechnologyUsage(
                 dateTime,
                 TimeSeriesMedicalTechnologyMetadata(medicalTechnologyId, roomId),
-                usage
-            )
+                usage,
+            ),
         ).wasAcknowledged()
     }.let {
         // update medical technology current data

@@ -25,7 +25,7 @@ class RoomTest : StringSpec({
     listOf(
         differentRoom,
         null,
-        4
+        4,
     ).forEach {
         "a room should not be equal to other rooms with different id, other classes or null" {
             room shouldNotBe it

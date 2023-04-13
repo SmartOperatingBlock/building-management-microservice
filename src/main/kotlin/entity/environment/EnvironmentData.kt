@@ -25,7 +25,7 @@ enum class TemperatureUnit {
     /**
      * Celsius unit.
      */
-    CELSIUS
+    CELSIUS,
 }
 
 /**
@@ -55,7 +55,7 @@ enum class LightUnit {
     /**
      * Lux unit.
      */
-    LUX
+    LUX,
 }
 
 /**

@@ -33,7 +33,7 @@ class ZoneTest : StringSpec({
     listOf(
         differentZone,
         null,
-        4
+        4,
     ).forEach {
         "a zone should not be equal to other zones with different id, other classes or null" {
             zone shouldNotBe it

@@ -41,8 +41,9 @@ class MedicalTechnologyTest : StringSpec({
         shouldThrow<IllegalArgumentException> {
             MedicalTechnology(
                 MedicalTechnologyID("1"),
-                "", "description",
-                MedicalTechnologyType.XRAY
+                "",
+                "description",
+                MedicalTechnologyType.XRAY,
             )
         }
     }
@@ -51,8 +52,9 @@ class MedicalTechnologyTest : StringSpec({
         shouldThrow<IllegalArgumentException> {
             MedicalTechnology(
                 MedicalTechnologyID("1"),
-                "name", "",
-                MedicalTechnologyType.XRAY
+                "name",
+                "",
+                MedicalTechnologyType.XRAY,
             )
         }
     }

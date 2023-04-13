@@ -39,14 +39,14 @@ class RoomApiTest : StringSpec({
         "r1",
         "name",
         "z1",
-        RoomApiDtoType.OPERATING_ROOM
+        RoomApiDtoType.OPERATING_ROOM,
     )
     val roomApiDto = RoomApiDto(
         "r1",
         "name",
         "z1",
         RoomApiDtoType.OPERATING_ROOM,
-        EnvironmentalDataApiDto()
+        EnvironmentalDataApiDto(),
     )
 
     suspend fun ApplicationTestBuilder.insertRoom(room: RoomEntry) =
@@ -100,7 +100,7 @@ class RoomApiTest : StringSpec({
             val response = client.get("/api/v1/rooms")
             response shouldHaveStatus HttpStatusCode.OK
             Json.decodeFromString<ApiResponses.ResponseEntryList<ApiResponses.ResponseEntry<RoomEntry>>>(
-                response.bodyAsText()
+                response.bodyAsText(),
             ).total shouldBe 1
         }
     }
@@ -110,7 +110,7 @@ class RoomApiTest : StringSpec({
             val response = client.get("/api/v1/rooms")
             response shouldHaveStatus HttpStatusCode.NoContent
             Json.decodeFromString<ApiResponses.ResponseEntryList<ApiResponses.ResponseEntry<RoomEntry>>>(
-                response.bodyAsText()
+                response.bodyAsText(),
             ).total shouldBe 0
         }
     }
@@ -134,8 +134,8 @@ class RoomApiTest : StringSpec({
             val response = client.get("/api/v1/rooms/data/${roomEntry.id}")
             response shouldHaveStatus HttpStatusCode.OK
             Json.decodeFromString<ApiResponses.ResponseEntryList<ApiResponses.ResponseTimedEntry<
-                        RoomEnvironmentalData>>>(
-                response.bodyAsText()
+                RoomEnvironmentalData,>,>,>(
+                response.bodyAsText(),
             ).total shouldBe 0
         }
     }

@@ -48,8 +48,8 @@ class ApiSerializationTest : StringSpec({
             Temperature(33.0, TemperatureUnit.CELSIUS),
             Humidity(55.0),
             Luminosity(150.0, LightUnit.LUX),
-            Presence(true)
-        )
+            Presence(true),
+        ),
     )
 
     val roomApiDto = RoomApiDto(
@@ -61,15 +61,15 @@ class ApiSerializationTest : StringSpec({
             ValueWithUnit(33.0, "CELSIUS"),
             55.0,
             ValueWithUnit(150.0, "LUX"),
-            true
-        )
+            true,
+        ),
     )
 
     val roomEntry = RoomEntry(
         id = "r1",
         name = "name",
         zoneId = "z1",
-        type = RoomApiDtoType.OPERATING_ROOM
+        type = RoomApiDtoType.OPERATING_ROOM,
     )
 
     val medicalTechnology = MedicalTechnology(
@@ -78,7 +78,7 @@ class ApiSerializationTest : StringSpec({
         description = "description",
         type = MedicalTechnologyType.ENDOSCOPE,
         isInUse = true,
-        roomId = RoomID("r-1")
+        roomId = RoomID("r-1"),
     )
 
     val medicalTechnologyApiDto = MedicalTechnologyApiDto(
@@ -87,14 +87,14 @@ class ApiSerializationTest : StringSpec({
         description = "description",
         type = MedicalTechnologyApiDtoType.ENDOSCOPE,
         inUse = true,
-        roomId = "r-1"
+        roomId = "r-1",
     )
 
     val medicalTechnologyEntry = MedicalTechnologyEntry(
         id = "mt-1",
         name = "name",
         description = "description",
-        type = MedicalTechnologyApiDtoType.ENDOSCOPE
+        type = MedicalTechnologyApiDtoType.ENDOSCOPE,
     )
 
     "It should be possible to obtain the corresponding room from the data get from the API" {
