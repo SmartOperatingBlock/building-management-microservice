@@ -22,7 +22,7 @@ import java.time.Instant
 data class TimeSeriesRoomEnvironmentalData(
     @Contextual val dateTime: Instant,
     val metadata: TimeSeriesRoomMetadata,
-    val value: Double
+    val value: Double,
 )
 
 /**
@@ -41,5 +41,5 @@ enum class TimeSeriesDataType {
     TEMPERATURE,
     HUMIDITY,
     LUMINOSITY,
-    PRESENCE
+    PRESENCE,
 }

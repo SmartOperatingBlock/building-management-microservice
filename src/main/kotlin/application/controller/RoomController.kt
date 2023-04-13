@@ -25,7 +25,7 @@ import java.time.Instant
  */
 class RoomController(
     private val roomDtManager: RoomDigitalTwinManager,
-    private val roomDatabaseManager: RoomDatabaseManager
+    private val roomDatabaseManager: RoomDatabaseManager,
 ) : RoomRepository {
     override fun createRoom(room: Room): Room? = (
         this.roomDtManager.createRoomDigitalTwin(room) &&

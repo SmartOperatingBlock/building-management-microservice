@@ -55,12 +55,12 @@ private fun Route.createMedicalTechnologyRoute(apiPath: String, port: Int, provi
             medicalTechnology,
             MedicalTechnologyController(
                 provider.medicalTechnologyDigitalTwinManager,
-                provider.medicalTechnologyDatabaseManager
-            )
+                provider.medicalTechnologyDatabaseManager,
+            ),
         ).execute()?.apply {
             call.response.header(
                 HttpHeaders.Location,
-                "http://localhost:$port$apiPath/medical-technologies/${medicalTechnology.id.value}"
+                "http://localhost:$port$apiPath/medical-technologies/${medicalTechnology.id.value}",
             )
             call.respond(HttpStatusCode.Created)
         } ?: call.respond(HttpStatusCode.Conflict)
@@ -72,9 +72,9 @@ private fun Route.getMedicalTechnologyRoute(apiPath: String, provider: ManagerPr
             MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
             MedicalTechnologyController(
                 provider.medicalTechnologyDigitalTwinManager,
-                provider.medicalTechnologyDatabaseManager
+                provider.medicalTechnologyDatabaseManager,
             ),
-            call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) }
+            call.request.queryParameters["dateTime"]?.let { rawDateTime -> Instant.parse(rawDateTime) },
         ).execute()?.apply { call.respond(this.toMedicalTechnologyApiDto()) }
             ?: call.respond(HttpStatusCode.NotFound)
     }
@@ -86,11 +86,11 @@ private fun Route.deleteMedicalTechnologyRoute(apiPath: String, provider: Manage
                 MedicalTechnologyID(call.parameters["technologyId"].orEmpty()),
                 MedicalTechnologyController(
                     provider.medicalTechnologyDigitalTwinManager,
-                    provider.medicalTechnologyDatabaseManager
+                    provider.medicalTechnologyDatabaseManager,
                 ),
             ).execute().let { result ->
                 if (result) HttpStatusCode.NoContent else HttpStatusCode.NotFound
-            }
+            },
         )
     }
 
@@ -103,10 +103,10 @@ private fun Route.mapMedicalTechnologyRoute(apiPath: String, provider: ManagerPr
                 RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager),
                 MedicalTechnologyController(
                     provider.medicalTechnologyDigitalTwinManager,
-                    provider.medicalTechnologyDatabaseManager
-                )
+                    provider.medicalTechnologyDatabaseManager,
+                ),
             ).execute().let { result ->
                 if (result) HttpStatusCode.NoContent else HttpStatusCode.NotFound
-            }
+            },
         )
     }

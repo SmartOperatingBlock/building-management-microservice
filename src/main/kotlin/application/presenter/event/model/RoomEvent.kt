@@ -23,7 +23,7 @@ data class RoomEvent<E : RoomEventPayload>(
     val roomId: String,
     val roomType: RoomTypePayload,
     override val data: E,
-    override val dateTime: String
+    override val dateTime: String,
 ) : Event<E>
 
 /** Module that wraps all the [RoomEvent] data payloads. */
@@ -43,7 +43,7 @@ object RoomEventPayloads {
     @Serializable
     data class TemperaturePayload(
         val temperatureValue: Double,
-        val temperatureUnit: TemperaturePayloadUnit
+        val temperatureUnit: TemperaturePayloadUnit,
     ) : RoomEventPayload
 
     /**
@@ -54,7 +54,7 @@ object RoomEventPayloads {
     @Serializable
     data class LuminosityPayload(
         val luminosityValue: Double,
-        val luminosityUnit: LuminosityPayloadUnit
+        val luminosityUnit: LuminosityPayloadUnit,
     ) : RoomEventPayload
 
     /**
@@ -67,13 +67,13 @@ object RoomEventPayloads {
     /** The [TemperaturePayload] unit. **/
     @Serializable
     enum class TemperaturePayloadUnit {
-        CELSIUS
+        CELSIUS,
     }
 
     /** The [LuminosityPayload] unit. **/
     @Serializable
     enum class LuminosityPayloadUnit {
-        LUX
+        LUX,
     }
 }
 
@@ -83,18 +83,22 @@ object RoomEventPayloads {
 enum class RoomTypePayload {
     /** Operating room type. */
     OPERATING_ROOM,
+
     /** Pre operating room type. */
-    PRE_OPERATING_ROOM
+    PRE_OPERATING_ROOM,
 }
 
 /** Module that wraps the possible keys for a [RoomEvent]. */
 object RoomEventKey {
     /** Temperature update event. */
     const val TEMPERATURE_EVENT = "TEMPERATURE_EVENT"
+
     /** Humidity update event. */
     const val HUMIDITY_EVENT = "HUMIDITY_EVENT"
+
     /** Luminosity update event. */
     const val LUMINOSITY_EVENT = "LUMINOSITY_EVENT"
+
     /** Presence update event. */
     const val PRESENCE_EVENT = "PRESENCE_EVENT"
 }

@@ -32,28 +32,28 @@ class DBSerializationTest : StringSpec({
         Temperature(33.0, TemperatureUnit.CELSIUS),
         Humidity(55.0),
         Luminosity(150.0, LightUnit.LUX),
-        Presence(true)
+        Presence(true),
     )
     val timeSeries = mapOf(
         TimeSeriesDataType.TEMPERATURE to TimeSeriesRoomEnvironmentalData(
             dateTime,
             TimeSeriesRoomMetadata(roomId, TimeSeriesDataType.TEMPERATURE, TemperatureUnit.CELSIUS.toString()),
-            33.0
+            33.0,
         ),
         TimeSeriesDataType.HUMIDITY to TimeSeriesRoomEnvironmentalData(
             dateTime,
             TimeSeriesRoomMetadata(roomId, TimeSeriesDataType.HUMIDITY),
-            55.0
+            55.0,
         ),
         TimeSeriesDataType.LUMINOSITY to TimeSeriesRoomEnvironmentalData(
             dateTime,
             TimeSeriesRoomMetadata(roomId, TimeSeriesDataType.LUMINOSITY, LightUnit.LUX.toString()),
-            150.0
+            150.0,
         ),
         TimeSeriesDataType.PRESENCE to TimeSeriesRoomEnvironmentalData(
             dateTime,
             TimeSeriesRoomMetadata(roomId, TimeSeriesDataType.PRESENCE),
-            1.0
+            1.0,
         ),
     )
 

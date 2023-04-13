@@ -15,7 +15,7 @@ import kotlinx.serialization.Serializable
 data class MedicalTechnologyEvent(
     override val key: String,
     override val data: MedicalTechnologyUsagePayload,
-    override val dateTime: String
+    override val dateTime: String,
 ) : Event<MedicalTechnologyUsagePayload>
 
 /**

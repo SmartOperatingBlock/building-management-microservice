@@ -33,22 +33,22 @@ class KafkaClient(private val provider: ManagerProvider) {
         val roomController = RoomController(provider.roomDigitalTwinManager, provider.roomDatabaseManager)
         val medicalTechnologyController = MedicalTechnologyController(
             provider.medicalTechnologyDigitalTwinManager,
-            provider.medicalTechnologyDatabaseManager
+            provider.medicalTechnologyDatabaseManager,
         )
         eventHandlers = listOf(
             EventHandlers.TemperatureEventHandler(roomController),
             EventHandlers.HumidityEventHandler(roomController),
             EventHandlers.LuminosityEventHandler(roomController),
             EventHandlers.PresenceEventHandler(roomController),
-            EventHandlers.MedicalTechnologyEventHandler(medicalTechnologyController)
+            EventHandlers.MedicalTechnologyEventHandler(medicalTechnologyController),
         )
     }
 
     private val kafkaConsumer = KafkaConsumer<String, String>(
         loadConsumerProperties(
             System.getenv(bootstrapServerUrlVariable),
-            System.getenv(schemaRegistryUrlVariable)
-        )
+            System.getenv(schemaRegistryUrlVariable),
+        ),
     )
 
     /**

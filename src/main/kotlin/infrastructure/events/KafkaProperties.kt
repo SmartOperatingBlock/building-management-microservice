@@ -19,5 +19,5 @@ fun loadConsumerProperties(boostrapServerUrl: String, schemaRegistryUrl: String)
     "schema.registry.url" to schemaRegistryUrl,
     "group.id" to "building-management-consumer",
     "key.deserializer" to "org.apache.kafka.common.serialization.StringDeserializer",
-    "value.deserializer" to KafkaJsonDeserializer::class.java
+    "value.deserializer" to KafkaJsonDeserializer::class.java,
 )

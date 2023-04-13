@@ -16,4 +16,6 @@ fun Boolean.rollback(rollbackActions: () -> Unit): Boolean =
     if (!this) {
         rollbackActions()
         false
-    } else true
+    } else {
+        true
+    }

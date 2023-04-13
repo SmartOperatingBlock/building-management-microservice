@@ -40,7 +40,7 @@ class MedicalTechnologyApiTest : StringSpec({
         id = "mt-1",
         name = "name",
         description = "description",
-        type = MedicalTechnologyApiDtoType.ENDOSCOPE
+        type = MedicalTechnologyApiDtoType.ENDOSCOPE,
     )
 
     val medicalTechnologyApiDto = MedicalTechnologyApiDto(
@@ -49,7 +49,7 @@ class MedicalTechnologyApiTest : StringSpec({
         description = "description",
         type = MedicalTechnologyApiDtoType.ENDOSCOPE,
         inUse = false,
-        roomId = null
+        roomId = null,
     )
 
     suspend fun ApplicationTestBuilder.insertMedicalTechnology(medicalTechnology: MedicalTechnologyEntry) =
@@ -125,9 +125,9 @@ class MedicalTechnologyApiTest : StringSpec({
                             "r1",
                             "name",
                             "z1",
-                            RoomApiDtoType.OPERATING_ROOM
-                        )
-                    )
+                            RoomApiDtoType.OPERATING_ROOM,
+                        ),
+                    ),
                 )
             }
             // create medical technology

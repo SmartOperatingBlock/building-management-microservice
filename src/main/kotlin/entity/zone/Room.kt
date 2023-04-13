@@ -74,6 +74,7 @@ data class RoomEnvironmentalData(
 enum class RoomType {
     /** It is the Pre/Post Operating Room. */
     PRE_OPERATING_ROOM,
+
     /** It is the Operating Room. */
     OPERATING_ROOM,
 }

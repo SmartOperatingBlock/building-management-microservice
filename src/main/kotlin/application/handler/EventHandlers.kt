@@ -40,7 +40,7 @@ object EventHandlers {
                 updateRoomEnvironmentData(
                     this,
                     RoomEnvironmentalData(temperature = this.data.toTemperature()),
-                    this@TemperatureEventHandler.roomRepository
+                    this@TemperatureEventHandler.roomRepository,
                 )
             }
         }
@@ -57,7 +57,7 @@ object EventHandlers {
                 updateRoomEnvironmentData(
                     this,
                     RoomEnvironmentalData(humidity = this.data.toHumidity()),
-                    this@HumidityEventHandler.roomRepository
+                    this@HumidityEventHandler.roomRepository,
                 )
             }
         }
@@ -74,7 +74,7 @@ object EventHandlers {
                 updateRoomEnvironmentData(
                     this,
                     RoomEnvironmentalData(luminosity = this.data.toLuminosity()),
-                    this@LuminosityEventHandler.roomRepository
+                    this@LuminosityEventHandler.roomRepository,
                 )
             }
         }
@@ -91,7 +91,7 @@ object EventHandlers {
                 updateRoomEnvironmentData(
                     this,
                     RoomEnvironmentalData(presence = this.data.toPresence()),
-                    this@PresenceEventHandler.roomRepository
+                    this@PresenceEventHandler.roomRepository,
                 )
             }
         }
@@ -99,7 +99,7 @@ object EventHandlers {
 
     /** Event handler for medical technology usage update event. */
     class MedicalTechnologyEventHandler(
-        private val medicalTechnologyRepository: MedicalTechnologyRepository
+        private val medicalTechnologyRepository: MedicalTechnologyRepository,
     ) : EventHandler {
         override fun canHandle(event: Event<*>): Boolean = event is MedicalTechnologyEvent
 
@@ -109,7 +109,7 @@ object EventHandlers {
                     MedicalTechnologyID(this.data.medicalTechnologyID),
                     this.data.inUse,
                     Instant.parse(this.dateTime),
-                    medicalTechnologyRepository
+                    medicalTechnologyRepository,
                 ).execute()
             }
         }
@@ -118,16 +118,18 @@ object EventHandlers {
     private fun updateRoomEnvironmentData(
         event: RoomEvent<*>,
         environmentalData: RoomEnvironmentalData,
-        roomRepository: RoomRepository
+        roomRepository: RoomRepository,
     ) =
         RoomService.UpdateRoomEnvironmentData(
             RoomID(event.roomId),
             environmentalData,
             Instant.parse(event.dateTime),
-            roomRepository
+            roomRepository,
         ).execute()
 
     private inline fun <reified T> Any?.cast(operation: T.() -> Boolean = { true }): Boolean = if (this is T) {
         operation()
-    } else false
+    } else {
+        false
+    }
 }

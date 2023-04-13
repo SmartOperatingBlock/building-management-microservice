@@ -43,7 +43,7 @@ interface RoomRepository {
     fun getRoomEnvironmentalData(
         roomId: RoomID,
         start: Instant,
-        end: Instant
+        end: Instant,
     ): List<Pair<Instant, RoomEnvironmentalData>>?
 
     /**
@@ -59,6 +59,6 @@ interface RoomRepository {
     fun updateRoomEnvironmentalData(
         roomId: RoomID,
         environmentalData: RoomEnvironmentalData,
-        dateTime: Instant
+        dateTime: Instant,
     ): Boolean
 }

@@ -31,13 +31,13 @@ class MedicalTechnologyServiceTest : StringSpec({
         id = MedicalTechnologyID("mt-1"),
         name = "name",
         description = "description",
-        type = MedicalTechnologyType.ENDOSCOPE
+        type = MedicalTechnologyType.ENDOSCOPE,
     )
 
     val exampleRoom = Room(
         RoomID("r1"),
         RoomType.OPERATING_ROOM,
-        ZoneID("z1")
+        ZoneID("z1"),
     )
 
     val databaseManager by lazy { DatabaseManager("mongodb://localhost:27017") }
@@ -49,7 +49,7 @@ class MedicalTechnologyServiceTest : StringSpec({
             val medicalTechnologyController = medicalTechnologyController()
             val result = MedicalTechnologyService.CreateMedicalTechnology(
                 exampleMedicalTechnology,
-                medicalTechnologyController
+                medicalTechnologyController,
             ).execute()
             result shouldNotBe null
             MedicalTechnologyService.GetMedicalTechnology(exampleMedicalTechnology.id, medicalTechnologyController)
@@ -74,7 +74,7 @@ class MedicalTechnologyServiceTest : StringSpec({
                 .execute()
             val result = MedicalTechnologyService.DeleteMedicalTechnology(
                 exampleMedicalTechnology.id,
-                medicalTechnologyController
+                medicalTechnologyController,
             ).execute()
             result shouldBe true
             MedicalTechnologyService.GetMedicalTechnology(exampleMedicalTechnology.id, medicalTechnologyController)
@@ -108,7 +108,7 @@ class MedicalTechnologyServiceTest : StringSpec({
             MedicalTechnologyService.GetMedicalTechnology(
                 exampleMedicalTechnology.id,
                 medicalTechnologyController,
-                Instant.now().minus(1, ChronoUnit.DAYS)
+                Instant.now().minus(1, ChronoUnit.DAYS),
             ).execute()?.id shouldBe exampleMedicalTechnology.id
         }
     }
@@ -131,7 +131,7 @@ class MedicalTechnologyServiceTest : StringSpec({
                 exampleMedicalTechnology.id,
                 exampleRoom.id,
                 roomController,
-                medicalTechnologyController
+                medicalTechnologyController,
             ).execute() shouldBe true
             MedicalTechnologyService.GetMedicalTechnology(exampleMedicalTechnology.id, medicalTechnologyController)
                 .execute()?.roomId shouldBe exampleRoom.id
@@ -147,7 +147,7 @@ class MedicalTechnologyServiceTest : StringSpec({
                 exampleMedicalTechnology.id,
                 exampleRoom.id,
                 roomController(),
-                medicalTechnologyController
+                medicalTechnologyController,
             ).execute() shouldBe false
         }
     }
@@ -161,7 +161,7 @@ class MedicalTechnologyServiceTest : StringSpec({
                 exampleMedicalTechnology.id,
                 exampleRoom.id,
                 roomController,
-                medicalTechnologyController
+                medicalTechnologyController,
             ).execute() shouldBe false
         }
     }
@@ -177,18 +177,18 @@ class MedicalTechnologyServiceTest : StringSpec({
                 exampleMedicalTechnology.id,
                 exampleRoom.id,
                 roomController,
-                medicalTechnologyController
+                medicalTechnologyController,
             ).execute()
             MedicalTechnologyService.UpdateMedicalTechnologyUsage(
                 exampleMedicalTechnology.id,
                 true,
                 Instant.now(),
-                medicalTechnologyController
+                medicalTechnologyController,
             ).execute() shouldBe true
             MedicalTechnologyService.GetMedicalTechnology(
                 exampleMedicalTechnology.id,
                 medicalTechnologyController,
-                Instant.now()
+                Instant.now(),
             ).execute()?.isInUse shouldBe true
         }
     }
@@ -199,7 +199,7 @@ class MedicalTechnologyServiceTest : StringSpec({
                 exampleMedicalTechnology.id,
                 true,
                 Instant.now(),
-                medicalTechnologyController()
+                medicalTechnologyController(),
             ).execute() shouldBe false
         }
     }
@@ -213,7 +213,7 @@ class MedicalTechnologyServiceTest : StringSpec({
                 exampleMedicalTechnology.id,
                 true,
                 Instant.now(),
-                medicalTechnologyController
+                medicalTechnologyController,
             ).execute() shouldBe false
         }
     }

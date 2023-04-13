@@ -39,13 +39,13 @@ class EventHandlersTest : StringSpec({
     val exampleRoom = Room(
         RoomID("r1"),
         RoomType.OPERATING_ROOM,
-        ZoneID("z1")
+        ZoneID("z1"),
     )
     val exampleMedicalTechnology = MedicalTechnology(
         id = MedicalTechnologyID("mt-1"),
         name = "name",
         description = "description",
-        type = MedicalTechnologyType.ENDOSCOPE
+        type = MedicalTechnologyType.ENDOSCOPE,
     )
     val databaseManager by lazy { DatabaseManager("mongodb://localhost:27017") }
     fun medicalTechnologyController() = MedicalTechnologyController(DigitalTwinManagerTestDouble(), databaseManager)
@@ -56,7 +56,7 @@ class EventHandlersTest : StringSpec({
         EventHandlers.HumidityEventHandler(roomController()),
         EventHandlers.LuminosityEventHandler(roomController()),
         EventHandlers.PresenceEventHandler(roomController()),
-        EventHandlers.MedicalTechnologyEventHandler(medicalTechnologyController())
+        EventHandlers.MedicalTechnologyEventHandler(medicalTechnologyController()),
     ).forEach {
         "Event handlers should safely handle events that can't be processed" {
             val nonexistentEvent = object : Event<Int> {
@@ -79,7 +79,7 @@ class EventHandlersTest : StringSpec({
                 exampleRoom.id.value,
                 RoomTypePayload.OPERATING_ROOM,
                 RoomEventPayloads.TemperaturePayload(34.0, RoomEventPayloads.TemperaturePayloadUnit.CELSIUS),
-                Instant.now().toString()
+                Instant.now().toString(),
             )
             val eventHandler = EventHandlers.TemperatureEventHandler(roomController)
             RoomService.CreateRoom(exampleRoom, roomController).execute()
@@ -98,7 +98,7 @@ class EventHandlersTest : StringSpec({
                 exampleRoom.id.value,
                 RoomTypePayload.OPERATING_ROOM,
                 RoomEventPayloads.HumidityPayload(55),
-                Instant.now().toString()
+                Instant.now().toString(),
             )
             val eventHandler = EventHandlers.HumidityEventHandler(roomController)
             RoomService.CreateRoom(exampleRoom, roomController).execute()
@@ -117,7 +117,7 @@ class EventHandlersTest : StringSpec({
                 exampleRoom.id.value,
                 RoomTypePayload.OPERATING_ROOM,
                 RoomEventPayloads.LuminosityPayload(150.0, RoomEventPayloads.LuminosityPayloadUnit.LUX),
-                Instant.now().toString()
+                Instant.now().toString(),
             )
             val eventHandler = EventHandlers.LuminosityEventHandler(roomController)
             RoomService.CreateRoom(exampleRoom, roomController).execute()
@@ -136,7 +136,7 @@ class EventHandlersTest : StringSpec({
                 exampleRoom.id.value,
                 RoomTypePayload.OPERATING_ROOM,
                 RoomEventPayloads.PresencePayload(true),
-                Instant.now().toString()
+                Instant.now().toString(),
             )
             val eventHandler = EventHandlers.PresenceEventHandler(roomController)
             RoomService.CreateRoom(exampleRoom, roomController).execute()
@@ -154,7 +154,7 @@ class EventHandlersTest : StringSpec({
             val event = MedicalTechnologyEvent(
                 MedicalTechnologyEventKey.USAGE_EVENT,
                 MedicalTechnologyUsagePayload(exampleMedicalTechnology.id.value, true),
-                Instant.now().toString()
+                Instant.now().toString(),
             )
             val eventHandler = EventHandlers.MedicalTechnologyEventHandler(medicalTechnologyController)
             MedicalTechnologyService.CreateMedicalTechnology(exampleMedicalTechnology, medicalTechnologyController)
@@ -164,14 +164,14 @@ class EventHandlersTest : StringSpec({
                 exampleMedicalTechnology.id,
                 exampleRoom.id,
                 roomController,
-                medicalTechnologyController
+                medicalTechnologyController,
             ).execute()
             eventHandler.canHandle(event) shouldBe true
             shouldNotThrow<Exception> { eventHandler.consume(event) }
             MedicalTechnologyService.GetMedicalTechnology(
                 exampleMedicalTechnology.id,
                 medicalTechnologyController,
-                Instant.now()
+                Instant.now(),
             ).execute()?.isInUse shouldBe true
         }
     }

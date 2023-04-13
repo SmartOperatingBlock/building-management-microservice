@@ -27,7 +27,9 @@ object RoomService {
         override fun execute(): Room? =
             if (this.roomRepository.findBy(room.id, null) == null) {
                 this.roomRepository.createRoom(room)
-            } else null
+            } else {
+                null
+            }
     }
 
     /**
@@ -35,7 +37,7 @@ object RoomService {
      */
     class DeleteRoom(
         private val roomID: RoomID,
-        private val roomRepository: RoomRepository
+        private val roomRepository: RoomRepository,
     ) : ApplicationService<Boolean> {
         override fun execute(): Boolean = this.roomRepository.deleteRoom(roomID)
     }
@@ -47,7 +49,7 @@ object RoomService {
     class GetRoom(
         private val roomID: RoomID,
         private val roomRepository: RoomRepository,
-        private val dateTime: Instant? = null
+        private val dateTime: Instant? = null,
     ) : ApplicationService<Room?> {
         override fun execute(): Room? = this.roomRepository.findBy(roomID, dateTime)
     }
@@ -60,7 +62,7 @@ object RoomService {
         private val roomID: RoomID,
         private val roomRepository: RoomRepository,
         private val startDateTime: Instant,
-        private val endDateTime: Instant?
+        private val endDateTime: Instant?,
     ) : ApplicationService<List<Pair<Instant, RoomEnvironmentalData>>?> {
         override fun execute(): List<Pair<Instant, RoomEnvironmentalData>>? =
             this.roomRepository.getRoomEnvironmentalData(roomID, startDateTime, endDateTime ?: Instant.now())
@@ -84,11 +86,13 @@ object RoomService {
         private val roomId: RoomID,
         private val environmentalData: RoomEnvironmentalData,
         private val dateTime: Instant,
-        private val roomRepository: RoomRepository
+        private val roomRepository: RoomRepository,
     ) : ApplicationService<Boolean> {
         override fun execute(): Boolean =
             if (this.roomRepository.findBy(roomId, null) != null) {
                 this.roomRepository.updateRoomEnvironmentalData(roomId, environmentalData, dateTime)
-            } else false
+            } else {
+                false
+            }
     }
 }

@@ -31,7 +31,7 @@ object ApiDeserializer {
         id = RoomID(this.id),
         type = this.type.toRoomType(),
         zoneId = ZoneID(this.zoneId),
-        name = this.name
+        name = this.name,
     )
 
     private fun RoomApiDtoType.toRoomType() = when (this) {
@@ -46,7 +46,7 @@ object ApiDeserializer {
         id = MedicalTechnologyID(this.id),
         name = this.name,
         description = this.description,
-        type = this.type.toMedicalTechnologyType()
+        type = this.type.toMedicalTechnologyType(),
     )
 
     private fun MedicalTechnologyApiDtoType.toMedicalTechnologyType() = when (this) {

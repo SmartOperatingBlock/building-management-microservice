@@ -25,12 +25,14 @@ object MedicalTechnologyService {
      */
     class CreateMedicalTechnology(
         private val medicalTechnology: MedicalTechnology,
-        private val medicalTechnologyRepository: MedicalTechnologyRepository
+        private val medicalTechnologyRepository: MedicalTechnologyRepository,
     ) : ApplicationService<MedicalTechnology?> {
         override fun execute(): MedicalTechnology? =
             if (this.medicalTechnologyRepository.findBy(medicalTechnology.id, null) == null) {
                 this.medicalTechnologyRepository.createMedicalTechnology(medicalTechnology)
-            } else null
+            } else {
+                null
+            }
     }
 
     /**
@@ -41,7 +43,7 @@ object MedicalTechnologyService {
     class GetMedicalTechnology(
         private val medicalTechnologyId: MedicalTechnologyID,
         private val medicalTechnologyRepository: MedicalTechnologyRepository,
-        private val dateTime: Instant? = null
+        private val dateTime: Instant? = null,
     ) : ApplicationService<MedicalTechnology?> {
         override fun execute(): MedicalTechnology? =
             this.medicalTechnologyRepository.findBy(medicalTechnologyId, dateTime)
@@ -53,7 +55,7 @@ object MedicalTechnologyService {
      */
     class DeleteMedicalTechnology(
         private val medicalTechnologyId: MedicalTechnologyID,
-        private val medicalTechnologyRepository: MedicalTechnologyRepository
+        private val medicalTechnologyRepository: MedicalTechnologyRepository,
     ) : ApplicationService<Boolean> {
         override fun execute(): Boolean = this.medicalTechnologyRepository.deleteMedicalTechnology(medicalTechnologyId)
     }
@@ -68,7 +70,7 @@ object MedicalTechnologyService {
         private val medicalTechnologyId: MedicalTechnologyID,
         private val roomID: RoomID?,
         private val roomRepository: RoomRepository,
-        private val medicalTechnologyRepository: MedicalTechnologyRepository
+        private val medicalTechnologyRepository: MedicalTechnologyRepository,
     ) : ApplicationService<Boolean> {
         override fun execute(): Boolean =
             // Check if the medical technology (always) and room exists (if the roomId is not null)
@@ -76,7 +78,9 @@ object MedicalTechnologyService {
                 (this.roomID == null || this.roomRepository.findBy(this.roomID, null) != null)
             ) {
                 this.medicalTechnologyRepository.mapTechnologyTo(medicalTechnologyId, roomID)
-            } else false
+            } else {
+                false
+            }
     }
 
     /**
@@ -97,9 +101,11 @@ object MedicalTechnologyService {
                         medicalTechnologyId,
                         usage,
                         this.roomId,
-                        dateTime
+                        dateTime,
                     )
-                } else false
+                } else {
+                    false
+                }
             }
     }
 }
