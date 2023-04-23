@@ -88,9 +88,9 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
         end: Instant,
     ): List<Pair<Instant, RoomEnvironmentalData>>? {
         var roomCurrentData = this.findBy(roomId, start)?.environmentalData
-        if (roomCurrentData != null) {
+        return if (roomCurrentData != null) {
             // The room exist
-            return this.roomTimeSeriesCollection.find(
+            this.roomTimeSeriesCollection.find(
                 TimeSeriesRoomEnvironmentalData::metadata / TimeSeriesRoomMetadata::roomId eq roomId,
                 TimeSeriesRoomEnvironmentalData::dateTime gt start,
                 TimeSeriesRoomEnvironmentalData::dateTime lte end,
@@ -102,7 +102,7 @@ class DatabaseManager(customConnectionString: String? = null) : RoomDatabaseMana
                 it.dateTime to updatedRoom
             }
         } else {
-            return null // The room does not exist
+            null // The room does not exist
         }
     }
 
