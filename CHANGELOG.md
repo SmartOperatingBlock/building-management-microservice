@@ -1,3 +1,11 @@
+## [1.4.3](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.2...1.4.3) (2023-04-27)
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-serialization to v1.8.21 ([ebdb0a7](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ebdb0a70d240b72b8110bc1b249e5cf61b7fd73f))
+* **deps:** update plugin kotlin-qa to v0.40.0 ([4133a95](https://github.com/SmartOperatingBlock/building-management-microservice/commit/4133a957c066d22a0f53b186d970ce72f99e17d0))
+
 ## [1.4.2](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.1...1.4.2) (2023-04-26)
 
 
