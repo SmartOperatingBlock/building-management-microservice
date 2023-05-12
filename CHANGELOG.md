@@ -1,3 +1,27 @@
+## [1.4.4](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.3...1.4.4) (2023-05-12)
+
+
+### Build and continuous integration
+
+* **deps:** update smartoperatingblock/documentation-ghp-action action to v1.1.0 ([04a9109](https://github.com/SmartOperatingBlock/building-management-microservice/commit/04a9109e84e2c6c33cb51c5c1acec2a0728db5c6))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-serialization-json to v1.5.1 ([ad66a63](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ad66a63f6bdea6a7f50cf70b72722d6812db2832))
+* **deps:** update alpine docker tag to v3.18 ([e7b12a2](https://github.com/SmartOperatingBlock/building-management-microservice/commit/e7b12a2bf5add21f2aa8f25ccb7a26dc4e2ff54b))
+* **deps:** update dependency com.azure:azure-identity to v1.8.3 ([a0738af](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a0738af66d21e754f7831431def51c54a4ee26fe))
+* **deps:** update dependency com.azure:azure-identity to v1.9.0 ([e25d675](https://github.com/SmartOperatingBlock/building-management-microservice/commit/e25d6752b0fd0878c08d3a3cf5ffe670b0028345))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.6.3 ([2e2bbcd](https://github.com/SmartOperatingBlock/building-management-microservice/commit/2e2bbcd0fd0846e18c2f3a75e5a3393b1a0a5ccc))
+* **deps:** update dependency io.confluent:kafka-json-serializer to v7.4.0 ([69e92da](https://github.com/SmartOperatingBlock/building-management-microservice/commit/69e92daa867a318428e9e7c3b64ee5c46e23e3e4))
+* **deps:** update dependency org.apache.kafka:kafka-clients to v7.4.0-ce ([bc5f1fa](https://github.com/SmartOperatingBlock/building-management-microservice/commit/bc5f1fab5fb62c2fb6dbff35a5cd5ed8f805ce74))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.26 ([30e9d2f](https://github.com/SmartOperatingBlock/building-management-microservice/commit/30e9d2f5b5b45eb247939b82ce2fdaa66568af09))
+* **deps:** update kotest to v5.6.2 ([678b3f5](https://github.com/SmartOperatingBlock/building-management-microservice/commit/678b3f509be5424ff3c3fd720ce63a5b6cd683b9))
+* **deps:** update plugin com.gradle.enterprise to v3.13.1 ([e5cdbbd](https://github.com/SmartOperatingBlock/building-management-microservice/commit/e5cdbbdfaec079e9f1b603ac0228eba19cadbece))
+* **deps:** update plugin com.gradle.enterprise to v3.13.2 ([5a6aa05](https://github.com/SmartOperatingBlock/building-management-microservice/commit/5a6aa0524df133982ca8314fee9ab4d606dd0e2a))
+* **deps:** update plugin kotlin-qa to v0.41.0 ([9eb15c7](https://github.com/SmartOperatingBlock/building-management-microservice/commit/9eb15c7260b16eed852aff9c86e9b0f157c71f80))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.7 ([0d6498a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/0d6498a4770862e7063ef697b72fc4eaa140418c))
+
 ## [1.4.3](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.2...1.4.3) (2023-04-27)
 
 
