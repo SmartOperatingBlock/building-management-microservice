@@ -37,7 +37,7 @@ object ApiSerializer {
     )
 
     /**
-     * Extension method to convert [Room] API DTO to [application.presenter.api.model.RoomApiDto] class.
+     * Extension method to convert [Room] to [RoomApiDto] class.
      */
     fun Room.toRoomApiDto(): RoomApiDto = RoomApiDto(
         id = this.id.value,
@@ -47,7 +47,10 @@ object ApiSerializer {
         environmentalData = this.environmentalData.toEnvironmentDataApiDto(),
     )
 
-    private fun RoomEnvironmentalData.toEnvironmentDataApiDto() = EnvironmentalDataApiDto(
+    /**
+     * Extension method to convert [RoomEnvironmentalData] to [EnvironmentalDataApiDto] class.
+     */
+    fun RoomEnvironmentalData.toEnvironmentDataApiDto() = EnvironmentalDataApiDto(
         temperature = this.temperature?.let { ValueWithUnit(it.value, it.unit.toString()) },
         humidity = this.humidity?.percentage,
         luminosity = this.luminosity?.let { ValueWithUnit(it.value, it.unit.toString()) },
