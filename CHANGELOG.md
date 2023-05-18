@@ -1,3 +1,21 @@
+## [1.4.5](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.4...1.4.5) (2023-05-18)
+
+
+### Bug Fixes
+
+* expose the room environmental data api dto instead of internal model ([dd34b1c](https://github.com/SmartOperatingBlock/building-management-microservice/commit/dd34b1c5614cbe049d103b6bbf91992fd01a11f1))
+* make room environmental data serializer public to use ([ec8b82c](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ec8b82c9ccbda3be1f2b9778925a9b4ce2836002))
+
+
+### Build and continuous integration
+
+* **deps:** update codecov/codecov-action action to v3.1.4 ([ead7dc4](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ead7dc410095f5d315ef60da44fc648f2f3428ff))
+
+
+### Dependency updates
+
+* **deps:** update dependency com.fasterxml.jackson.module:jackson-module-kotlin to v2.15.1 ([cb77ec4](https://github.com/SmartOperatingBlock/building-management-microservice/commit/cb77ec4d32d5b2d56605f60377551db06c04c281))
+
 ## [1.4.4](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.3...1.4.4) (2023-05-12)
 
 
