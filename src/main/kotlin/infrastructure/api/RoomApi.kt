@@ -11,6 +11,7 @@ package infrastructure.api
 import application.controller.RoomController
 import application.presenter.api.deserializer.ApiDeserializer.toRoom
 import application.presenter.api.model.RoomEntry
+import application.presenter.api.serializer.ApiSerializer.toEnvironmentDataApiDto
 import application.presenter.api.serializer.ApiSerializer.toRoomApiDto
 import application.service.RoomService
 import entity.zone.RoomID
@@ -112,7 +113,7 @@ private fun Route.getHistoricalRoomEnvironmentDataRoute(apiPath: String, provide
                 ?: Instant.now(),
             call.request.queryParameters["to"]?.let { rawDateTime -> Instant.parse(rawDateTime) },
         ).execute()?.map { pair ->
-            ApiResponses.ResponseTimedEntry(pair.second, pair.first.toString())
+            ApiResponses.ResponseTimedEntry(pair.second.toEnvironmentDataApiDto(), pair.first.toString())
         }.apply {
             when (this) {
                 null -> call.respond(HttpStatusCode.NotFound)
