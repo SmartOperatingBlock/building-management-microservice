@@ -250,9 +250,9 @@ paths:
             schema:
               type: object
               properties:
-                room-id:
+                roomId:
                   type: string
-                  example: Room-#2
+                  example: Room-2
                   description: room to specify a new mapping, null if you want to delete mapping
         description: the new mapping
       responses:
@@ -277,13 +277,13 @@ components:
       properties:
         id:
           type: string
-          example: Room-#1
+          example: Room-1
         name:
           type: string
           example: Mario Rossi's Operating Room - Bufalini Hospital
         zoneId:
           type: string
-          example: Zone-#1
+          example: Zone-1
         type:
           $ref: '#/components/schemas/RoomType'
 
@@ -301,7 +301,7 @@ components:
               url:
                 type: string
                 format: uri
-                example: 'http://localhost:3000/api/v1/rooms/Room-#1'
+                example: 'http://localhost:3000/api/v1/rooms/Room-1'
         total:
           type: integer
           description: the total number of room entries
@@ -312,13 +312,13 @@ components:
       properties:
         id:
           type: string
-          example: Room-#1
+          example: Room-1
         name:
           type: string
           example: Mario Rossi's Operating Room - Bufalini Hospital
         zoneId:
           type: string
-          example: Zone-#1
+          example: Zone-1
         type:
           $ref: '#/components/schemas/RoomType'
         environmentalData:
@@ -359,7 +359,7 @@ components:
       properties:
         entries:
           type: array
-          description: room's environemtal data entries
+          description: room's environmental data entries
           items:
             type: object
             properties:
@@ -398,7 +398,7 @@ components:
       properties:
         id:
           type: string
-          example: mt-#1
+          example: mt-1
         name:
           type: string
           example: Endoscope
@@ -408,6 +408,6 @@ components:
           type: boolean
         roomId:
           type: string
-          example: Room-#1
+          example: Room-1
         type:
           $ref: '#/components/schemas/MedicalTechnologyType'
