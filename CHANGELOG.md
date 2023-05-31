@@ -1,3 +1,17 @@
+## [1.4.6](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.5...1.4.6) (2023-05-31)
+
+
+### Dependency updates
+
+* **deps:** update dependency com.azure:azure-digitaltwins-core to v1.3.9 ([875eccd](https://github.com/SmartOperatingBlock/building-management-microservice/commit/875eccda8132f8c15b78f432dc3a6f49c9e5635b))
+* **deps:** update plugin com.gradle.enterprise to v3.13.3 ([4640ff2](https://github.com/SmartOperatingBlock/building-management-microservice/commit/4640ff2fd3c7ad5bdf2e7b1d0d42bc5d5a87d46e))
+* **deps:** update plugin kotlin-qa to v0.42.0 ([9c55801](https://github.com/SmartOperatingBlock/building-management-microservice/commit/9c55801a2bfbfb57421fe0d4f9d6b427b8317051))
+
+
+### Documentation
+
+* **rest-api:** correct medical technology mapping request body and update ids in examples with valid ones ([532fc19](https://github.com/SmartOperatingBlock/building-management-microservice/commit/532fc19827f03b0dbc1d7b05c8815bfe7fb199e3))
+
 ## [1.4.5](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.4...1.4.5) (2023-05-18)
 
 
