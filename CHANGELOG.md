@@ -1,3 +1,22 @@
+## [1.4.7](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.6...1.4.7) (2023-06-07)
+
+
+### Dependency updates
+
+* **deps:** update dependency com.azure:azure-identity to v1.9.1 ([a0b7760](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a0b776088e2d9bd056a2e0394651cf36f98e9963))
+* **deps:** update dependency com.fasterxml.jackson.module:jackson-module-kotlin to v2.15.2 ([e909f82](https://github.com/SmartOperatingBlock/building-management-microservice/commit/e909f82f8e102578d6d19cee5aaef71fd68c5d5d))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.7.0 ([a062b47](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a062b471e66c4c178549335e535b4ad0370787f6))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.27 ([62021ed](https://github.com/SmartOperatingBlock/building-management-microservice/commit/62021eda9c5da469c41c5e85edbf1b2c8786a474))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.29 ([b4a79b1](https://github.com/SmartOperatingBlock/building-management-microservice/commit/b4a79b1147027a254844dbda5ecad97215c920be))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.30 ([e0bc309](https://github.com/SmartOperatingBlock/building-management-microservice/commit/e0bc30990fc21fe8cc9e0d5d6d862728e457992c))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.32 ([3bfcc38](https://github.com/SmartOperatingBlock/building-management-microservice/commit/3bfcc38aaec4a345a15c6f7b02cd8957b807529c))
+* **deps:** update ktor to v2.3.1 ([edad9e9](https://github.com/SmartOperatingBlock/building-management-microservice/commit/edad9e9b3177ada8f5d1551f4ee6a010023e8aa0))
+
+
+### Documentation
+
+* **deps:** update plugin dokka to v1.8.20 ([7ddaf82](https://github.com/SmartOperatingBlock/building-management-microservice/commit/7ddaf8214b567c22ce63981d09d1552bcbc4dda7))
+
 ## [1.4.6](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.5...1.4.6) (2023-05-31)
 
 
