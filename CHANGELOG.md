@@ -1,3 +1,13 @@
+## [1.4.8](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.7...1.4.8) (2023-06-08)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-stdlib to v1.8.22 ([30d9f32](https://github.com/SmartOperatingBlock/building-management-microservice/commit/30d9f32284e7ad0519897ea0deee7bd53c95ea8b))
+* **deps:** update plugin kotlin-qa to v0.43.0 ([b534b24](https://github.com/SmartOperatingBlock/building-management-microservice/commit/b534b2423d1f23bca7f6bc538a62400fc577136b))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.8 ([1967d41](https://github.com/SmartOperatingBlock/building-management-microservice/commit/1967d41c3ddc704249a9f742299cf1349fe24e9c))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.9 ([0a49fdf](https://github.com/SmartOperatingBlock/building-management-microservice/commit/0a49fdf141e61964c8660400d6fe1702f064be1b))
+
 ## [1.4.7](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.6...1.4.7) (2023-06-07)
 
 
