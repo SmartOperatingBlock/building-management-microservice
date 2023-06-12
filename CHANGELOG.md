@@ -1,3 +1,19 @@
+## [1.4.9](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.8...1.4.9) (2023-06-12)
+
+
+### Build and continuous integration
+
+* **deps:** update smartoperatingblock/release-and-delivery-action action to v1.0.1 ([b7e4b29](https://github.com/SmartOperatingBlock/building-management-microservice/commit/b7e4b2936942a874b5b81bee4827ec8b0790ed6d))
+* **deps:** update smartoperatingblock/release-and-delivery-action action to v1.0.2 ([30ca6d4](https://github.com/SmartOperatingBlock/building-management-microservice/commit/30ca6d437d759ad8ee11ef4738b8ae49b3c25de2))
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-serialization to v1.8.22 ([96a3db0](https://github.com/SmartOperatingBlock/building-management-microservice/commit/96a3db08ea911600e235690ac22901698503052d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.33 ([3aac565](https://github.com/SmartOperatingBlock/building-management-microservice/commit/3aac5652c2082c430f36bf85e6af45636e7ab9cb))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.34 ([6f8d617](https://github.com/SmartOperatingBlock/building-management-microservice/commit/6f8d6179d2a520bc2ed6cc0aa73bf9435da93b57))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.35 ([fa9708b](https://github.com/SmartOperatingBlock/building-management-microservice/commit/fa9708b5eb0c467d14f015ba0ccc838bd1de8998))
+
 ## [1.4.8](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.7...1.4.8) (2023-06-08)
 
 
