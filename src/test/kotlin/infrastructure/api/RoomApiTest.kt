@@ -133,8 +133,13 @@ class RoomApiTest : StringSpec({
             insertRoom(roomEntry)
             val response = client.get("/api/v1/rooms/data/${roomEntry.id}")
             response shouldHaveStatus HttpStatusCode.OK
-            Json.decodeFromString<ApiResponses.ResponseEntryList<ApiResponses.ResponseTimedEntry<
-                RoomEnvironmentalData,>,>,>(
+            Json.decodeFromString<
+                ApiResponses.ResponseEntryList<
+                    ApiResponses.ResponseTimedEntry<
+                        RoomEnvironmentalData,
+                        >,
+                    >,
+                >(
                 response.bodyAsText(),
             ).total shouldBe 0
         }
