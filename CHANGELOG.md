@@ -1,3 +1,32 @@
+## [1.4.10](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.9...1.4.10) (2023-07-07)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-stdlib to v1.9.0 ([cb25ae3](https://github.com/SmartOperatingBlock/building-management-microservice/commit/cb25ae3059434f84f86b417352e69b030493918a))
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.4.8 ([da93369](https://github.com/SmartOperatingBlock/building-management-microservice/commit/da93369fcdb9bc8a2fc53a49eaef6e51ded291b3))
+* **deps:** update dependency com.azure:azure-digitaltwins-core to v1.3.10 ([710763d](https://github.com/SmartOperatingBlock/building-management-microservice/commit/710763dfd9b0ef80a9c9fb72212b772219a74565))
+* **deps:** update dependency gradle to v8.2 ([bc0a6be](https://github.com/SmartOperatingBlock/building-management-microservice/commit/bc0a6bebeca87186c11bd3311ce8075b6afc72be))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.36 ([6c6d535](https://github.com/SmartOperatingBlock/building-management-microservice/commit/6c6d535b6ca1718c4b547244b768d57d94b6d295))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.37 ([ea542e6](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ea542e6ae3ac70abaaf1737d27036771c157f36c))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.38 ([0b76188](https://github.com/SmartOperatingBlock/building-management-microservice/commit/0b761881962475d6ae888cc1444a2777b94b8cd3))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.39 ([610ebd9](https://github.com/SmartOperatingBlock/building-management-microservice/commit/610ebd9dd89b48ba68a310c3bcddd58bb407fab5))
+* **deps:** update ktor to v2.3.2 ([953b143](https://github.com/SmartOperatingBlock/building-management-microservice/commit/953b1432909e0bb172eb296e7af0b03e12657255))
+* **deps:** update plugin com.gradle.enterprise to v3.13.4 ([2a3d15d](https://github.com/SmartOperatingBlock/building-management-microservice/commit/2a3d15d9181e561359ca40c492a864bf6c206daa))
+* **deps:** update plugin kotlin-qa to v0.45.0 ([eebad6b](https://github.com/SmartOperatingBlock/building-management-microservice/commit/eebad6b11857207eb4995605d8816fa2f4284dfd))
+* **deps:** update plugin kotlin-qa to v0.46.0 ([994cb93](https://github.com/SmartOperatingBlock/building-management-microservice/commit/994cb9361eea774eead30e701e2302b8c1971318))
+* **deps:** update plugin kotlin-qa to v0.46.1 ([728f4ee](https://github.com/SmartOperatingBlock/building-management-microservice/commit/728f4ee47ff0af0df374c8d7e6490ae46070a375))
+
+
+### Build and continuous integration
+
+* **deps:** update smartoperatingblock/release-and-delivery-action action to v1.0.3 ([49dc0ae](https://github.com/SmartOperatingBlock/building-management-microservice/commit/49dc0ae44123f5eea10cd096e1bbbfceac882e9f))
+
+
+### Style improvements
+
+* correct code to adhere to new kotlin qa rules ([48540f5](https://github.com/SmartOperatingBlock/building-management-microservice/commit/48540f5f060d3a03a6f6c89a8f9c4d66d772434f))
+
 ## [1.4.9](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.8...1.4.9) (2023-06-12)
 
 
