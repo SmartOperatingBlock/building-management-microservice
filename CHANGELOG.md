@@ -1,3 +1,13 @@
+## [1.4.11](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.10...1.4.11) (2023-07-10)
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-serialization to v1.9.0 ([c6d5e76](https://github.com/SmartOperatingBlock/building-management-microservice/commit/c6d5e76d80d2e639a2cbd8dcbac10152f4cba651))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.40 ([2729fd7](https://github.com/SmartOperatingBlock/building-management-microservice/commit/2729fd79fb4c9a2e250de7e363d6b53d741640a6))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.41 ([77a1bc7](https://github.com/SmartOperatingBlock/building-management-microservice/commit/77a1bc7ccee84d2e6e766df2f45b34d890fc4ed8))
+* **deps:** update plugin kotlin-qa to v0.47.0 ([53169b8](https://github.com/SmartOperatingBlock/building-management-microservice/commit/53169b89a1a7799d54d01fa18e9fcc0bb5145566))
+
 ## [1.4.10](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.9...1.4.10) (2023-07-07)
 
 
