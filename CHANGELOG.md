@@ -1,3 +1,41 @@
+## [1.4.12](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.11...1.4.12) (2023-08-23)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-serialization-json to v1.6.0 ([a4bc1a0](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a4bc1a05bd6b080bf17d6541fc31191d04ce4c3a))
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.4.10 ([608ee8c](https://github.com/SmartOperatingBlock/building-management-microservice/commit/608ee8c48cf54bbd689faeb89f2e4d658de759c7))
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.4.11 ([b343c9f](https://github.com/SmartOperatingBlock/building-management-microservice/commit/b343c9ff8aef1efde564a9eb7c11579b92b07dce))
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.4.9 ([164e84f](https://github.com/SmartOperatingBlock/building-management-microservice/commit/164e84f1d3b8602e7dcf0d2146081f12ca102402))
+* **deps:** update dependency com.azure:azure-digitaltwins-core to v1.3.11 ([46bd8ca](https://github.com/SmartOperatingBlock/building-management-microservice/commit/46bd8cafa7ee70a0ddc9728789486a038b21a90c))
+* **deps:** update dependency com.azure:azure-identity to v1.10.0 ([c8e2f66](https://github.com/SmartOperatingBlock/building-management-microservice/commit/c8e2f663ba94e693209ac9917c872c5c2a483f6d))
+* **deps:** update dependency com.azure:azure-identity to v1.9.2 ([5241ebb](https://github.com/SmartOperatingBlock/building-management-microservice/commit/5241ebbd391fa11a89960acc77daeed2cbae3689))
+* **deps:** update dependency com.tngtech.archunit:archunit-junit5 to v1.1.0 ([7b7c766](https://github.com/SmartOperatingBlock/building-management-microservice/commit/7b7c766eb87631bc43b9c90e0928863a15054bc6))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.7.1 ([adec95e](https://github.com/SmartOperatingBlock/building-management-microservice/commit/adec95ea46110f7104ea99f14b245b715ff458bc))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.7.2 ([55a3153](https://github.com/SmartOperatingBlock/building-management-microservice/commit/55a31538552705cd6fedf03224ceca82b38fea7c))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.8.0 ([b219f65](https://github.com/SmartOperatingBlock/building-management-microservice/commit/b219f65ac08a68458bb1791c21b4d9b050455376))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.8.1 ([30bcb69](https://github.com/SmartOperatingBlock/building-management-microservice/commit/30bcb695a43a13d35f5452cdbd39f4f8b79c5e1a))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.9.0 ([e966a77](https://github.com/SmartOperatingBlock/building-management-microservice/commit/e966a77199139a2ae99249d5dd8ab3b92c02f5f2))
+* **deps:** update dependency gradle to v8.2.1 ([52978b1](https://github.com/SmartOperatingBlock/building-management-microservice/commit/52978b18df8fcb3247c648c66babd5dafa71188f))
+* **deps:** update dependency gradle to v8.3 ([90a8f00](https://github.com/SmartOperatingBlock/building-management-microservice/commit/90a8f00bc1ce47a423e039bd051eb3fc0a24889b))
+* **deps:** update dependency io.confluent:kafka-json-serializer to v7.4.1 ([4e4e057](https://github.com/SmartOperatingBlock/building-management-microservice/commit/4e4e057493642a8a8804f978e7dde5eb3e9c606c))
+* **deps:** update dependency org.apache.kafka:kafka-clients to v7.4.1-ce ([ed26a33](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ed26a33ce8ec894adc1c54402ca33472ad6b0b05))
+* **deps:** update dependency org.litote.kmongo:kmongo-serialization to v4.10.0 ([78890fc](https://github.com/SmartOperatingBlock/building-management-microservice/commit/78890fc143436235eb4c1ffc2ee6ea2aa2894b43))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.42 ([85b7a40](https://github.com/SmartOperatingBlock/building-management-microservice/commit/85b7a40ec1f2f81a9d5dde6eaab45a3562762dbf))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.43 ([6bc0b11](https://github.com/SmartOperatingBlock/building-management-microservice/commit/6bc0b11f200bacb94ff895718808fc1e785ad238))
+* **deps:** update ktor to v2.3.3 ([4bd55c9](https://github.com/SmartOperatingBlock/building-management-microservice/commit/4bd55c9f49500527ffd6c826aba1f5547cc0df63))
+* **deps:** update node.js to 18.17 ([48ecc1a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/48ecc1af8d77db875ffc4f76c5b9a2c0d46a06a0))
+* **deps:** update plugin com.gradle.enterprise to v3.14 ([0c429af](https://github.com/SmartOperatingBlock/building-management-microservice/commit/0c429af5690beaaca1926c9d93d80e4ce06b77e1))
+* **deps:** update plugin com.gradle.enterprise to v3.14.1 ([36e5618](https://github.com/SmartOperatingBlock/building-management-microservice/commit/36e5618eb2a9f1e7641b8d17fe4fbaf0b6bae74f))
+* **deps:** update plugin kotlin-qa to v0.47.1 ([9abef93](https://github.com/SmartOperatingBlock/building-management-microservice/commit/9abef9337a07084ea33fde12703826adcbcd75ff))
+* **deps:** update plugin kotlin-qa to v0.48.0 ([88113ae](https://github.com/SmartOperatingBlock/building-management-microservice/commit/88113ae9dac542dfcc9974658d821ea2e08ba09e))
+* **deps:** update plugin kotlin-qa to v0.49.0 ([460ddc2](https://github.com/SmartOperatingBlock/building-management-microservice/commit/460ddc23581d008ab590794c5bea3335d585b7ef))
+
+
+### Build and continuous integration
+
+* **deps:** update gradle/wrapper-validation-action action to v1.1.0 ([a0a218a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a0a218a9c6cdea9b14a086784d8aaacbcedae8b8))
+
 ## [1.4.11](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.10...1.4.11) (2023-07-10)
 
 
