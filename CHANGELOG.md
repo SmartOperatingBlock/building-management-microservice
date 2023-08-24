@@ -1,3 +1,13 @@
+## [1.4.13](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.12...1.4.13) (2023-08-24)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-stdlib to v1.9.10 ([a39b28e](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a39b28ee58f2e677d32fc35068205403e37f4841))
+* **deps:** update dependency com.azure:azure-digitaltwins-core to v1.3.12 ([5b57489](https://github.com/SmartOperatingBlock/building-management-microservice/commit/5b5748949b9507b41379b52a2817b8c047af5a29))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.44 ([56889cd](https://github.com/SmartOperatingBlock/building-management-microservice/commit/56889cd6710788785e67bb7c67d0c4d9bdb48412))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.46 ([0adb9af](https://github.com/SmartOperatingBlock/building-management-microservice/commit/0adb9af2feb180f0ed82cbe4a03d7a70bcc42368))
+
 ## [1.4.12](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.11...1.4.12) (2023-08-23)
 
 
