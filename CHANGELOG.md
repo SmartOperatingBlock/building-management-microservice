@@ -1,3 +1,16 @@
+## [1.4.15](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.14...1.4.15) (2023-09-06)
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-serialization to v1.9.10 ([d4638d1](https://github.com/SmartOperatingBlock/building-management-microservice/commit/d4638d1744f8a66bb1fc8983e98fd4c40d00851e))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.10 ([b0e8865](https://github.com/SmartOperatingBlock/building-management-microservice/commit/b0e886575fc94a9aa6f2d783f86079cbd31e2a0a))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4 ([2b9769c](https://github.com/SmartOperatingBlock/building-management-microservice/commit/2b9769c732f0e3ae3bb83c4efc72e5395ca0d2c6))
+
 ## [1.4.14](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.13...1.4.14) (2023-09-04)
 
 
