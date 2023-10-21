@@ -1,3 +1,55 @@
+## [1.4.16](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.15...1.4.16) (2023-10-21)
+
+
+### Dependency updates
+
+* **deps:** update dependency com.azure:azure-digitaltwins-core to v1.3.13 ([6c32d61](https://github.com/SmartOperatingBlock/building-management-microservice/commit/6c32d6101d25e96b359b05af17934ef11c1d154b))
+* **deps:** update dependency com.azure:azure-identity to v1.10.1 ([eb5762f](https://github.com/SmartOperatingBlock/building-management-microservice/commit/eb5762f60e1b2c72dd548ecee8701b9a5bd6988f))
+* **deps:** update dependency com.azure:azure-identity to v1.10.2 ([a511553](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a5115538a3d1556ddef88ba0653837f58e088f77))
+* **deps:** update dependency com.azure:azure-identity to v1.10.3 ([25d8ce1](https://github.com/SmartOperatingBlock/building-management-microservice/commit/25d8ce1aac20f4a31b3caa7de8d62416544ed9c7))
+* **deps:** update dependency com.azure:azure-identity to v1.10.4 ([3af6b78](https://github.com/SmartOperatingBlock/building-management-microservice/commit/3af6b78b08a389dbbc0c5ff0c32f325071ff5d8c))
+* **deps:** update dependency com.fasterxml.jackson.module:jackson-module-kotlin to v2.15.3 ([fd9e642](https://github.com/SmartOperatingBlock/building-management-microservice/commit/fd9e642e422a3a861318cd3f80ae679cb0a01317))
+* **deps:** update dependency gradle to v8.4 ([1e3a5ff](https://github.com/SmartOperatingBlock/building-management-microservice/commit/1e3a5ffd76dc549688c2462c900473c5fdbd526b))
+* **deps:** update dependency io.confluent:kafka-json-serializer to v7.5.1 ([af3fa46](https://github.com/SmartOperatingBlock/building-management-microservice/commit/af3fa46227f251b0911676848ebedb30d5a66312))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.54 ([0d37abb](https://github.com/SmartOperatingBlock/building-management-microservice/commit/0d37abb59ae8873b856f9772211971b64fcd0d18))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.55 ([4233cac](https://github.com/SmartOperatingBlock/building-management-microservice/commit/4233cacad7a83531c5683136f99639b6424fdf89))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.56 ([20fe12f](https://github.com/SmartOperatingBlock/building-management-microservice/commit/20fe12f2201bf229c23ca806aaf7cd1fe7ef923b))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.58 ([98ee0b3](https://github.com/SmartOperatingBlock/building-management-microservice/commit/98ee0b3714a2e94b45972e16f743a84905bbd8ca))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.60 ([12f4605](https://github.com/SmartOperatingBlock/building-management-microservice/commit/12f4605e4798c632dc23c604e2531548466355b0))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.61 ([d695565](https://github.com/SmartOperatingBlock/building-management-microservice/commit/d695565ca2019a574d0e57fcdf3e312e48b4ace8))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.62 ([b79b04a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/b79b04aa33651d1a989baa7b4c8f2fb5343e1697))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.63 ([a07e202](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a07e20241622019ce0f94b19a924a51b9da90658))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.64 ([8c0b707](https://github.com/SmartOperatingBlock/building-management-microservice/commit/8c0b7072368dd874e1cb6e61ac20af175b945d88))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.65 ([e5a4042](https://github.com/SmartOperatingBlock/building-management-microservice/commit/e5a404201a5f963c524d0af03126e56744cc5c26))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.66 ([f15a12f](https://github.com/SmartOperatingBlock/building-management-microservice/commit/f15a12f65a326e87381aaca2b69dfe8523f11613))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.67 ([baae56d](https://github.com/SmartOperatingBlock/building-management-microservice/commit/baae56d172a76a8871f37a978c80dbdac87b6299))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.68 ([9d51304](https://github.com/SmartOperatingBlock/building-management-microservice/commit/9d51304076137d7025b888063f2ad6342d0c90cb))
+* **deps:** update kotest to v5.7.2 ([8953322](https://github.com/SmartOperatingBlock/building-management-microservice/commit/8953322014fa6030854f9e993e66887ce0f3c295))
+* **deps:** update ktor to v2.3.5 ([ba24674](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ba2467485cd5c7dfec1f83d4774d42de7e059aeb))
+* **deps:** update node.js to 18.18 ([d81924a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/d81924a39355637cc061c76d46740b4d0f336a43))
+* **deps:** update plugin com.gradle.enterprise to v3.15 ([13c1fe4](https://github.com/SmartOperatingBlock/building-management-microservice/commit/13c1fe4d8f35a191571100d8629356461ebd6f3f))
+* **deps:** update plugin com.gradle.enterprise to v3.15.1 ([dfd8beb](https://github.com/SmartOperatingBlock/building-management-microservice/commit/dfd8beb3357133f93c9835a86ef432470111b994))
+* **deps:** update plugin kotlin-qa to v0.49.1 ([ebb00d7](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ebb00d7112ab6f4e246a212f58f40b8791cdb808))
+* **deps:** update plugin kotlin-qa to v0.50.0 ([d22a3f0](https://github.com/SmartOperatingBlock/building-management-microservice/commit/d22a3f09e1ee79feb963aa36a8346f317d47caa6))
+* **deps:** update plugin kotlin-qa to v0.51.0 ([98747d0](https://github.com/SmartOperatingBlock/building-management-microservice/commit/98747d0ec3c1a30a0ceacb49f21e5e2d77cf5589))
+* **deps:** update plugin kotlin-qa to v0.52.0 ([53c9e9c](https://github.com/SmartOperatingBlock/building-management-microservice/commit/53c9e9c86e2e06fcbef0ede1e6448172e750db42))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.11 ([a57984a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a57984af077145ce827e91e913abe6672aaafcea))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.12 ([5701f39](https://github.com/SmartOperatingBlock/building-management-microservice/commit/5701f397fe05b64b866ae498158765fcb01c5b51))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.13 ([c87461b](https://github.com/SmartOperatingBlock/building-management-microservice/commit/c87461badbaa140b7102fcbbcd36e45accea7840))
+
+
+### Documentation
+
+* **deps:** update plugin dokka to v1.9.10 ([19f875c](https://github.com/SmartOperatingBlock/building-management-microservice/commit/19f875cfb201c27caccec0c3eb9ad78b5f43f4d8))
+
+
+### Build and continuous integration
+
+* **deps:** update smartoperatingblock/release-and-delivery-action action to v1.0.10 ([1f46ab6](https://github.com/SmartOperatingBlock/building-management-microservice/commit/1f46ab64f814d627fc371b1dff1af190f1c097b7))
+* **deps:** update smartoperatingblock/release-and-delivery-action action to v1.0.4 ([4eefd2e](https://github.com/SmartOperatingBlock/building-management-microservice/commit/4eefd2e47346f638fbb8d5be3166ea83764eb558))
+* **deps:** update smartoperatingblock/release-and-delivery-action action to v1.0.5 ([bdb2ea3](https://github.com/SmartOperatingBlock/building-management-microservice/commit/bdb2ea3f22b99a9f1acb316a8b3b0f5bc51bc978))
+* **deps:** update smartoperatingblock/release-and-delivery-action action to v1.0.6 ([04662ae](https://github.com/SmartOperatingBlock/building-management-microservice/commit/04662ae3b5dbc1820aa02748952891c2514f486f))
+
 ## [1.4.15](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.14...1.4.15) (2023-09-06)
 
 
