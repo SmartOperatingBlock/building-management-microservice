@@ -1,3 +1,21 @@
+## [1.4.17](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.16...1.4.17) (2023-10-31)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-stdlib to v1.9.20 ([f7a42fa](https://github.com/SmartOperatingBlock/building-management-microservice/commit/f7a42fa1d98906b48b89ea962e0eeec55572489f))
+* **deps:** update dependency com.azure:azure-digitaltwins-core to v1.3.14 ([4152e6a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/4152e6aa021507415c07949f1281012ec1595430))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.9.3 ([128a92e](https://github.com/SmartOperatingBlock/building-management-microservice/commit/128a92e9281c774f13ac75a42212a333b8de38cc))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.69 ([1cffada](https://github.com/SmartOperatingBlock/building-management-microservice/commit/1cffada94a733ac4df4d12dbec59603cf9d78a1a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.70 ([63bdcda](https://github.com/SmartOperatingBlock/building-management-microservice/commit/63bdcdacfcbbad108dec57f2347f5fc14b0728ef))
+* **deps:** update node.js to 20.9 ([190ab81](https://github.com/SmartOperatingBlock/building-management-microservice/commit/190ab81a07ef05d8b3117d5a2c076ada420c8f29))
+* **deps:** update node.js to v20 ([7362688](https://github.com/SmartOperatingBlock/building-management-microservice/commit/736268881a560409d22148e6c03e9a8df6df2a38))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v4 ([5afad6f](https://github.com/SmartOperatingBlock/building-management-microservice/commit/5afad6f3faa6a0da21a4ec1edf8f3959eafbd296))
+
 ## [1.4.16](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.15...1.4.16) (2023-10-21)
 
 
