@@ -1,3 +1,22 @@
+## [1.4.19](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.18...1.4.19) (2023-11-16)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-serialization-json to v1.6.1 ([042270b](https://github.com/SmartOperatingBlock/building-management-microservice/commit/042270b8dca78f472cd7410071f081b8495f32d5))
+* **deps:** update dependency com.azure:azure-identity to v1.11.0 ([6756bc6](https://github.com/SmartOperatingBlock/building-management-microservice/commit/6756bc6744e1c1dbfe1fa4593e817dccf34cf54e))
+* **deps:** update dependency com.tngtech.archunit:archunit-junit5 to v1.2.0 ([a777395](https://github.com/SmartOperatingBlock/building-management-microservice/commit/a777395d0de4ec3ea27095f7d077ee84768a2d7e))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.10.0 ([6c704ec](https://github.com/SmartOperatingBlock/building-management-microservice/commit/6c704ecee13485e13cc4f0a6dd997abdd2f8a4fd))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.10.1 ([193945e](https://github.com/SmartOperatingBlock/building-management-microservice/commit/193945e2120c82f5beebf0eb03f02614af9a012b))
+* **deps:** update dependency io.confluent:kafka-json-serializer to v7.5.2 ([509fbe1](https://github.com/SmartOperatingBlock/building-management-microservice/commit/509fbe18a3b068a38f026242734e0afb55bbd41c))
+* **deps:** update dependency org.litote.kmongo:kmongo-serialization to v4.11.0 ([c9231e7](https://github.com/SmartOperatingBlock/building-management-microservice/commit/c9231e7f118968d90d0174ca66e1d73ed76a83e0))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.72 ([4bc77fe](https://github.com/SmartOperatingBlock/building-management-microservice/commit/4bc77fe5c1f08a66ee751b9daba5d17832582886))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.73 ([c00ee99](https://github.com/SmartOperatingBlock/building-management-microservice/commit/c00ee999d206b78ce75ec022b74c802dbcdc2280))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.74 ([e5101b7](https://github.com/SmartOperatingBlock/building-management-microservice/commit/e5101b7a8b9128a7b5a3117c08deae1858c84dde))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.75 ([f153860](https://github.com/SmartOperatingBlock/building-management-microservice/commit/f153860c3883cb4a998aad1c09d025d83d9b0a3f))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.76 ([0da0b99](https://github.com/SmartOperatingBlock/building-management-microservice/commit/0da0b99d949e6f1b0fde4ceed49d6e0582a6d39d))
+* **deps:** update ktor to v2.3.6 ([e117589](https://github.com/SmartOperatingBlock/building-management-microservice/commit/e1175891e2b7a94c78ab4da20b29aae0ccca1984))
+
 ## [1.4.18](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.17...1.4.18) (2023-11-05)
 
 
