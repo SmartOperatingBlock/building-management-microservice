@@ -1,3 +1,22 @@
+## [1.4.20](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.19...1.4.20) (2023-11-24)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-stdlib to v1.9.21 ([970a82d](https://github.com/SmartOperatingBlock/building-management-microservice/commit/970a82d4d1d0180b337dfc7bfd2799d933551002))
+* **deps:** update dependency com.azure:azure-digitaltwins-core to v1.3.15 ([129f2fe](https://github.com/SmartOperatingBlock/building-management-microservice/commit/129f2fe21b0d98008fc90d3d551089b0d4330bbf))
+* **deps:** update dependency com.fasterxml.jackson.module:jackson-module-kotlin to v2.16.0 ([6dd52ab](https://github.com/SmartOperatingBlock/building-management-microservice/commit/6dd52ab66b704d274098f94620606c38e3f0d665))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.10.2 ([780c1a2](https://github.com/SmartOperatingBlock/building-management-microservice/commit/780c1a2a0ada8ed9e3cf087210a37fd14d1233bb))
+* **deps:** update dependency de.flapdoodle.embed:de.flapdoodle.embed.mongo to v4.11.1 ([7a1faf8](https://github.com/SmartOperatingBlock/building-management-microservice/commit/7a1faf82a0b2fac299b5a9880eb91bba94d45c70))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.77 ([2281880](https://github.com/SmartOperatingBlock/building-management-microservice/commit/22818804743e8fb58520ae4ad32dc2d825600c7d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.78 ([673be0a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/673be0a5811b64d9c685b0cc47c786b0ee325f69))
+* **deps:** update node.js to 20.10 ([15cb1d9](https://github.com/SmartOperatingBlock/building-management-microservice/commit/15cb1d9e83b27d8b59cad86afb12e18fa26bd87c))
+
+
+### Build and continuous integration
+
+* **deps:** update smartoperatingblock/release-and-delivery-action action to v1.0.11 ([3d9cfd3](https://github.com/SmartOperatingBlock/building-management-microservice/commit/3d9cfd3a95d1dc5f825a091494505b8f22ed96e7))
+
 ## [1.4.19](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.18...1.4.19) (2023-11-16)
 
 
