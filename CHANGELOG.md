@@ -1,3 +1,24 @@
+## [1.4.21](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.20...1.4.21) (2023-12-01)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-serialization-json to v1.6.2 ([ad9d73e](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ad9d73e3bfb63077eb790ebe7e6df83c5a872d00))
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.4.12 ([14eef9f](https://github.com/SmartOperatingBlock/building-management-microservice/commit/14eef9f0e412fc88beb5775c33d628fb423213e2))
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.4.13 ([734e178](https://github.com/SmartOperatingBlock/building-management-microservice/commit/734e178c246fbfc029d20382c646c03802fd2477))
+* **deps:** update dependency gradle to v8.5 ([5b2a4e0](https://github.com/SmartOperatingBlock/building-management-microservice/commit/5b2a4e072695a5dc7b69f30ba76cdf7b960bdaf9))
+* **deps:** update plugin kotlin-qa to v0.54.1 ([92d0e2a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/92d0e2acd2e6ad0ad8515f18e45782ef1c1b1c29))
+* **deps:** update plugin kotlin-qa to v0.55.0 ([b2a9483](https://github.com/SmartOperatingBlock/building-management-microservice/commit/b2a9483934a3f93ab8a2722fe1d8197f97ca5d37))
+* **deps:** update plugin kotlin-qa to v0.55.1 ([6f8baae](https://github.com/SmartOperatingBlock/building-management-microservice/commit/6f8baae431166d06b08619a84b89a5870722ffaf))
+* **deps:** update plugin kotlin-qa to v0.55.2 ([987c800](https://github.com/SmartOperatingBlock/building-management-microservice/commit/987c800730b2da8bcabaa2d4552558a4901d29cc))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.15 ([97c2a07](https://github.com/SmartOperatingBlock/building-management-microservice/commit/97c2a07f65e206c94ee4cdfcaeb0f612b414d196))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.16 ([f90a59a](https://github.com/SmartOperatingBlock/building-management-microservice/commit/f90a59ac45b9a97faedef9cf1693b4ce82e03f76))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-java action to v4 ([76b0e81](https://github.com/SmartOperatingBlock/building-management-microservice/commit/76b0e81543aea90a334ebccbb78e62f5fdb6906b))
+
 ## [1.4.20](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.19...1.4.20) (2023-11-24)
 
 
