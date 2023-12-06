@@ -1,3 +1,16 @@
+## [1.4.22](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.21...1.4.22) (2023-12-06)
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-serialization to v1.9.21 ([94b34b2](https://github.com/SmartOperatingBlock/building-management-microservice/commit/94b34b252210b6af4b88d151c18aa8527c20fde3))
+* **deps:** update dependency ch.qos.logback:logback-classic to v1.4.14 ([7d63854](https://github.com/SmartOperatingBlock/building-management-microservice/commit/7d63854bb9d56fe99ec117b2895232f5978bf60e))
+* **deps:** update dependency com.azure:azure-identity to v1.11.1 ([70a4d0d](https://github.com/SmartOperatingBlock/building-management-microservice/commit/70a4d0d202b73eb22587f9e7a1ca3c2113c138ba))
+* **deps:** update dependency com.tngtech.archunit:archunit-junit5 to v1.2.1 ([fd60387](https://github.com/SmartOperatingBlock/building-management-microservice/commit/fd6038757ef0ead9c4b7b760fabb9695e3879beb))
+* **deps:** update dependency org.apache.kafka:kafka-clients to v7.5.2-ce ([ea14c44](https://github.com/SmartOperatingBlock/building-management-microservice/commit/ea14c445944dd404391bcabd8c1b2ce1351cc8b8))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.79 ([7835c08](https://github.com/SmartOperatingBlock/building-management-microservice/commit/7835c0833879873ce38404029118c3cbea8e3fe4))
+* **deps:** update plugin kotlin-qa to v0.56.0 ([89adf84](https://github.com/SmartOperatingBlock/building-management-microservice/commit/89adf84a791dcd94ed00a9170291652541fd2e3f))
+
 ## [1.4.21](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.20...1.4.21) (2023-12-01)
 
 
