@@ -1,3 +1,13 @@
+## [1.4.24](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.23...1.4.24) (2023-12-27)
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-serialization to v1.9.22 ([e692a73](https://github.com/SmartOperatingBlock/building-management-microservice/commit/e692a732a3dac67e0c62f91664295dee42d54965))
+* **deps:** update dependency com.fasterxml.jackson.module:jackson-module-kotlin to v2.16.1 ([fc04b04](https://github.com/SmartOperatingBlock/building-management-microservice/commit/fc04b049868e1a149f2828dbe9fd600ba0443ee2))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.85 ([3bf1de2](https://github.com/SmartOperatingBlock/building-management-microservice/commit/3bf1de275e0ae4d16de29d101d85ccd79cd2b1b2))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.17 ([13bd245](https://github.com/SmartOperatingBlock/building-management-microservice/commit/13bd24516cddec8f070ee3681dd7d784a62ba023))
+
 ## [1.4.23](https://github.com/SmartOperatingBlock/building-management-microservice/compare/1.4.22...1.4.23) (2023-12-22)
 
 
